@@ -19,12 +19,12 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.4.0)",
-    comments = "Source: lager.proto")
-public final class LagerGrpc {
+    comments = "Source: user.proto")
+public final class UserGrpc {
 
-  private LagerGrpc() {}
+  private UserGrpc() {}
 
-  public static final String SERVICE_NAME = "lager.Lager";
+  public static final String SERVICE_NAME = "lager.User";
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -33,7 +33,7 @@ public final class LagerGrpc {
       io.grpc.MethodDescriptor.<lager.UserCreationRequest, lager.UserCreationResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "lager.Lager", "createUser"))
+              "lager.User", "createUser"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.UserCreationRequest.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -45,7 +45,7 @@ public final class LagerGrpc {
       io.grpc.MethodDescriptor.<lager.UsernameExistsRequest, lager.UsernameExistsResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "lager.Lager", "usernameExists"))
+              "lager.User", "usernameExists"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.UsernameExistsRequest.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -55,29 +55,29 @@ public final class LagerGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static LagerStub newStub(io.grpc.Channel channel) {
-    return new LagerStub(channel);
+  public static UserStub newStub(io.grpc.Channel channel) {
+    return new UserStub(channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static LagerBlockingStub newBlockingStub(
+  public static UserBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new LagerBlockingStub(channel);
+    return new UserBlockingStub(channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static LagerFutureStub newFutureStub(
+  public static UserFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new LagerFutureStub(channel);
+    return new UserFutureStub(channel);
   }
 
   /**
    */
-  public static abstract class LagerImplBase implements io.grpc.BindableService {
+  public static abstract class UserImplBase implements io.grpc.BindableService {
 
     /**
      */
@@ -115,20 +115,20 @@ public final class LagerGrpc {
 
   /**
    */
-  public static final class LagerStub extends io.grpc.stub.AbstractStub<LagerStub> {
-    private LagerStub(io.grpc.Channel channel) {
+  public static final class UserStub extends io.grpc.stub.AbstractStub<UserStub> {
+    private UserStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private LagerStub(io.grpc.Channel channel,
+    private UserStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected LagerStub build(io.grpc.Channel channel,
+    protected UserStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new LagerStub(channel, callOptions);
+      return new UserStub(channel, callOptions);
     }
 
     /**
@@ -150,20 +150,20 @@ public final class LagerGrpc {
 
   /**
    */
-  public static final class LagerBlockingStub extends io.grpc.stub.AbstractStub<LagerBlockingStub> {
-    private LagerBlockingStub(io.grpc.Channel channel) {
+  public static final class UserBlockingStub extends io.grpc.stub.AbstractStub<UserBlockingStub> {
+    private UserBlockingStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private LagerBlockingStub(io.grpc.Channel channel,
+    private UserBlockingStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected LagerBlockingStub build(io.grpc.Channel channel,
+    protected UserBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new LagerBlockingStub(channel, callOptions);
+      return new UserBlockingStub(channel, callOptions);
     }
 
     /**
@@ -183,20 +183,20 @@ public final class LagerGrpc {
 
   /**
    */
-  public static final class LagerFutureStub extends io.grpc.stub.AbstractStub<LagerFutureStub> {
-    private LagerFutureStub(io.grpc.Channel channel) {
+  public static final class UserFutureStub extends io.grpc.stub.AbstractStub<UserFutureStub> {
+    private UserFutureStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private LagerFutureStub(io.grpc.Channel channel,
+    private UserFutureStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected LagerFutureStub build(io.grpc.Channel channel,
+    protected UserFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new LagerFutureStub(channel, callOptions);
+      return new UserFutureStub(channel, callOptions);
     }
 
     /**
@@ -224,10 +224,10 @@ public final class LagerGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final LagerImplBase serviceImpl;
+    private final UserImplBase serviceImpl;
     private final int methodId;
 
-    MethodHandlers(LagerImplBase serviceImpl, int methodId) {
+    MethodHandlers(UserImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -260,10 +260,10 @@ public final class LagerGrpc {
     }
   }
 
-  private static final class LagerDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
+  private static final class UserDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return lager.LagerOuterClass.getDescriptor();
+      return lager.UserOuterClass.getDescriptor();
     }
   }
 
@@ -272,11 +272,11 @@ public final class LagerGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (LagerGrpc.class) {
+      synchronized (UserGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new LagerDescriptorSupplier())
+              .setSchemaDescriptor(new UserDescriptorSupplier())
               .addMethod(METHOD_CREATE_USER)
               .addMethod(METHOD_USERNAME_EXISTS)
               .build();

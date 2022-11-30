@@ -6,7 +6,7 @@ namespace GrpcClient.DAOs;
 public class UserDao : IUserDao
 {
     private readonly GrpcDao grpcDao;
-    private Lager.LagerClient client;
+    private User.UserClient client;
     
     public UserDao()
     {
@@ -14,7 +14,7 @@ public class UserDao : IUserDao
         client = grpcDao.getClient();
     }
     
-    public Task<User> CreateAsync(User user)
+    public Task<Shared.Models.User> CreateAsync(Shared.Models.User user)
     {
         client.createUserAsync(new UserCreationRequest(){ Admin = user.IsAdmin, Username = user.UserName, Password = user.Password });
         return Task.FromResult(user);

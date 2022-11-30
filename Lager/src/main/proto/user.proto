@@ -1,8 +1,8 @@
-﻿syntax = "proto3";
-option csharp_namespace = "GrpcClient";
+syntax = "proto3";
+option java_multiple_files = true;
 package lager;
 
-service Lager{
+service User{
   rpc createUser(UserCreationRequest) returns (UserCreationResponse);
   rpc usernameExists(UsernameExistsRequest) returns (UsernameExistsResponse);
 }
@@ -24,4 +24,3 @@ message UsernameExistsRequest{
 message UsernameExistsResponse{
   bool exists = 1;
 }
-

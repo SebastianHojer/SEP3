@@ -4,7 +4,7 @@ import database.DatabaseMain;
 import io.grpc.stub.StreamObserver;
 import lager.*;
 
-public class LagerServiceImpl extends LagerGrpc.LagerImplBase {
+public class UserServiceImpl extends UserGrpc.UserImplBase {
     private DatabaseMain db = new DatabaseMain();
 
     @Override
