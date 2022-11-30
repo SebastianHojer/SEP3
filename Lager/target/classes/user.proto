@@ -1,0 +1,26 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package lager;
+
+service User{
+  rpc createUser(UserCreationRequest) returns (UserCreationResponse);
+  rpc usernameExists(UsernameExistsRequest) returns (UsernameExistsResponse);
+}
+
+message UserCreationRequest {
+  string username = 1;
+  string password = 2;
+  bool admin = 3;
+}
+
+message UserCreationResponse{
+  bool created = 1;
+}
+
+message UsernameExistsRequest{
+  string username = 1;
+}
+
+message UsernameExistsResponse{
+  bool exists = 1;
+}
