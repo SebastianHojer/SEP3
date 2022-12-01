@@ -1,0 +1,9 @@
+h3 {
+    text-align: center;
+    text-decoration-style: solid;
+}
+
+.card {
+    display: inline-block;
+    margin: 0 1.5rem 1rem 0;
+}
