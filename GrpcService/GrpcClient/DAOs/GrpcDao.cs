@@ -5,13 +5,13 @@ using GrpcClient;
 public sealed class GrpcDao
 {
     private static readonly GrpcDao instance = new GrpcDao();
-    private static User.UserClient client;
+    private static User.UserClient userClient;
 
     static GrpcDao()
     {
         var channel = GrpcChannel.ForAddress("http://localhost:9090");
         AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-        client = new User.UserClient(channel);
+        userClient = new User.UserClient(channel);
     }
 
     private GrpcDao()
@@ -21,8 +21,8 @@ public sealed class GrpcDao
     
     public static GrpcDao Instance { get { return instance; } }
 
-    public User.UserClient getClient()
+    public User.UserClient getUserClient()
     {
-        return client;
+        return userClient;
     }
 }

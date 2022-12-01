@@ -29,7 +29,7 @@ public class UserLogic : IUserLogic
             IsAdmin = dto.IsAdmin
         };
     
-        User created = await userDao.CreateAsync(toCreate);
+        User created = await userDao.CreateUserAsync(toCreate);
     
         return created;
     }
