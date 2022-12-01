@@ -51,6 +51,30 @@ public final class UserGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.UsernameExistsResponse.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.UsernameRetrievalRequest,
+      lager.UsernameRetrievalResponse> METHOD_RETRIEVE_USERS =
+      io.grpc.MethodDescriptor.<lager.UsernameRetrievalRequest, lager.UsernameRetrievalResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.User", "retrieveUsers"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UsernameRetrievalRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UsernameRetrievalResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.DeleteUserRequest,
+      lager.DeleteUserResponse> METHOD_DELETE_USER =
+      io.grpc.MethodDescriptor.<lager.DeleteUserRequest, lager.DeleteUserResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.User", "deleteUser"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.DeleteUserRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.DeleteUserResponse.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -93,6 +117,20 @@ public final class UserGrpc {
       asyncUnimplementedUnaryCall(METHOD_USERNAME_EXISTS, responseObserver);
     }
 
+    /**
+     */
+    public void retrieveUsers(lager.UsernameRetrievalRequest request,
+        io.grpc.stub.StreamObserver<lager.UsernameRetrievalResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_RETRIEVE_USERS, responseObserver);
+    }
+
+    /**
+     */
+    public void deleteUser(lager.DeleteUserRequest request,
+        io.grpc.stub.StreamObserver<lager.DeleteUserResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_DELETE_USER, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -109,6 +147,20 @@ public final class UserGrpc {
                 lager.UsernameExistsRequest,
                 lager.UsernameExistsResponse>(
                   this, METHODID_USERNAME_EXISTS)))
+          .addMethod(
+            METHOD_RETRIEVE_USERS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.UsernameRetrievalRequest,
+                lager.UsernameRetrievalResponse>(
+                  this, METHODID_RETRIEVE_USERS)))
+          .addMethod(
+            METHOD_DELETE_USER,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.DeleteUserRequest,
+                lager.DeleteUserResponse>(
+                  this, METHODID_DELETE_USER)))
           .build();
     }
   }
@@ -146,6 +198,22 @@ public final class UserGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_USERNAME_EXISTS, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void retrieveUsers(lager.UsernameRetrievalRequest request,
+        io.grpc.stub.StreamObserver<lager.UsernameRetrievalResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_USERS, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void deleteUser(lager.DeleteUserRequest request,
+        io.grpc.stub.StreamObserver<lager.DeleteUserResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_DELETE_USER, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -178,6 +246,20 @@ public final class UserGrpc {
     public lager.UsernameExistsResponse usernameExists(lager.UsernameExistsRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_USERNAME_EXISTS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.UsernameRetrievalResponse retrieveUsers(lager.UsernameRetrievalRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_RETRIEVE_USERS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.DeleteUserResponse deleteUser(lager.DeleteUserRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_DELETE_USER, getCallOptions(), request);
     }
   }
 
@@ -214,10 +296,28 @@ public final class UserGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_USERNAME_EXISTS, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.UsernameRetrievalResponse> retrieveUsers(
+        lager.UsernameRetrievalRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_USERS, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.DeleteUserResponse> deleteUser(
+        lager.DeleteUserRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_DELETE_USER, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_USER = 0;
   private static final int METHODID_USERNAME_EXISTS = 1;
+  private static final int METHODID_RETRIEVE_USERS = 2;
+  private static final int METHODID_DELETE_USER = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -243,6 +343,14 @@ public final class UserGrpc {
         case METHODID_USERNAME_EXISTS:
           serviceImpl.usernameExists((lager.UsernameExistsRequest) request,
               (io.grpc.stub.StreamObserver<lager.UsernameExistsResponse>) responseObserver);
+          break;
+        case METHODID_RETRIEVE_USERS:
+          serviceImpl.retrieveUsers((lager.UsernameRetrievalRequest) request,
+              (io.grpc.stub.StreamObserver<lager.UsernameRetrievalResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_USER:
+          serviceImpl.deleteUser((lager.DeleteUserRequest) request,
+              (io.grpc.stub.StreamObserver<lager.DeleteUserResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -279,6 +387,8 @@ public final class UserGrpc {
               .setSchemaDescriptor(new UserDescriptorSupplier())
               .addMethod(METHOD_CREATE_USER)
               .addMethod(METHOD_USERNAME_EXISTS)
+              .addMethod(METHOD_RETRIEVE_USERS)
+              .addMethod(METHOD_DELETE_USER)
               .build();
         }
       }
