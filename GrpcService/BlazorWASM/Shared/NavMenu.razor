@@ -20,11 +20,15 @@
                 <span class="oi oi-list-rich" aria-hidden="true"></span> View Products
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="CreateUser">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Create User
-            </NavLink>
-        </div>
+        <AuthorizeView>
+        <Authorized>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="CreateUser">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Create User
+                </NavLink>
+            </div>
+        </Authorized>
+        </AuthorizeView>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="DeleteUser">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Delete User

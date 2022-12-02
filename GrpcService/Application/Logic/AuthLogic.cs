@@ -10,9 +10,15 @@ public class AuthLogic : IAuthLogic
     {
         new User
         {
-            Password = "1FinePassword!",
-            UserName = "Eggy",
+            Password = "1234",
+            UserName = "Admin",
             IsAdmin = true
+        },
+        new User
+        {
+            Password = "1234",
+            UserName = "NotAdmin",
+            IsAdmin = false
         },
     };
 

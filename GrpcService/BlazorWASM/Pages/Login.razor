@@ -5,28 +5,33 @@
 
 <AuthorizeView>
     <NotAuthorized>
+        <div class="col d-flex justify-content-center">
         <div class="card">
-            <h3>Please login</h3>
-            <div class="field">
-                <label>Username:</label>
-                <input type="text" @bind="userName"/>
-            </div>
-            <div class="field">
-                <label style="text-align: center">Password:</label>
-                <input type="password" @bind="password"/>
-            </div>
-            @if (!string.IsNullOrEmpty(errorLabel))
-            {
-                <div class="field">
-                    <label style="color: red">
-                        @errorLabel
-                    </label>
+            <h3 class="card-header text-center">Login</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" class="form-control" @bind="userName"/>
                 </div>
-            }
-            <div class="field">
-                <button class="loginbtn" @onclick="LoginAsync">Log in</button>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" class="form-control" @bind="password"/>
+                </div>
+                @if (!string.IsNullOrEmpty(errorLabel))
+                {
+                    <div class="form-group">
+                        <label style="color: red">
+                            @errorLabel
+                        </label>
+                    </div>
+                }
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary text-center" @onclick="LoginAsync">Log in</button>
             </div>
         </div>
+        </div>
+        
     </NotAuthorized>
     <Authorized>
         <div class="card">

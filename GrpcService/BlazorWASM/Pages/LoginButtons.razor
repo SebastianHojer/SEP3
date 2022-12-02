@@ -4,21 +4,13 @@
 @inject IAuthService authService
 
 <AuthorizeView>
-     <Authorized>
-         <div class="nav-item px-3">
-             <NavLink class="nav-link" @onclick="Logout">
-                 <span class="oi oi-list-rich" aria-hidden="true"></span> Log out
-             </NavLink>
-         </div>
-     </Authorized>
-     <NotAuthorized>
-         <div class="nav-item px-3">
-             <NavLink class="nav-link" @onclick="Login">
-                 <span class="oi oi-list-rich" aria-hidden="true"></span> Log in
-             </NavLink>
-         </div>
-     </NotAuthorized>
- </AuthorizeView>
+    <Authorized>
+        <img class="icon" src="Images/Logout.png" @onclick="Logout"/>
+    </Authorized>
+    <NotAuthorized>
+        <img class="icon" src="Images/Login.png" @onclick="Login"/>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
     private void Login()
