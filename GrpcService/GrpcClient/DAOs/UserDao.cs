@@ -30,5 +30,11 @@ public class UserDao : IUserDao
     {
         PasswordAuthenticationResponse response = userClient.authenticatePassword(new PasswordAuthenticationRequest(){Username = user.UserName, Password = user.Password});
         return await Task.FromResult(response.Authenticated);
-    } 
+    }
+
+    public async Task<bool> DeleteUser(string userName)
+    {
+        DeleteUserResponse response = userClient.deleteUser(new DeleteUserRequest() { Username = userName });
+        return await Task.FromResult(response.Deleted);
+    }
 }

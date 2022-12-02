@@ -7,4 +7,5 @@ public interface IUserDao
     Task<User> CreateUserAsync(User user);
     Task<bool> UsernameExists(string userName);
     Task<bool> AuthenticatePassword(User user);
+    Task<bool> DeleteUser(string userName);
 }
