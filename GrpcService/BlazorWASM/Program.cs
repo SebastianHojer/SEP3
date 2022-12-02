@@ -13,12 +13,14 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7151")});
 
-//HTTP Services
-builder.Services.AddScoped<IUserService, UserHttpClient>();
-
 //Auth Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 AuthorizationPolicies.AddPolicies(builder.Services);
+
+//HTTP Services
+builder.Services.AddScoped<IUserService, UserHttpClient>();
+
+
 
 await builder.Build().RunAsync();
