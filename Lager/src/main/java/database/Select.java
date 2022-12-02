@@ -17,7 +17,7 @@ public class Select
 
   public boolean userExists(String username)
   {
-    String SQL = "select from sep3.\"user\" where username = " + username;
+    String SQL = "select * from sep3.\"user\" where username = '" + username + "'";
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
       ResultSet rs = preparedStatement.executeQuery();
       if(rs.next()){
@@ -42,5 +42,25 @@ public class Select
         e.printStackTrace();
         return null;
       }
+  }
+
+  public boolean authenticatePassword(String username, String password)
+  {
+    String SQL = "select * from sep3.\"user\" where username = '" + username + "'";
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      ResultSet rs = preparedStatement.executeQuery();
+      String actualPassword;
+      if(rs.next()){
+        actualPassword = rs.getString("password");
+      } else return false;
+
+      if(actualPassword.equals(password)){
+        return true;
+      }
+    } catch (SQLException e){
+      e.printStackTrace();
+      return false;
+    }
+    return false;
   }
 }

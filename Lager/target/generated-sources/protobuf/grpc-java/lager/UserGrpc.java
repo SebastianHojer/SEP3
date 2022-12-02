@@ -75,6 +75,18 @@ public final class UserGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.DeleteUserResponse.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.PasswordAuthenticationRequest,
+      lager.PasswordAuthenticationResponse> METHOD_AUTHENTICATE_PASSWORD =
+      io.grpc.MethodDescriptor.<lager.PasswordAuthenticationRequest, lager.PasswordAuthenticationResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.User", "authenticatePassword"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.PasswordAuthenticationRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.PasswordAuthenticationResponse.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -131,6 +143,13 @@ public final class UserGrpc {
       asyncUnimplementedUnaryCall(METHOD_DELETE_USER, responseObserver);
     }
 
+    /**
+     */
+    public void authenticatePassword(lager.PasswordAuthenticationRequest request,
+        io.grpc.stub.StreamObserver<lager.PasswordAuthenticationResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_AUTHENTICATE_PASSWORD, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -161,6 +180,13 @@ public final class UserGrpc {
                 lager.DeleteUserRequest,
                 lager.DeleteUserResponse>(
                   this, METHODID_DELETE_USER)))
+          .addMethod(
+            METHOD_AUTHENTICATE_PASSWORD,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.PasswordAuthenticationRequest,
+                lager.PasswordAuthenticationResponse>(
+                  this, METHODID_AUTHENTICATE_PASSWORD)))
           .build();
     }
   }
@@ -214,6 +240,14 @@ public final class UserGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_DELETE_USER, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void authenticatePassword(lager.PasswordAuthenticationRequest request,
+        io.grpc.stub.StreamObserver<lager.PasswordAuthenticationResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_AUTHENTICATE_PASSWORD, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -260,6 +294,13 @@ public final class UserGrpc {
     public lager.DeleteUserResponse deleteUser(lager.DeleteUserRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_DELETE_USER, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.PasswordAuthenticationResponse authenticatePassword(lager.PasswordAuthenticationRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_AUTHENTICATE_PASSWORD, getCallOptions(), request);
     }
   }
 
@@ -312,12 +353,21 @@ public final class UserGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_DELETE_USER, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.PasswordAuthenticationResponse> authenticatePassword(
+        lager.PasswordAuthenticationRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_AUTHENTICATE_PASSWORD, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_USER = 0;
   private static final int METHODID_USERNAME_EXISTS = 1;
   private static final int METHODID_RETRIEVE_USERS = 2;
   private static final int METHODID_DELETE_USER = 3;
+  private static final int METHODID_AUTHENTICATE_PASSWORD = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -351,6 +401,10 @@ public final class UserGrpc {
         case METHODID_DELETE_USER:
           serviceImpl.deleteUser((lager.DeleteUserRequest) request,
               (io.grpc.stub.StreamObserver<lager.DeleteUserResponse>) responseObserver);
+          break;
+        case METHODID_AUTHENTICATE_PASSWORD:
+          serviceImpl.authenticatePassword((lager.PasswordAuthenticationRequest) request,
+              (io.grpc.stub.StreamObserver<lager.PasswordAuthenticationResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -389,6 +443,7 @@ public final class UserGrpc {
               .addMethod(METHOD_USERNAME_EXISTS)
               .addMethod(METHOD_RETRIEVE_USERS)
               .addMethod(METHOD_DELETE_USER)
+              .addMethod(METHOD_AUTHENTICATE_PASSWORD)
               .build();
         }
       }

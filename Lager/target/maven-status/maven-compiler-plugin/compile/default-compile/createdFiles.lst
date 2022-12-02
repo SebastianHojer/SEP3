@@ -1,6 +1,9 @@
 lager\DeleteUserRequest$Builder.class
 lager\ProductCreationRequest$Builder.class
 lager\DeleteUserResponseOrBuilder.class
+lager\PasswordAuthenticationRequest$Builder.class
+lager\PasswordAuthenticationResponseOrBuilder.class
+lager\PasswordAuthenticationRequestOrBuilder.class
 lager\ProductCreationResponse$Builder.class
 lager\ProductCreationResponse.class
 lager\UserGrpc$UserDescriptorSupplier.class
@@ -8,14 +11,18 @@ lager\ProductCreationResponse$1.class
 lager\UserGrpc$UserBlockingStub.class
 lager\UsernameExistsResponse.class
 lager\UsernameRetrievalResponseOrBuilder.class
+lager\PasswordAuthenticationResponse$1.class
 lager\UserCreationResponseOrBuilder.class
 lager\WarehouseGrpc$WarehouseBlockingStub.class
 lager\WarehouseGrpc.class
 lager\WarehouseGrpc$WarehouseDescriptorSupplier.class
 lager\UserCreationRequest$Builder.class
+lager\PasswordAuthenticationResponse$Builder.class
+lager\PasswordAuthenticationRequest$1.class
 lager\UsernameRetrievalResponse.class
 lager\ProductCreationRequest$1.class
 org\lager\server\WarehouseServiceImpl.class
+lager\PasswordAuthenticationResponse.class
 lager\UsernameExistsRequestOrBuilder.class
 lager\ProductCreationRequest.class
 lager\UsernameExistsRequest.class
@@ -45,6 +52,7 @@ lager\UserCreationResponse.class
 lager\UserOuterClass.class
 lager\UsernameRetrievalRequest$1.class
 lager\UsernameRetrievalRequestOrBuilder.class
+lager\PasswordAuthenticationRequest.class
 lager\UserGrpc$1.class
 lager\WarehouseGrpc$WarehouseImplBase.class
 lager\UserCreationRequest.class

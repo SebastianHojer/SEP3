@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Application.DaoInterfaces;
 using Application.LogicInterfaces;
 using Shared.Models;
 
@@ -6,38 +7,25 @@ namespace Application.Logic;
 
 public class AuthLogic : IAuthLogic
 {
-    private readonly IList<User> users = new List<User>
+    private readonly IUserDao userDao;
+
+    public AuthLogic(IUserDao userDao)
     {
-        new User
-        {
-            Password = "1234",
-            UserName = "Admin",
-            IsAdmin = true
-        },
-        new User
-        {
-            Password = "1234",
-            UserName = "NotAdmin",
-            IsAdmin = false
-        },
-    };
+        this.userDao = userDao;
+    }
 
     public Task<User> ValidateUser(string username, string password)
     {
-        User? existingUser = users.FirstOrDefault(u => 
-            u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase));
-        
-        if (existingUser == null)
+        User user = new User(username, password);
+        Console.WriteLine("AuthLogic");
+        Task<bool> authentication = userDao.AuthenticatePassword(user);
+        Console.WriteLine(authentication);
+        if (authentication.Result == false)
         {
-            throw new Exception("User not found");
+            throw new Exception("User or password is not found");
         }
 
-        if (!existingUser.Password.Equals(password))
-        {
-            throw new Exception("Password mismatch");
-        }
-
-        return Task.FromResult(existingUser);
+        return Task.FromResult(user);
     }
 
     public Task RegisterUser(User user)
@@ -56,7 +44,7 @@ public class AuthLogic : IAuthLogic
         
         // save to persistence instead of list
         
-        users.Add(user);
+        //users.Add(user);
         
         return Task.CompletedTask;
     }

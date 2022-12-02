@@ -42,6 +42,13 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void authenticatePassword(PasswordAuthenticationRequest request, StreamObserver<PasswordAuthenticationResponse> responseObserver){
+        boolean authenticated = db.authenticatePassword(request.getUsername(), request.getPassword());
+        PasswordAuthenticationResponse response = PasswordAuthenticationResponse.newBuilder().setAuthenticated(authenticated).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 
 
 }

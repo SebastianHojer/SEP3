@@ -54,6 +54,16 @@ public final class UserOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_lager_DeleteUserResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_PasswordAuthenticationRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_PasswordAuthenticationRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_PasswordAuthenticationResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_PasswordAuthenticationResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -72,15 +82,21 @@ public final class UserOuterClass {
       "Request\"-\n\031UsernameRetrievalResponse\022\020\n\010" +
       "username\030\001 \003(\t\"%\n\021DeleteUserRequest\022\020\n\010u" +
       "sername\030\001 \001(\t\"%\n\022DeleteUserResponse\022\017\n\007d" +
-      "eleted\030\001 \001(\0102\263\002\n\004User\022E\n\ncreateUser\022\032.la",
-      "ger.UserCreationRequest\032\033.lager.UserCrea" +
-      "tionResponse\022M\n\016usernameExists\022\034.lager.U" +
-      "sernameExistsRequest\032\035.lager.UsernameExi" +
-      "stsResponse\022R\n\rretrieveUsers\022\037.lager.Use" +
-      "rnameRetrievalRequest\032 .lager.UsernameRe" +
-      "trievalResponse\022A\n\ndeleteUser\022\030.lager.De" +
-      "leteUserRequest\032\031.lager.DeleteUserRespon" +
-      "seB\002P\001b\006proto3"
+      "eleted\030\001 \001(\010\"C\n\035PasswordAuthenticationRe",
+      "quest\022\020\n\010username\030\001 \001(\t\022\020\n\010password\030\002 \001(" +
+      "\t\"7\n\036PasswordAuthenticationResponse\022\025\n\ra" +
+      "uthenticated\030\001 \001(\0102\230\003\n\004User\022E\n\ncreateUse" +
+      "r\022\032.lager.UserCreationRequest\032\033.lager.Us" +
+      "erCreationResponse\022M\n\016usernameExists\022\034.l" +
+      "ager.UsernameExistsRequest\032\035.lager.Usern" +
+      "ameExistsResponse\022R\n\rretrieveUsers\022\037.lag" +
+      "er.UsernameRetrievalRequest\032 .lager.User" +
+      "nameRetrievalResponse\022A\n\ndeleteUser\022\030.la" +
+      "ger.DeleteUserRequest\032\031.lager.DeleteUser",
+      "Response\022c\n\024authenticatePassword\022$.lager" +
+      ".PasswordAuthenticationRequest\032%.lager.P" +
+      "asswordAuthenticationResponseB\002P\001b\006proto" +
+      "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -142,6 +158,18 @@ public final class UserOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_DeleteUserResponse_descriptor,
         new java.lang.String[] { "Deleted", });
+    internal_static_lager_PasswordAuthenticationRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_lager_PasswordAuthenticationRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_PasswordAuthenticationRequest_descriptor,
+        new java.lang.String[] { "Username", "Password", });
+    internal_static_lager_PasswordAuthenticationResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_lager_PasswordAuthenticationResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_PasswordAuthenticationResponse_descriptor,
+        new java.lang.String[] { "Authenticated", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

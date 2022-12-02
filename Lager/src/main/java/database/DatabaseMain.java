@@ -44,4 +44,9 @@ public class DatabaseMain
   public boolean createProduct(int ean, String productName, int stock, String information) {
     return insert.createProduct(ean, productName, stock, information);
   }
+
+  public boolean authenticatePassword(String username, String password)
+  {
+    return select.authenticatePassword(username, password);
+  }
 }

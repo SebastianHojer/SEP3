@@ -14,15 +14,21 @@ public class UserDao : IUserDao
         userClient = grpcDao.getUserClient();
     }
     
-    public Task<Shared.Models.User> CreateUserAsync(Shared.Models.User user)
+    public async Task<Shared.Models.User> CreateUserAsync(Shared.Models.User user)
     {
         userClient.createUserAsync(new UserCreationRequest(){ Admin = user.IsAdmin, Username = user.UserName, Password = user.Password });
-        return Task.FromResult(user);
+        return await Task.FromResult(user);
     }
 
-    public Task<bool> UsernameExists(string userName)
+    public async Task<bool> UsernameExists(string userName)
     {
         UsernameExistsResponse response = userClient.usernameExistsAsync(new UsernameExistsRequest(){Username = userName}).ResponseAsync.Result;
-        return Task.FromResult(response.Exists);
+        return await Task.FromResult(response.Exists);
     }
+
+    public async Task<bool> AuthenticatePassword(Shared.Models.User user)
+    {
+        PasswordAuthenticationResponse response = userClient.authenticatePassword(new PasswordAuthenticationRequest(){Username = user.UserName, Password = user.Password});
+        return await Task.FromResult(response.Authenticated);
+    } 
 }
