@@ -8,4 +8,5 @@ public interface IUserDao
     Task<bool> UsernameExists(string userName);
     Task<User> AuthenticatePassword(User user);
     Task<bool> DeleteUser(string userName);
+    Task<List<string>> RetrieveUsers();
 }

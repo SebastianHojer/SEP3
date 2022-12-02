@@ -1,4 +1,5 @@
-﻿using Application.DaoInterfaces;
+﻿using System.Collections;
+using Application.DaoInterfaces;
 using Shared.Models;
 
 namespace GrpcClient.DAOs;
@@ -18,6 +19,17 @@ public class UserDao : IUserDao
     {
         await userClient.createUserAsync(new UserCreationRequest(){ Admin = user.IsAdmin, Username = user.UserName, Password = user.Password });
         return user;
+    }
+
+    public async Task<List<string>> RetrieveUsers()
+    {
+        UsernameRetrievalResponse response = await userClient.retrieveUsersAsync(new UsernameRetrievalRequest());
+        List<string> usernames = new List<string>();
+        for (int i = 0; i < response.Username.Count; i++)
+        {
+            usernames.Add(response.Username[i]);
+        }
+        return usernames;
     }
 
     public async Task<bool> UsernameExists(string userName)

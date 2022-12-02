@@ -40,9 +40,15 @@ public class UserLogic : IUserLogic
             throw new InvalidUsernameException("Username max-length is 32 characters!");
     }
 
-    public async Task<bool> DeleteUser(string userName)
+    public bool DeleteUser(string userName)
     {
         bool deleted = userDao.DeleteUser(userName).Result;
-        return await Task.FromResult(deleted);
+        return deleted;
+    }
+
+    public List<string> RetrieveUsers()
+    {
+        List<string> usernames = userDao.RetrieveUsers().Result;
+        return usernames;
     }
 }
