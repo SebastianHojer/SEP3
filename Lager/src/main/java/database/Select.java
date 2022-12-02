@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Select
 {
@@ -28,4 +29,18 @@ public class Select
     return false;
   }
 
+  public ArrayList<String> retrieveUsers() {
+      String SQL = "select * from sep3.\"user\"";
+      try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+        ResultSet rs = preparedStatement.executeQuery();
+        ArrayList<String> usernames = new ArrayList<>();
+        while(rs.next()){
+          usernames.add(rs.getString("username"));
+        }
+        return usernames;
+      } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
+      }
+  }
 }

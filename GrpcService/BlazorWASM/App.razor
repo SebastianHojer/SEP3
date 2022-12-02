@@ -1,6 +1,21 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿<CascadingAuthenticationState>
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+            <NotAuthorized>
+                <div class="col d-flex justify-content-center">
+                <div class="card" style="text-align: center; width: 50rem">
+                    <div class="card-header">
+                        Warning
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Access Denied</h5>
+                        <p class="card-text">You don't have permission to view this page</p>
+                    </div>
+                </div>
+                </div>
+            </NotAuthorized>
+        </AuthorizeRouteView>
         <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
     </Found>
     <NotFound>
@@ -10,3 +25,4 @@
         </LayoutView>
     </NotFound>
 </Router>
+</CascadingAuthenticationState>

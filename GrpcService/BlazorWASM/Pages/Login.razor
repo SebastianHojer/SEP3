@@ -1,0 +1,62 @@
+@page "/Login"
+@using HttpClients.ClientInterfaces
+@inject IAuthService authService
+@inject NavigationManager navMgr
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="col d-flex justify-content-center">
+        <div class="card">
+            <h3 class="card-header text-center">Login</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" class="form-control" @bind="userName"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" class="form-control" @bind="password"/>
+                </div>
+                @if (!string.IsNullOrEmpty(errorLabel))
+                {
+                    <div class="form-group">
+                        <label style="color: red">
+                            @errorLabel
+                        </label>
+                    </div>
+                }
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary text-center" @onclick="LoginAsync">Log in</button>
+            </div>
+        </div>
+        </div>
+        
+    </NotAuthorized>
+    <Authorized>
+        <div class="card">
+            <h3>Hello, @context.User.Identity.Name</h3>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private string userName;
+    private string password;
+    private string errorLabel;
+
+    private async Task LoginAsync()
+    {
+        errorLabel = "";
+        try
+        {
+            await authService.LoginAsync(userName, password);
+            navMgr.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            errorLabel = $"Error: {e.Message}";
+        }
+    }
+}

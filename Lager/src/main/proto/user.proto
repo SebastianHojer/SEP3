@@ -2,9 +2,12 @@ syntax = "proto3";
 option java_multiple_files = true;
 package lager;
 
+
 service User{
   rpc createUser(UserCreationRequest) returns (UserCreationResponse);
   rpc usernameExists(UsernameExistsRequest) returns (UsernameExistsResponse);
+  rpc retrieveUsers(UsernameRetrievalRequest) returns (UsernameRetrievalResponse);
+  rpc deleteUser(DeleteUserRequest) returns (DeleteUserResponse);
 }
 
 message UserCreationRequest {
@@ -24,3 +27,19 @@ message UsernameExistsRequest{
 message UsernameExistsResponse{
   bool exists = 1;
 }
+
+message UsernameRetrievalRequest {}
+
+message UsernameRetrievalResponse{
+  repeated string username = 1;
+}
+
+message DeleteUserRequest{
+  string username = 1;
+}
+
+message DeleteUserResponse{
+  bool deleted = 1;
+}
+
+

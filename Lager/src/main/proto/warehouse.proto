@@ -1,0 +1,18 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package lager;
+
+service Warehouse{
+  rpc createProduct(ProductCreationRequest) returns (ProductCreationResponse);
+}
+
+message ProductCreationRequest {
+  int32 ean = 1;
+  string productName = 2;
+  int32 stock = 3;
+  string information = 4;
+}
+
+message ProductCreationResponse{
+  bool created = 1;
+}

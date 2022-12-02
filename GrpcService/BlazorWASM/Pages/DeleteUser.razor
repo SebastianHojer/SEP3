@@ -1,0 +1,41 @@
+@page "/DeleteUser"
+@using global::Shared.DTOs
+@using global::Shared.Models
+@using HttpClients.ClientInterfaces
+@inject IUserService userService;
+<h3>Delete User</h3>
+<table>
+    @foreach (string username in usernames)
+    {
+        <tr>
+            <td>@username</td>
+            <td>
+                <button @onclick="@(() => Delete(username))"> Delete </button>
+            </td>
+        
+        </tr>
+    }
+</table>
+@code {
+    private List<string> usernames;
+    private string password = "";
+    private bool isAdmin = false;
+    private string resultMsg = "";
+    private string color = "";
+    
+    private async Task Delete(string username)
+    {
+        resultMsg = "";
+
+        try
+        {
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+            color = "red";
+        }
+    }
+}

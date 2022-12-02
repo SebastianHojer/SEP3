@@ -34,6 +34,26 @@ public final class UserOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_lager_UsernameExistsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UsernameRetrievalRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UsernameRetrievalRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UsernameRetrievalResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UsernameRetrievalResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_DeleteUserRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_DeleteUserRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_DeleteUserResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_DeleteUserResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -48,11 +68,19 @@ public final class UserOuterClass {
       "\n\005admin\030\003 \001(\010\"\'\n\024UserCreationResponse\022\017\n" +
       "\007created\030\001 \001(\010\")\n\025UsernameExistsRequest\022" +
       "\020\n\010username\030\001 \001(\t\"(\n\026UsernameExistsRespo" +
-      "nse\022\016\n\006exists\030\001 \001(\0102\234\001\n\004User\022E\n\ncreateUs" +
-      "er\022\032.lager.UserCreationRequest\032\033.lager.U" +
-      "serCreationResponse\022M\n\016usernameExists\022\034." +
-      "lager.UsernameExistsRequest\032\035.lager.User" +
-      "nameExistsResponseB\002P\001b\006proto3"
+      "nse\022\016\n\006exists\030\001 \001(\010\"\032\n\030UsernameRetrieval" +
+      "Request\"-\n\031UsernameRetrievalResponse\022\020\n\010" +
+      "username\030\001 \003(\t\"%\n\021DeleteUserRequest\022\020\n\010u" +
+      "sername\030\001 \001(\t\"%\n\022DeleteUserResponse\022\017\n\007d" +
+      "eleted\030\001 \001(\0102\263\002\n\004User\022E\n\ncreateUser\022\032.la",
+      "ger.UserCreationRequest\032\033.lager.UserCrea" +
+      "tionResponse\022M\n\016usernameExists\022\034.lager.U" +
+      "sernameExistsRequest\032\035.lager.UsernameExi" +
+      "stsResponse\022R\n\rretrieveUsers\022\037.lager.Use" +
+      "rnameRetrievalRequest\032 .lager.UsernameRe" +
+      "trievalResponse\022A\n\ndeleteUser\022\030.lager.De" +
+      "leteUserRequest\032\031.lager.DeleteUserRespon" +
+      "seB\002P\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -90,6 +118,30 @@ public final class UserOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_UsernameExistsResponse_descriptor,
         new java.lang.String[] { "Exists", });
+    internal_static_lager_UsernameRetrievalRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_lager_UsernameRetrievalRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UsernameRetrievalRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_lager_UsernameRetrievalResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_lager_UsernameRetrievalResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UsernameRetrievalResponse_descriptor,
+        new java.lang.String[] { "Username", });
+    internal_static_lager_DeleteUserRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_lager_DeleteUserRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_DeleteUserRequest_descriptor,
+        new java.lang.String[] { "Username", });
+    internal_static_lager_DeleteUserResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_lager_DeleteUserResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_DeleteUserResponse_descriptor,
+        new java.lang.String[] { "Deleted", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
