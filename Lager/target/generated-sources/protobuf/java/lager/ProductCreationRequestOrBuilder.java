@@ -8,9 +8,14 @@ public interface ProductCreationRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 ean = 1;</code>
+   * <code>string ean = 1;</code>
    */
-  int getEan();
+  java.lang.String getEan();
+  /**
+   * <code>string ean = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getEanBytes();
 
   /**
    * <code>string productName = 2;</code>

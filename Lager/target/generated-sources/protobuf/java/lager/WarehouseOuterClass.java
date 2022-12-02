@@ -34,7 +34,7 @@ public final class WarehouseOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\017warehouse.proto\022\005lager\"^\n\026ProductCreat" +
-      "ionRequest\022\013\n\003ean\030\001 \001(\005\022\023\n\013productName\030\002" +
+      "ionRequest\022\013\n\003ean\030\001 \001(\t\022\023\n\013productName\030\002" +
       " \001(\t\022\r\n\005stock\030\003 \001(\005\022\023\n\013information\030\004 \001(\t" +
       "\"*\n\027ProductCreationResponse\022\017\n\007created\030\001" +
       " \001(\0102[\n\tWarehouse\022N\n\rcreateProduct\022\035.lag" +

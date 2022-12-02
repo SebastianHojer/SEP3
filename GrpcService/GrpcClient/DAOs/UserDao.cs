@@ -7,7 +7,7 @@ public class UserDao : IUserDao
 {
     private readonly GrpcDao grpcDao;
     private User.UserClient userClient;
-    
+
     public UserDao()
     {
         grpcDao = GrpcDao.Instance;
@@ -16,25 +16,31 @@ public class UserDao : IUserDao
     
     public async Task<Shared.Models.User> CreateUserAsync(Shared.Models.User user)
     {
-        userClient.createUserAsync(new UserCreationRequest(){ Admin = user.IsAdmin, Username = user.UserName, Password = user.Password });
-        return await Task.FromResult(user);
+        await userClient.createUserAsync(new UserCreationRequest(){ Admin = user.IsAdmin, Username = user.UserName, Password = user.Password });
+        return user;
     }
 
     public async Task<bool> UsernameExists(string userName)
     {
-        UsernameExistsResponse response = userClient.usernameExistsAsync(new UsernameExistsRequest(){Username = userName}).ResponseAsync.Result;
-        return await Task.FromResult(response.Exists);
+        UsernameExistsResponse response = await userClient.usernameExistsAsync(new UsernameExistsRequest(){Username = userName});
+        return response.Exists;
     }
 
-    public async Task<bool> AuthenticatePassword(Shared.Models.User user)
+    public async Task<Shared.Models.User> AuthenticatePassword(Shared.Models.User user)
     {
-        PasswordAuthenticationResponse response = userClient.authenticatePassword(new PasswordAuthenticationRequest(){Username = user.UserName, Password = user.Password});
-        return await Task.FromResult(response.Authenticated);
+        PasswordAuthenticationResponse response = await userClient.authenticatePasswordAsync(new PasswordAuthenticationRequest(){Username = user.UserName, Password = user.Password});
+        if (response.Authenticated)
+        {
+            user.Authenticated = true;
+            if(response.IsAdmin){user.IsAdmin = true;}
+        }
+        
+        return user;
     }
 
     public async Task<bool> DeleteUser(string userName)
     {
-        DeleteUserResponse response = userClient.deleteUser(new DeleteUserRequest() { Username = userName });
-        return await Task.FromResult(response.Deleted);
+        DeleteUserResponse response = await userClient.deleteUserAsync(new DeleteUserRequest() { Username = userName });
+        return  response.Deleted;
     }
 }

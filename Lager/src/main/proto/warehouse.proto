@@ -7,7 +7,7 @@ service Warehouse{
 }
 
 message ProductCreationRequest {
-  int32 ean = 1;
+  string ean = 1;
   string productName = 2;
   int32 stock = 3;
   string information = 4;
@@ -16,3 +16,4 @@ message ProductCreationRequest {
 message ProductCreationResponse{
   bool created = 1;
 }
+

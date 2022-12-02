@@ -33,11 +33,11 @@ public class Insert
     return false;
   }
 
-  public boolean createProduct(int ean, String productName, int stock, String information){
+  public boolean createProduct(String ean, String productName, int stock, String information){
     String SQL = "insert into sep3.warehouse (ean, productname, stock, information) values (?, ?, ?, ?)";
     int affectedRows;
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
-      preparedStatement.setInt(1, ean);
+      preparedStatement.setString(1, ean);
       preparedStatement.setString(2, productName);
       preparedStatement.setInt(3, stock);
       preparedStatement.setString(4, information);

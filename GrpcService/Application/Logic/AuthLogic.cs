@@ -18,9 +18,9 @@ public class AuthLogic : IAuthLogic
     {
         User user = new User(username, password);
         Console.WriteLine("AuthLogic");
-        Task<bool> authentication = userDao.AuthenticatePassword(user);
+        Task<User> authentication = userDao.AuthenticatePassword(user);
         Console.WriteLine(authentication);
-        if (authentication.Result == false)
+        if (authentication.Result.Authenticated == false)
         {
             throw new Exception("User or password is not found");
         }

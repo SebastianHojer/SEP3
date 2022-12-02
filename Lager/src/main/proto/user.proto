@@ -50,6 +50,7 @@ message PasswordAuthenticationRequest{
 
 message PasswordAuthenticationResponse{
   bool authenticated = 1;
+  bool isAdmin = 2;
 }
 
 

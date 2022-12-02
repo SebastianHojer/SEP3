@@ -1,11 +1,13 @@
 package org.lager.server;
 
 import database.DatabaseMain;
+import dto.AuthenticationDto;
 import io.grpc.stub.StreamObserver;
 import lager.*;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl extends UserGrpc.UserImplBase {
     private final DatabaseMain db = DatabaseMain.getInstance();
@@ -44,11 +46,9 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
 
     @Override
     public void authenticatePassword(PasswordAuthenticationRequest request, StreamObserver<PasswordAuthenticationResponse> responseObserver){
-        boolean authenticated = db.authenticatePassword(request.getUsername(), request.getPassword());
-        PasswordAuthenticationResponse response = PasswordAuthenticationResponse.newBuilder().setAuthenticated(authenticated).build();
+        AuthenticationDto authenticated = db.authenticatePassword(request.getUsername(), request.getPassword());
+        PasswordAuthenticationResponse response = PasswordAuthenticationResponse.newBuilder().setAuthenticated(authenticated.isAuthenticated()).setIsAdmin(authenticated.isAdmin()).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
-
-
 }

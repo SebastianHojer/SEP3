@@ -84,19 +84,19 @@ public final class UserOuterClass {
       "sername\030\001 \001(\t\"%\n\022DeleteUserResponse\022\017\n\007d" +
       "eleted\030\001 \001(\010\"C\n\035PasswordAuthenticationRe",
       "quest\022\020\n\010username\030\001 \001(\t\022\020\n\010password\030\002 \001(" +
-      "\t\"7\n\036PasswordAuthenticationResponse\022\025\n\ra" +
-      "uthenticated\030\001 \001(\0102\230\003\n\004User\022E\n\ncreateUse" +
-      "r\022\032.lager.UserCreationRequest\032\033.lager.Us" +
-      "erCreationResponse\022M\n\016usernameExists\022\034.l" +
-      "ager.UsernameExistsRequest\032\035.lager.Usern" +
-      "ameExistsResponse\022R\n\rretrieveUsers\022\037.lag" +
-      "er.UsernameRetrievalRequest\032 .lager.User" +
-      "nameRetrievalResponse\022A\n\ndeleteUser\022\030.la" +
-      "ger.DeleteUserRequest\032\031.lager.DeleteUser",
-      "Response\022c\n\024authenticatePassword\022$.lager" +
-      ".PasswordAuthenticationRequest\032%.lager.P" +
-      "asswordAuthenticationResponseB\002P\001b\006proto" +
-      "3"
+      "\t\"H\n\036PasswordAuthenticationResponse\022\025\n\ra" +
+      "uthenticated\030\001 \001(\010\022\017\n\007isAdmin\030\002 \001(\0102\230\003\n\004" +
+      "User\022E\n\ncreateUser\022\032.lager.UserCreationR" +
+      "equest\032\033.lager.UserCreationResponse\022M\n\016u" +
+      "sernameExists\022\034.lager.UsernameExistsRequ" +
+      "est\032\035.lager.UsernameExistsResponse\022R\n\rre" +
+      "trieveUsers\022\037.lager.UsernameRetrievalReq" +
+      "uest\032 .lager.UsernameRetrievalResponse\022A" +
+      "\n\ndeleteUser\022\030.lager.DeleteUserRequest\032\031",
+      ".lager.DeleteUserResponse\022c\n\024authenticat" +
+      "ePassword\022$.lager.PasswordAuthentication" +
+      "Request\032%.lager.PasswordAuthenticationRe" +
+      "sponseB\002P\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -169,7 +169,7 @@ public final class UserOuterClass {
     internal_static_lager_PasswordAuthenticationResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_PasswordAuthenticationResponse_descriptor,
-        new java.lang.String[] { "Authenticated", });
+        new java.lang.String[] { "Authenticated", "IsAdmin", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

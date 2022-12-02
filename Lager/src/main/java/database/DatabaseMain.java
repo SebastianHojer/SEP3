@@ -1,5 +1,7 @@
 package database;
 
+import dto.AuthenticationDto;
+
 import java.util.ArrayList;
 
 public class DatabaseMain
@@ -41,11 +43,11 @@ public class DatabaseMain
     return delete.deleteUser(username);
   }
 
-  public boolean createProduct(int ean, String productName, int stock, String information) {
+  public boolean createProduct(String ean, String productName, int stock, String information) {
     return insert.createProduct(ean, productName, stock, information);
   }
 
-  public boolean authenticatePassword(String username, String password)
+  public AuthenticationDto authenticatePassword(String username, String password)
   {
     return select.authenticatePassword(username, password);
   }

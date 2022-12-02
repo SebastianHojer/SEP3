@@ -16,6 +16,7 @@ public  final class PasswordAuthenticationResponse extends
   }
   private PasswordAuthenticationResponse() {
     authenticated_ = false;
+    isAdmin_ = false;
   }
 
   @java.lang.Override
@@ -46,6 +47,11 @@ public  final class PasswordAuthenticationResponse extends
           case 8: {
 
             authenticated_ = input.readBool();
+            break;
+          }
+          case 16: {
+
+            isAdmin_ = input.readBool();
             break;
           }
         }
@@ -80,6 +86,15 @@ public  final class PasswordAuthenticationResponse extends
     return authenticated_;
   }
 
+  public static final int ISADMIN_FIELD_NUMBER = 2;
+  private boolean isAdmin_;
+  /**
+   * <code>bool isAdmin = 2;</code>
+   */
+  public boolean getIsAdmin() {
+    return isAdmin_;
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -95,6 +110,9 @@ public  final class PasswordAuthenticationResponse extends
     if (authenticated_ != false) {
       output.writeBool(1, authenticated_);
     }
+    if (isAdmin_ != false) {
+      output.writeBool(2, isAdmin_);
+    }
   }
 
   public int getSerializedSize() {
@@ -105,6 +123,10 @@ public  final class PasswordAuthenticationResponse extends
     if (authenticated_ != false) {
       size += com.google.protobuf.CodedOutputStream
         .computeBoolSize(1, authenticated_);
+    }
+    if (isAdmin_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(2, isAdmin_);
     }
     memoizedSize = size;
     return size;
@@ -124,6 +146,8 @@ public  final class PasswordAuthenticationResponse extends
     boolean result = true;
     result = result && (getAuthenticated()
         == other.getAuthenticated());
+    result = result && (getIsAdmin()
+        == other.getIsAdmin());
     return result;
   }
 
@@ -137,6 +161,9 @@ public  final class PasswordAuthenticationResponse extends
     hash = (37 * hash) + AUTHENTICATED_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getAuthenticated());
+    hash = (37 * hash) + ISADMIN_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getIsAdmin());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -268,6 +295,8 @@ public  final class PasswordAuthenticationResponse extends
       super.clear();
       authenticated_ = false;
 
+      isAdmin_ = false;
+
       return this;
     }
 
@@ -291,6 +320,7 @@ public  final class PasswordAuthenticationResponse extends
     public lager.PasswordAuthenticationResponse buildPartial() {
       lager.PasswordAuthenticationResponse result = new lager.PasswordAuthenticationResponse(this);
       result.authenticated_ = authenticated_;
+      result.isAdmin_ = isAdmin_;
       onBuilt();
       return result;
     }
@@ -334,6 +364,9 @@ public  final class PasswordAuthenticationResponse extends
       if (other == lager.PasswordAuthenticationResponse.getDefaultInstance()) return this;
       if (other.getAuthenticated() != false) {
         setAuthenticated(other.getAuthenticated());
+      }
+      if (other.getIsAdmin() != false) {
+        setIsAdmin(other.getIsAdmin());
       }
       onChanged();
       return this;
@@ -383,6 +416,32 @@ public  final class PasswordAuthenticationResponse extends
     public Builder clearAuthenticated() {
       
       authenticated_ = false;
+      onChanged();
+      return this;
+    }
+
+    private boolean isAdmin_ ;
+    /**
+     * <code>bool isAdmin = 2;</code>
+     */
+    public boolean getIsAdmin() {
+      return isAdmin_;
+    }
+    /**
+     * <code>bool isAdmin = 2;</code>
+     */
+    public Builder setIsAdmin(boolean value) {
+      
+      isAdmin_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool isAdmin = 2;</code>
+     */
+    public Builder clearIsAdmin() {
+      
+      isAdmin_ = false;
       onChanged();
       return this;
     }

@@ -11,4 +11,9 @@ public interface PasswordAuthenticationResponseOrBuilder extends
    * <code>bool authenticated = 1;</code>
    */
   boolean getAuthenticated();
+
+  /**
+   * <code>bool isAdmin = 2;</code>
+   */
+  boolean getIsAdmin();
 }

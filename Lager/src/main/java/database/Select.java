@@ -1,7 +1,10 @@
 package database;
 
+import dto.AuthenticationDto;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Select
 {
@@ -31,36 +34,38 @@ public class Select
 
   public ArrayList<String> retrieveUsers() {
       String SQL = "select * from sep3.\"user\"";
+      ArrayList<String> usernames = new ArrayList<>();
       try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
         ResultSet rs = preparedStatement.executeQuery();
-        ArrayList<String> usernames = new ArrayList<>();
         while(rs.next()){
           usernames.add(rs.getString("username"));
         }
-        return usernames;
       } catch (SQLException e) {
         e.printStackTrace();
-        return null;
       }
+      return usernames;
   }
 
-  public boolean authenticatePassword(String username, String password)
+  public AuthenticationDto authenticatePassword(String username, String password)
   {
+    boolean isAdmin = false;
+    boolean authenticated = false;
     String SQL = "select * from sep3.\"user\" where username = '" + username + "'";
     try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
       ResultSet rs = preparedStatement.executeQuery();
-      String actualPassword;
+      String actualPassword = "";
+
       if(rs.next()){
         actualPassword = rs.getString("password");
-      } else return false;
-
+        isAdmin = rs.getBoolean("admin");
+      }
       if(actualPassword.equals(password)){
-        return true;
+        authenticated = true;
       }
     } catch (SQLException e){
       e.printStackTrace();
-      return false;
     }
-    return false;
+    AuthenticationDto dto = new AuthenticationDto(isAdmin, authenticated);
+    return dto;
   }
 }
