@@ -34,4 +34,33 @@ public class UserController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    [HttpDelete]
+    public async Task<ActionResult<string>> DeleteAsync(string username)
+    {
+        try
+        {
+            userLogic.DeleteUser(username);
+            return Ok(username);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<string>>> retrieveUsersAsync()
+    {
+        try
+        {
+            IEnumerable<string> users = userLogic.RetrieveUsers();
+            return Ok(users);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }

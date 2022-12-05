@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Cache;
+using System.Net.Http.Json;
 using System.Text.Json;
 using HttpClients.ClientInterfaces;
 using Shared.DTOs;
@@ -29,5 +30,31 @@ public class UserHttpClient : IUserService
             PropertyNameCaseInsensitive = true
         })!;
         return user;
+    }
+
+    public async Task Delete(string username)
+    {
+        HttpResponseMessage response = await client.DeleteAsync($"/User?username={username}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+    }
+
+    public async Task<List<string>> Retrieve()
+    {
+        HttpResponseMessage responseMessage = await client.GetAsync("/user");
+        string result = await responseMessage.Content.ReadAsStringAsync();
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            string content = await responseMessage.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+        List<string> usernames = JsonSerializer.Deserialize<List<string>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return usernames;
     }
 }

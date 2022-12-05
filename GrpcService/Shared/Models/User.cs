@@ -1,4 +1,6 @@
-﻿namespace Shared.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Shared.Models;
 
 public class User
 {
@@ -12,11 +14,11 @@ public class User
         Password = password;
     }
 
+    [JsonConstructor]
     public User(string userName, string password, bool isAdmin)
     {
         UserName = userName;
         Password = password;
         IsAdmin = isAdmin;
     }
-    
 }

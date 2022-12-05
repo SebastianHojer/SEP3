@@ -1,21 +1,63 @@
 @page "/DeleteUser"
-@using global::Shared.DTOs
-@using global::Shared.Models
 @using HttpClients.ClientInterfaces
 @inject IUserService userService;
+
+@attribute [Authorize("mustbeadmin")]
 <h3>Delete User</h3>
-<table>
-    @foreach (string username in usernames)
+<p> ayo </p>
+<button @onclick="@(() => RetrieveUsers())"> Refresh </button>
+@if (!string.IsNullOrEmpty(resultMsg))
+{
+    <div>
+        <span>@resultMsg</span>
+    </div>
+}
+
+@if (usernames == null)
+{
+    <span>Loading..</span>
+}
+else if (!usernames.Any())
+{
+    <span>No users to be found</span>
+}
+else
+{
+    <table>
+        @foreach (string username in usernames)
+                {
+                    <tr>
+                        <td>@username</td>
+                        <td>
+                            <button @onclick="@(() => Delete(username))"> Delete </button>
+                        </td>
+                    </tr>
+                }
+            </table>
+}
+
+@functions { //todo IMPLEMENTER dette
+    private int Count { get; set; } = 10;
+
+    void StartCountdown()
     {
-        <tr>
-            <td>@username</td>
-            <td>
-                <button @onclick="@(() => Delete(username))"> Delete </button>
-            </td>
-        
-        </tr>
+        var timer = new Timer(new TimerCallback(_ =>
+        {
+            if (Count > 0)
+            {
+                Count--;
+
+                // Note that the following line is necessary because otherwise
+                // Blazor would not recognize the state change and not refresh the UI
+                InvokeAsync(() =>
+                {
+
+                    StateHasChanged();
+                });
+            }
+        }), null, 1000, 1000);
     }
-</table>
+}
 @code {
     private List<string> usernames;
     private string password = "";
@@ -29,7 +71,32 @@
 
         try
         {
-            
+            await userService.Delete(username);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+            color = "red";
+        }
+    }
+    protected override async Task OnInitializedAsync() {
+        try
+        {
+           usernames = await userService.Retrieve();
+            StartCountdown();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+        }
+    }
+    private async Task RetrieveUsers()
+    {
+        resultMsg = "";
+        try
+        {
+            usernames = await userService.Retrieve();
         }
         catch (Exception e)
         {
