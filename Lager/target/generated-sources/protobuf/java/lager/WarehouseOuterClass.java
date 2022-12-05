@@ -15,6 +15,11 @@ public final class WarehouseOuterClass {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_Product_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_Product_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_lager_ProductCreationRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -24,6 +29,36 @@ public final class WarehouseOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_lager_ProductCreationResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_DeleteProductRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_DeleteProductRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_DeleteProductResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_DeleteProductResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_ProductExistsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_ProductExistsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_ProductExistsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_ProductExistsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveProductsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveProductsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveProductsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveProductsResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -33,13 +68,26 @@ public final class WarehouseOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017warehouse.proto\022\005lager\"^\n\026ProductCreat" +
-      "ionRequest\022\013\n\003ean\030\001 \001(\t\022\023\n\013productName\030\002" +
-      " \001(\t\022\r\n\005stock\030\003 \001(\005\022\023\n\013information\030\004 \001(\t" +
-      "\"*\n\027ProductCreationResponse\022\017\n\007created\030\001" +
-      " \001(\0102[\n\tWarehouse\022N\n\rcreateProduct\022\035.lag" +
-      "er.ProductCreationRequest\032\036.lager.Produc" +
-      "tCreationResponseB\002P\001b\006proto3"
+      "\n\017warehouse.proto\022\005lager\"O\n\007Product\022\013\n\003e" +
+      "an\030\001 \001(\t\022\023\n\013productName\030\002 \001(\t\022\r\n\005stock\030\003" +
+      " \001(\005\022\023\n\013information\030\004 \001(\t\":\n\026ProductCrea" +
+      "tionRequest\022 \n\010toCreate\030\001 \001(\0132\016.lager.Pr" +
+      "oduct\"*\n\027ProductCreationResponse\022\017\n\007crea" +
+      "ted\030\001 \001(\010\"#\n\024DeleteProductRequest\022\013\n\003ean" +
+      "\030\001 \001(\t\"(\n\025DeleteProductResponse\022\017\n\007delet" +
+      "ed\030\001 \001(\010\"#\n\024ProductExistsRequest\022\013\n\003ean\030" +
+      "\001 \001(\t\"\'\n\025ProductExistsResponse\022\016\n\006exists" +
+      "\030\001 \001(\010\"\031\n\027RetrieveProductsRequest\";\n\030Ret",
+      "rieveProductsResponse\022\037\n\007product\030\001 \003(\0132\016" +
+      ".lager.Product2\310\002\n\tWarehouse\022N\n\rcreatePr" +
+      "oduct\022\035.lager.ProductCreationRequest\032\036.l" +
+      "ager.ProductCreationResponse\022J\n\rdeletePr" +
+      "oduct\022\033.lager.DeleteProductRequest\032\034.lag" +
+      "er.DeleteProductResponse\022J\n\rproductExist" +
+      "s\022\033.lager.ProductExistsRequest\032\034.lager.P" +
+      "roductExistsResponse\022S\n\020retrieveProducts" +
+      "\022\036.lager.RetrieveProductsRequest\032\037.lager" +
+      ".RetrieveProductsResponseB\002P\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -53,18 +101,60 @@ public final class WarehouseOuterClass {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_lager_ProductCreationRequest_descriptor =
+    internal_static_lager_Product_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_lager_Product_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_Product_descriptor,
+        new java.lang.String[] { "Ean", "ProductName", "Stock", "Information", });
+    internal_static_lager_ProductCreationRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_lager_ProductCreationRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_ProductCreationRequest_descriptor,
-        new java.lang.String[] { "Ean", "ProductName", "Stock", "Information", });
+        new java.lang.String[] { "ToCreate", });
     internal_static_lager_ProductCreationResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_lager_ProductCreationResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_ProductCreationResponse_descriptor,
         new java.lang.String[] { "Created", });
+    internal_static_lager_DeleteProductRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_lager_DeleteProductRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_DeleteProductRequest_descriptor,
+        new java.lang.String[] { "Ean", });
+    internal_static_lager_DeleteProductResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_lager_DeleteProductResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_DeleteProductResponse_descriptor,
+        new java.lang.String[] { "Deleted", });
+    internal_static_lager_ProductExistsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_lager_ProductExistsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_ProductExistsRequest_descriptor,
+        new java.lang.String[] { "Ean", });
+    internal_static_lager_ProductExistsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_lager_ProductExistsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_ProductExistsResponse_descriptor,
+        new java.lang.String[] { "Exists", });
+    internal_static_lager_RetrieveProductsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_lager_RetrieveProductsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveProductsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_lager_RetrieveProductsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_lager_RetrieveProductsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveProductsResponse_descriptor,
+        new java.lang.String[] { "Product", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
