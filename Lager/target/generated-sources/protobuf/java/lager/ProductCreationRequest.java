@@ -15,10 +15,6 @@ public  final class ProductCreationRequest extends
     super(builder);
   }
   private ProductCreationRequest() {
-    ean_ = "";
-    productName_ = "";
-    stock_ = 0;
-    information_ = "";
   }
 
   @java.lang.Override
@@ -47,26 +43,16 @@ public  final class ProductCreationRequest extends
             break;
           }
           case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+            lager.Product.Builder subBuilder = null;
+            if (toCreate_ != null) {
+              subBuilder = toCreate_.toBuilder();
+            }
+            toCreate_ = input.readMessage(lager.Product.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(toCreate_);
+              toCreate_ = subBuilder.buildPartial();
+            }
 
-            ean_ = s;
-            break;
-          }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            productName_ = s;
-            break;
-          }
-          case 24: {
-
-            stock_ = input.readInt32();
-            break;
-          }
-          case 34: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            information_ = s;
             break;
           }
         }
@@ -92,115 +78,25 @@ public  final class ProductCreationRequest extends
             lager.ProductCreationRequest.class, lager.ProductCreationRequest.Builder.class);
   }
 
-  public static final int EAN_FIELD_NUMBER = 1;
-  private volatile java.lang.Object ean_;
+  public static final int TOCREATE_FIELD_NUMBER = 1;
+  private lager.Product toCreate_;
   /**
-   * <code>string ean = 1;</code>
+   * <code>.lager.Product toCreate = 1;</code>
    */
-  public java.lang.String getEan() {
-    java.lang.Object ref = ean_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      ean_ = s;
-      return s;
-    }
+  public boolean hasToCreate() {
+    return toCreate_ != null;
   }
   /**
-   * <code>string ean = 1;</code>
+   * <code>.lager.Product toCreate = 1;</code>
    */
-  public com.google.protobuf.ByteString
-      getEanBytes() {
-    java.lang.Object ref = ean_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      ean_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int PRODUCTNAME_FIELD_NUMBER = 2;
-  private volatile java.lang.Object productName_;
-  /**
-   * <code>string productName = 2;</code>
-   */
-  public java.lang.String getProductName() {
-    java.lang.Object ref = productName_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      productName_ = s;
-      return s;
-    }
+  public lager.Product getToCreate() {
+    return toCreate_ == null ? lager.Product.getDefaultInstance() : toCreate_;
   }
   /**
-   * <code>string productName = 2;</code>
+   * <code>.lager.Product toCreate = 1;</code>
    */
-  public com.google.protobuf.ByteString
-      getProductNameBytes() {
-    java.lang.Object ref = productName_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      productName_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int STOCK_FIELD_NUMBER = 3;
-  private int stock_;
-  /**
-   * <code>int32 stock = 3;</code>
-   */
-  public int getStock() {
-    return stock_;
-  }
-
-  public static final int INFORMATION_FIELD_NUMBER = 4;
-  private volatile java.lang.Object information_;
-  /**
-   * <code>string information = 4;</code>
-   */
-  public java.lang.String getInformation() {
-    java.lang.Object ref = information_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      information_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string information = 4;</code>
-   */
-  public com.google.protobuf.ByteString
-      getInformationBytes() {
-    java.lang.Object ref = information_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      information_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public lager.ProductOrBuilder getToCreateOrBuilder() {
+    return getToCreate();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -215,17 +111,8 @@ public  final class ProductCreationRequest extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getEanBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ean_);
-    }
-    if (!getProductNameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, productName_);
-    }
-    if (stock_ != 0) {
-      output.writeInt32(3, stock_);
-    }
-    if (!getInformationBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, information_);
+    if (toCreate_ != null) {
+      output.writeMessage(1, getToCreate());
     }
   }
 
@@ -234,18 +121,9 @@ public  final class ProductCreationRequest extends
     if (size != -1) return size;
 
     size = 0;
-    if (!getEanBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ean_);
-    }
-    if (!getProductNameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, productName_);
-    }
-    if (stock_ != 0) {
+    if (toCreate_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(3, stock_);
-    }
-    if (!getInformationBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, information_);
+        .computeMessageSize(1, getToCreate());
     }
     memoizedSize = size;
     return size;
@@ -263,14 +141,11 @@ public  final class ProductCreationRequest extends
     lager.ProductCreationRequest other = (lager.ProductCreationRequest) obj;
 
     boolean result = true;
-    result = result && getEan()
-        .equals(other.getEan());
-    result = result && getProductName()
-        .equals(other.getProductName());
-    result = result && (getStock()
-        == other.getStock());
-    result = result && getInformation()
-        .equals(other.getInformation());
+    result = result && (hasToCreate() == other.hasToCreate());
+    if (hasToCreate()) {
+      result = result && getToCreate()
+          .equals(other.getToCreate());
+    }
     return result;
   }
 
@@ -281,14 +156,10 @@ public  final class ProductCreationRequest extends
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + EAN_FIELD_NUMBER;
-    hash = (53 * hash) + getEan().hashCode();
-    hash = (37 * hash) + PRODUCTNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getProductName().hashCode();
-    hash = (37 * hash) + STOCK_FIELD_NUMBER;
-    hash = (53 * hash) + getStock();
-    hash = (37 * hash) + INFORMATION_FIELD_NUMBER;
-    hash = (53 * hash) + getInformation().hashCode();
+    if (hasToCreate()) {
+      hash = (37 * hash) + TOCREATE_FIELD_NUMBER;
+      hash = (53 * hash) + getToCreate().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -418,14 +289,12 @@ public  final class ProductCreationRequest extends
     }
     public Builder clear() {
       super.clear();
-      ean_ = "";
-
-      productName_ = "";
-
-      stock_ = 0;
-
-      information_ = "";
-
+      if (toCreateBuilder_ == null) {
+        toCreate_ = null;
+      } else {
+        toCreate_ = null;
+        toCreateBuilder_ = null;
+      }
       return this;
     }
 
@@ -448,10 +317,11 @@ public  final class ProductCreationRequest extends
 
     public lager.ProductCreationRequest buildPartial() {
       lager.ProductCreationRequest result = new lager.ProductCreationRequest(this);
-      result.ean_ = ean_;
-      result.productName_ = productName_;
-      result.stock_ = stock_;
-      result.information_ = information_;
+      if (toCreateBuilder_ == null) {
+        result.toCreate_ = toCreate_;
+      } else {
+        result.toCreate_ = toCreateBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -493,20 +363,8 @@ public  final class ProductCreationRequest extends
 
     public Builder mergeFrom(lager.ProductCreationRequest other) {
       if (other == lager.ProductCreationRequest.getDefaultInstance()) return this;
-      if (!other.getEan().isEmpty()) {
-        ean_ = other.ean_;
-        onChanged();
-      }
-      if (!other.getProductName().isEmpty()) {
-        productName_ = other.productName_;
-        onChanged();
-      }
-      if (other.getStock() != 0) {
-        setStock(other.getStock());
-      }
-      if (!other.getInformation().isEmpty()) {
-        information_ = other.information_;
-        onChanged();
+      if (other.hasToCreate()) {
+        mergeToCreate(other.getToCreate());
       }
       onChanged();
       return this;
@@ -534,237 +392,121 @@ public  final class ProductCreationRequest extends
       return this;
     }
 
-    private java.lang.Object ean_ = "";
+    private lager.Product toCreate_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lager.Product, lager.Product.Builder, lager.ProductOrBuilder> toCreateBuilder_;
     /**
-     * <code>string ean = 1;</code>
+     * <code>.lager.Product toCreate = 1;</code>
      */
-    public java.lang.String getEan() {
-      java.lang.Object ref = ean_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ean_ = s;
-        return s;
+    public boolean hasToCreate() {
+      return toCreateBuilder_ != null || toCreate_ != null;
+    }
+    /**
+     * <code>.lager.Product toCreate = 1;</code>
+     */
+    public lager.Product getToCreate() {
+      if (toCreateBuilder_ == null) {
+        return toCreate_ == null ? lager.Product.getDefaultInstance() : toCreate_;
       } else {
-        return (java.lang.String) ref;
+        return toCreateBuilder_.getMessage();
       }
     }
     /**
-     * <code>string ean = 1;</code>
+     * <code>.lager.Product toCreate = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getEanBytes() {
-      java.lang.Object ref = ean_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ean_ = b;
-        return b;
+    public Builder setToCreate(lager.Product value) {
+      if (toCreateBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        toCreate_ = value;
+        onChanged();
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        toCreateBuilder_.setMessage(value);
       }
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder setEan(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      ean_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder clearEan() {
-      
-      ean_ = getDefaultInstance().getEan();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder setEanBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      ean_ = value;
-      onChanged();
-      return this;
-    }
 
-    private java.lang.Object productName_ = "";
+      return this;
+    }
     /**
-     * <code>string productName = 2;</code>
+     * <code>.lager.Product toCreate = 1;</code>
      */
-    public java.lang.String getProductName() {
-      java.lang.Object ref = productName_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        productName_ = s;
-        return s;
+    public Builder setToCreate(
+        lager.Product.Builder builderForValue) {
+      if (toCreateBuilder_ == null) {
+        toCreate_ = builderForValue.build();
+        onChanged();
       } else {
-        return (java.lang.String) ref;
+        toCreateBuilder_.setMessage(builderForValue.build());
       }
-    }
-    /**
-     * <code>string productName = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getProductNameBytes() {
-      java.lang.Object ref = productName_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        productName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string productName = 2;</code>
-     */
-    public Builder setProductName(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      productName_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string productName = 2;</code>
-     */
-    public Builder clearProductName() {
-      
-      productName_ = getDefaultInstance().getProductName();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string productName = 2;</code>
-     */
-    public Builder setProductNameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      productName_ = value;
-      onChanged();
-      return this;
-    }
 
-    private int stock_ ;
-    /**
-     * <code>int32 stock = 3;</code>
-     */
-    public int getStock() {
-      return stock_;
-    }
-    /**
-     * <code>int32 stock = 3;</code>
-     */
-    public Builder setStock(int value) {
-      
-      stock_ = value;
-      onChanged();
       return this;
     }
     /**
-     * <code>int32 stock = 3;</code>
+     * <code>.lager.Product toCreate = 1;</code>
      */
-    public Builder clearStock() {
-      
-      stock_ = 0;
-      onChanged();
-      return this;
-    }
+    public Builder mergeToCreate(lager.Product value) {
+      if (toCreateBuilder_ == null) {
+        if (toCreate_ != null) {
+          toCreate_ =
+            lager.Product.newBuilder(toCreate_).mergeFrom(value).buildPartial();
+        } else {
+          toCreate_ = value;
+        }
+        onChanged();
+      } else {
+        toCreateBuilder_.mergeFrom(value);
+      }
 
-    private java.lang.Object information_ = "";
+      return this;
+    }
     /**
-     * <code>string information = 4;</code>
+     * <code>.lager.Product toCreate = 1;</code>
      */
-    public java.lang.String getInformation() {
-      java.lang.Object ref = information_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        information_ = s;
-        return s;
+    public Builder clearToCreate() {
+      if (toCreateBuilder_ == null) {
+        toCreate_ = null;
+        onChanged();
       } else {
-        return (java.lang.String) ref;
+        toCreate_ = null;
+        toCreateBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.lager.Product toCreate = 1;</code>
+     */
+    public lager.Product.Builder getToCreateBuilder() {
+      
+      onChanged();
+      return getToCreateFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.lager.Product toCreate = 1;</code>
+     */
+    public lager.ProductOrBuilder getToCreateOrBuilder() {
+      if (toCreateBuilder_ != null) {
+        return toCreateBuilder_.getMessageOrBuilder();
+      } else {
+        return toCreate_ == null ?
+            lager.Product.getDefaultInstance() : toCreate_;
       }
     }
     /**
-     * <code>string information = 4;</code>
+     * <code>.lager.Product toCreate = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getInformationBytes() {
-      java.lang.Object ref = information_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        information_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        lager.Product, lager.Product.Builder, lager.ProductOrBuilder> 
+        getToCreateFieldBuilder() {
+      if (toCreateBuilder_ == null) {
+        toCreateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            lager.Product, lager.Product.Builder, lager.ProductOrBuilder>(
+                getToCreate(),
+                getParentForChildren(),
+                isClean());
+        toCreate_ = null;
       }
-    }
-    /**
-     * <code>string information = 4;</code>
-     */
-    public Builder setInformation(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      information_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string information = 4;</code>
-     */
-    public Builder clearInformation() {
-      
-      information_ = getDefaultInstance().getInformation();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string information = 4;</code>
-     */
-    public Builder setInformationBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      information_ = value;
-      onChanged();
-      return this;
+      return toCreateBuilder_;
     }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {

@@ -8,37 +8,15 @@ public interface ProductCreationRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string ean = 1;</code>
+   * <code>.lager.Product toCreate = 1;</code>
    */
-  java.lang.String getEan();
+  boolean hasToCreate();
   /**
-   * <code>string ean = 1;</code>
+   * <code>.lager.Product toCreate = 1;</code>
    */
-  com.google.protobuf.ByteString
-      getEanBytes();
-
+  lager.Product getToCreate();
   /**
-   * <code>string productName = 2;</code>
+   * <code>.lager.Product toCreate = 1;</code>
    */
-  java.lang.String getProductName();
-  /**
-   * <code>string productName = 2;</code>
-   */
-  com.google.protobuf.ByteString
-      getProductNameBytes();
-
-  /**
-   * <code>int32 stock = 3;</code>
-   */
-  int getStock();
-
-  /**
-   * <code>string information = 4;</code>
-   */
-  java.lang.String getInformation();
-  /**
-   * <code>string information = 4;</code>
-   */
-  com.google.protobuf.ByteString
-      getInformationBytes();
+  lager.ProductOrBuilder getToCreateOrBuilder();
 }

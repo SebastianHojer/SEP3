@@ -1,6 +1,8 @@
 package database;
 
 import dto.AuthenticationDto;
+import lager.PasswordAuthenticationResponse;
+import lager.Product;
 
 import java.util.ArrayList;
 
@@ -47,8 +49,20 @@ public class DatabaseMain
     return insert.createProduct(ean, productName, stock, information);
   }
 
-  public AuthenticationDto authenticatePassword(String username, String password)
+  public PasswordAuthenticationResponse authenticatePassword(String username, String password)
   {
     return select.authenticatePassword(username, password);
+  }
+
+  public boolean deleteProduct(String ean) {
+    return delete.deleteProduct(ean);
+  }
+
+  public boolean productExists(String ean) {
+    return select.productExists(ean);
+  }
+
+  public ArrayList<Product> retrieveProducts() {
+    return select.retrieveProducts();
   }
 }

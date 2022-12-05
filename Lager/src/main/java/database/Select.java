@@ -1,6 +1,8 @@
 package database;
 
 import dto.AuthenticationDto;
+import lager.PasswordAuthenticationResponse;
+import lager.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,6 +29,21 @@ public class Select
         return true;
       }
     } catch (SQLException e){
+      e.printStackTrace();
+      return false;
+    }
+    return false;
+  }
+
+  public boolean productExists(String ean) {
+    String SQL = "select * from sep3.warehouse where ean = '" + ean + "'";
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      ResultSet rs = preparedStatement.executeQuery();
+      if(rs.next()){
+        return true;
+      }
+    } catch (SQLException e){
+      e.printStackTrace();
       return false;
     }
     return false;
@@ -46,7 +63,7 @@ public class Select
       return usernames;
   }
 
-  public AuthenticationDto authenticatePassword(String username, String password)
+  public PasswordAuthenticationResponse authenticatePassword(String username, String password)
   {
     boolean isAdmin = false;
     boolean authenticated = false;
@@ -65,7 +82,26 @@ public class Select
     } catch (SQLException e){
       e.printStackTrace();
     }
-    AuthenticationDto dto = new AuthenticationDto(isAdmin, authenticated);
-    return dto;
+    return PasswordAuthenticationResponse.newBuilder().setAuthenticated(authenticated).setIsAdmin(isAdmin).build();
+  }
+
+
+  public ArrayList<Product> retrieveProducts() {
+    String SQL = "select * from sep3.warehouse";
+    ArrayList<Product> products = new ArrayList<>();
+    try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+      ResultSet rs = preparedStatement.executeQuery();
+      while(rs.next()){
+        String ean = rs.getString("ean");
+        String productname = rs.getString("productname");
+        int stock = rs.getInt("stock");
+        String information = rs.getString("information");
+        Product product = Product.newBuilder().setEan(ean).setProductName(productname).setStock(stock).setInformation(information).build();
+        products.add(product);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return products;
   }
 }

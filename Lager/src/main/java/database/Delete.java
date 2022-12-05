@@ -18,11 +18,22 @@ public class Delete
         try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
             preparedStatement.setString(1, username);
             int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows>0){
-                System.out.println("Affected rows: " + affectedRows);
-                return true;
-            } else{return false;}
+            System.out.println("Affected rows: " + affectedRows);
+            return affectedRows > 0;
         } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteProduct(String ean) {
+        String SQL = "delete from sep3.warehouse where ean = ?";
+        try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+            preparedStatement.setString(1, ean);
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("Affected rows: " + affectedRows);
+            return affectedRows > 0;
+        }catch(SQLException e){
             e.printStackTrace();
             return false;
         }
