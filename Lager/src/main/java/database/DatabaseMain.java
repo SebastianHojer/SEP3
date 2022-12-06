@@ -1,6 +1,5 @@
 package database;
 
-import dto.AuthenticationDto;
 import lager.PasswordAuthenticationResponse;
 import lager.Product;
 

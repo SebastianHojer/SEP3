@@ -6,7 +6,7 @@ namespace Application.LogicInterfaces;
 public interface IUserLogic
 {
     Task<User> CreateAsync(UserCreationDto userToCreate);
-    bool DeleteUser(string userName);
-    List<string> RetrieveUsers();
+    Task DeleteUserAsync(string userName);
+    Task<List<string>> RetrieveUsers();
 
 }

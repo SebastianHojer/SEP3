@@ -13,9 +13,9 @@ public class WarehouseDao
         warehouseClient = grpcDao.getWarehouseClient();
     }
 
-    public async Task<bool> CreateProduct(ProductCreationDto dto)
+    public async Task<bool> CreateProductAsync(ProductCreationDto dto)
     {
-        ProductCreationResponse response = await warehouseClient.createProductAsync(new ProductCreationRequest(){Ean = dto.ean, ProductName = dto.productName, Information = dto.information, Stock = dto.stock});
+        ProductCreationResponse response = await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = dto.ean, Information = dto.information, Stock = dto.stock, ProductName = dto.productName}});
         return response.Created;
     }
 }

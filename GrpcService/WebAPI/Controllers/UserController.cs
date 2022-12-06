@@ -35,12 +35,12 @@ public class UserController : ControllerBase
         }
     }
     [HttpDelete]
-    public async Task<ActionResult<string>> DeleteAsync(string username)
+    public async Task<ActionResult> DeleteAsync(string username)
     {
         try
         {
-            userLogic.DeleteUser(username);
-            return Ok(username);
+            await userLogic.DeleteUserAsync(username);
+            return Ok();
         }
         catch (Exception e)
         {
@@ -50,11 +50,11 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<string>>> retrieveUsersAsync()
+    public async Task<ActionResult<IEnumerable<string>>> RetrieveUsersAsync()
     {
         try
         {
-            IEnumerable<string> users = userLogic.RetrieveUsers();
+            IEnumerable<string> users = await userLogic.RetrieveUsers();
             return Ok(users);
         }
         catch (Exception e)
