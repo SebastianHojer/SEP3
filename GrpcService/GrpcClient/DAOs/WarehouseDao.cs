@@ -15,7 +15,7 @@ public class WarehouseDao
 
     public async Task<bool> CreateProduct(ProductCreationDto dto)
     {
-        ProductCreationResponse response = await warehouseClient.createProductAsync(new ProductCreationRequest(){Ean = dto.ean, ProductName = dto.productName, Information = dto.information, Stock = dto.stock});
+        ProductCreationResponse response = await warehouseClient.createProductAsync(new ProductCreationRequest(){Ean = dto.Ean, ProductName = dto.ProductName, Information = dto.Information, Stock = dto.Stock});
         return response.Created;
     }
 }
