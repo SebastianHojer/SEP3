@@ -53,6 +53,7 @@
         {
             await userService.Create(new UserCreationDto(username, password, isAdmin));
             username = "";
+            password = "";
             resultMsg = "User successfully created";
             color = "green";
         }
