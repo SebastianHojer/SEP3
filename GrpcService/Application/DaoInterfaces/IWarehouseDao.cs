@@ -1,6 +1,9 @@
-/*namespace Application.DaoInterfaces;
+using Shared.DTOs;
+using Shared.Models;
+
+namespace Application.DaoInterfaces;
 
 public interface IWarehouseDao
 {
-    Task<
-}*/
+    Task<Product> CreateProductAsync(ProductCreationDto dto);
+}

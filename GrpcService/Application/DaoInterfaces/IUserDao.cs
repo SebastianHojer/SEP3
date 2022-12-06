@@ -5,8 +5,8 @@ namespace Application.DaoInterfaces;
 public interface IUserDao
 {
     Task<User> CreateUserAsync(User user);
-    Task<bool> UsernameExists(string userName);
-    Task<User> AuthenticatePassword(User user);
-    Task<bool> DeleteUser(string userName);
+    Task<bool> UsernameExistsAsync(string userName);
+    Task<User> AuthenticatePasswordAsync(User user);
+    Task DeleteUserAsync(string userName);
     Task<List<string>> RetrieveUsers();
 }
