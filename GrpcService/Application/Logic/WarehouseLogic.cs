@@ -18,11 +18,11 @@ public class WarehouseLogic : IWarehouseLogic
 
     public async Task<Product> CreateAsync(ProductCreationDto productToCreate)
     {
-        bool exists = await warehouseDao.ProductExistsAsync(productToCreate.ean);
+        bool exists = await warehouseDao.ProductExistsAsync(productToCreate.Ean);
         if (exists) throw new EanTakenException("EAN is already taken");
         ValidateData(productToCreate);
-        Product toCreate = new Product(productToCreate.ean, productToCreate.productName, productToCreate.stock,
-            productToCreate.information);
+        Product toCreate = new Product(productToCreate.Ean, productToCreate.ProductName, productToCreate.Stock,
+            productToCreate.Information);
         Product created = await warehouseDao.CreateProductAsync(toCreate);
         return created;
     }
@@ -30,20 +30,20 @@ public class WarehouseLogic : IWarehouseLogic
     private static void ValidateData(ProductCreationDto productToCreate)
     {
 
-        if (productToCreate.ean.Length > 15)
+        if (productToCreate.Ean.Length > 15)
             throw new InvalidProductException("EAN cannot be longer than 15 characters!");
 
-        if (productToCreate.stock < 0)
+        if (productToCreate.Stock < 0)
         {
             throw new InvalidProductException("Stock cannot be lower than 0!");
         }
 
-        if (productToCreate.information.Length > 100)
+        if (productToCreate.Information.Length > 100)
         {
             throw new InvalidProductException("Information cannot contain more than 100 characters");
         }
 
-        if (productToCreate.productName.Length > 50)
+        if (productToCreate.ProductName.Length > 50)
         {
             throw new InvalidProductException("Product name cannot contain more than 50 characters");
         }
