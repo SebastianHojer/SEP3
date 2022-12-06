@@ -21,7 +21,7 @@ public class UserDao : IUserDao
         return user;
     }
 
-    public async Task<List<string>> RetrieveUsers()
+    public async Task<List<string>> RetrieveUsersAsync()
     {
         var response = await userClient.retrieveUsersAsync(new UsernameRetrievalRequest());
         var usernames = new List<string>();
@@ -46,7 +46,6 @@ public class UserDao : IUserDao
             user.Authenticated = true;
             if(response.IsAdmin){user.IsAdmin = true;}
         }
-        
         return user;
     }
 

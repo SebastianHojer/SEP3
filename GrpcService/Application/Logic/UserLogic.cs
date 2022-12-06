@@ -17,7 +17,7 @@ public class UserLogic : IUserLogic
     
     public async Task<User> CreateAsync(UserCreationDto dto)
     {
-        bool exists = userDao.UsernameExistsAsync(dto.UserName).Result;
+        bool exists = await userDao.UsernameExistsAsync(dto.UserName);
         if (exists)
             throw new UsernameTakenException("Username already taken!");
 
@@ -51,7 +51,7 @@ public class UserLogic : IUserLogic
 
     public async Task<List<string>> RetrieveUsers()
     {
-        List<string> usernames = await userDao.RetrieveUsers();
+        List<string> usernames = await userDao.RetrieveUsersAsync();
         return usernames;
     }
 }

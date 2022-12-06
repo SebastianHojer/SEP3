@@ -8,5 +8,5 @@ public interface IUserDao
     Task<bool> UsernameExistsAsync(string userName);
     Task<User> AuthenticatePasswordAsync(User user);
     Task DeleteUserAsync(string userName);
-    Task<List<string>> RetrieveUsers();
+    Task<List<string>> RetrieveUsersAsync();
 }

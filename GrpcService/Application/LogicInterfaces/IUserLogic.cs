@@ -8,5 +8,4 @@ public interface IUserLogic
     Task<User> CreateAsync(UserCreationDto userToCreate);
     Task DeleteUserAsync(string userName);
     Task<List<string>> RetrieveUsers();
-
 }
