@@ -42,4 +42,12 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void addLocation(AddLocationRequest request, StreamObserver<AddLocationResponse> responseObserver){
+        boolean added = db.addLocation(request.getEan(), request.getLocation());
+        AddLocationResponse response = AddLocationResponse.newBuilder().setAdded(added).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 }

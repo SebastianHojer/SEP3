@@ -1,4 +1,6 @@
+using System.Net;
 using System.Net.Http.Json;
+using System.Security.AccessControl;
 using System.Text.Json;
 using HttpClients.ClientInterfaces;
 using Shared.DTOs;
@@ -33,7 +35,7 @@ public class WarehouseService : IWarehouseService
 
     public async Task DeleteAsync(Product product)
     {
-        HttpResponseMessage response = await client.DeleteAsync($"/warehouse?product={product}");
+        HttpResponseMessage response = await client.DeleteAsync($"/warehouse?ean={product.Ean}");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();
@@ -41,18 +43,17 @@ public class WarehouseService : IWarehouseService
         }
     }
 
-    public async Task<List<Product>> RetrieveAsync()
+    public async Task<IEnumerable<Product>> RetrieveAsync()
     {
         HttpResponseMessage responseMessage = await client.GetAsync("/warehouse");
-        Console.WriteLine("CHingchong you made it");
         string result = await responseMessage.Content.ReadAsStringAsync();
-        if (responseMessage.IsSuccessStatusCode)
+        if (!responseMessage.IsSuccessStatusCode)
         {
             string content = await responseMessage.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
 
-        List<Product> products = JsonSerializer.Deserialize<List<Product>>(result, new JsonSerializerOptions
+        IEnumerable<Product> products = JsonSerializer.Deserialize<IEnumerable<Product>>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;

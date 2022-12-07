@@ -7,5 +7,5 @@ public interface IWarehouseService
 {
     Task<Product> CreateAsync(ProductCreationDto dto);
     Task DeleteAsync(Product product);
-    Task<List<Product>> RetrieveAsync();
+    Task<IEnumerable<Product>> RetrieveAsync();
 }

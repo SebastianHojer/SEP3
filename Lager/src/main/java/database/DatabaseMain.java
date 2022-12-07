@@ -64,4 +64,8 @@ public class DatabaseMain
   public ArrayList<Product> retrieveProducts() {
     return select.retrieveProducts();
   }
+
+  public boolean addLocation(String ean, String location){
+    return insert.addLocation(ean, location);
+  }
 }
