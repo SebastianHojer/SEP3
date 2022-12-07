@@ -4,8 +4,7 @@
 
 @attribute [Authorize("MustBeAdmin")]
 <h3>Delete User</h3>
-<p> ayo </p>
-<button @onclick="@(() => RetrieveUsers())"> Refresh </button>
+<button class="btn btn-primary text-center" @onclick="@(() => RetrieveUsers())"> Refresh </button>
 @if (!string.IsNullOrEmpty(resultMsg))
 {
     <div>
@@ -15,7 +14,9 @@
 
 @if (usernames == null)
 {
-    <span>Loading..</span>
+    <div class="col d-flex justify-content-center">
+      <div class="loader"></div>
+      </div>
 }
 else if (!usernames.Any())
 {
@@ -23,17 +24,27 @@ else if (!usernames.Any())
 }
 else
 {
-    <table>
-        @foreach (string username in usernames)
-                {
-                    <tr>
-                        <td>@username</td>
-                        <td>
-                            <button @onclick="@(() => DeleteAndRefresh(username) )"> Delete </button>
-                        </td>
-                    </tr>
-                }
-            </table>
+    <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var username in usernames)
+        {
+            <tr>
+                <td>@username</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(username))"> Delete </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
 }
 
 @functions { //todo IMPLEMENTER dette
