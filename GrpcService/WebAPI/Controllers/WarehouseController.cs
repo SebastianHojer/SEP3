@@ -12,7 +12,7 @@ public class WarehouseController : ControllerBase
 {
     private readonly IWarehouseLogic warehouseLogic;
 
-    public ProductController(IWarehouseLogic warehouseLogic)
+    public WarehouseController(IWarehouseLogic warehouseLogic)
     {
         this.warehouseLogic = warehouseLogic;
     }
@@ -39,7 +39,7 @@ public class WarehouseController : ControllerBase
     {
         try
         {
-            warehouseLogic.DeleteProduct(product);
+            await warehouseLogic.DeleteProductAsync(product.Ean);
             return Ok(product);
         }
         catch (Exception e)
@@ -54,7 +54,7 @@ public class WarehouseController : ControllerBase
     {
         try
         {
-            IEnumerable<Product> products = warehouseLogic.RetrieveProducts();
+            IEnumerable<Product> products = await warehouseLogic.RetrieveProductsAsync();
             return Ok(products);
         }
         catch (Exception e)

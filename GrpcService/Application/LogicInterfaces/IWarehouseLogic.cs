@@ -7,5 +7,5 @@ public interface IWarehouseLogic
 {
     Task<Product> CreateAsync(ProductCreationDto userToCreate);
     Task DeleteProductAsync(string ean);
-    Task<List<Product>> RetrieveProducts();
+    Task<List<Product>> RetrieveProductsAsync();
 }

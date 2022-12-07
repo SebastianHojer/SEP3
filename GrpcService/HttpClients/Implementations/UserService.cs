@@ -6,11 +6,11 @@ using Shared.Models;
 
 namespace HttpClients.Implementations;
 
-public class UserHttpClient : IUserService
+public class UserService : IUserService
 {
     private readonly HttpClient client;
 
-    public UserHttpClient(HttpClient client)
+    public UserService(HttpClient client)
     {
         this.client = client;
     }

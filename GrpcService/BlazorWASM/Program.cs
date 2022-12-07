@@ -19,8 +19,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 //HTTP Services
-builder.Services.AddScoped<IUserService, UserHttpClient>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 
 
 

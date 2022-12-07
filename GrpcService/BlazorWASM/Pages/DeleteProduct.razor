@@ -2,7 +2,7 @@
 @page "/DeleteUser"
 @using HttpClients.ClientInterfaces
 @using global::Shared.Models
-@inject IProductService productService;
+@inject IWarehouseService WarehouseService;
 
 <!--@attribute [Authorize("mustbeadmin")]-->
 <h3>DeleteProduct</h3>
@@ -38,7 +38,7 @@
 
     try
     {
-      await productService.DeleteProduct(product);
+      await WarehouseService.DeleteAsync(product);
     }
     catch (Exception e)
     {
@@ -50,7 +50,7 @@
   protected override async Task OnInitializedAsync() {
     try
     {
-      products = await productService.RetrieveProducts();
+      products = await WarehouseService.RetrieveAsync();
     }
     catch (Exception e) {
       Console.WriteLine(e);
@@ -62,7 +62,7 @@
     resultMsg = "";
     try
     {
-      products = await productService.RetrieveProducts();
+      products = await WarehouseService.RetrieveAsync();
     }
     catch (Exception e)
     {
@@ -78,7 +78,7 @@
     try
     {
       await Delete(product);
-      products = await productService.RetrievProducts();
+      products = await WarehouseService.RetrieveAsync();
            
     }
     catch (Exception e)

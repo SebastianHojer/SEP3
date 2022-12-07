@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using HttpClients.ClientInterfaces;
@@ -6,11 +7,16 @@ using Shared.Models;
 
 namespace HttpClients.Implementations;
 
-public class ProductService : IProductService
+public class WarehouseService : IWarehouseService
 {
     private readonly HttpClient client;
 
-    public async Task<Product> Create(ProductCreationDto dto)
+    public WarehouseService(HttpClient client)
+    {
+        this.client = client;
+    }
+
+    public async Task<Product> CreateAsync(ProductCreationDto dto)
     {
         HttpResponseMessage response = await client.PostAsJsonAsync("/product", dto);
         string result = await response.Content.ReadAsStringAsync();
@@ -26,7 +32,7 @@ public class ProductService : IProductService
         return product;
     }
 
-    public async Task Delete(Product product)
+    public async Task DeleteAsync(Product product)
     {
         HttpResponseMessage response = await client.DeleteAsync($"/Product?product={product}");
         if (!response.IsSuccessStatusCode)
@@ -36,7 +42,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<List<Product>> Retrieve()
+    public async Task<List<Product>> RetrieveAsync()
     {
         HttpResponseMessage responseMessage = await client.GetAsync("/product");
         string result = await responseMessage.Content.ReadAsStringAsync();

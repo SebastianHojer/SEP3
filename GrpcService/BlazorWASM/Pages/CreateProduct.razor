@@ -1,7 +1,7 @@
 @page "/CreateProduct"
 @using global::Shared.DTOs
 @using HttpClients.ClientInterfaces
-@inject IProductService productService
+@inject IWarehouseService WarehouseService
 
 @attribute [Authorize("MustBeAdmin")]
 <div class="col d-flex justify-content-center">
@@ -49,7 +49,7 @@
 
         try
         {
-            await productService.Create(new ProductCreationDto(ean, productName, stock, information));
+            await WarehouseService.CreateAsync(new ProductCreationDto(ean, productName, stock, information));
             ean = "";
             productName = "";
             information = "";
