@@ -23,4 +23,5 @@ builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 
+
 await builder.Build().RunAsync();

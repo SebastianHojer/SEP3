@@ -17,7 +17,7 @@ public class UserLogic : IUserLogic
     
     public async Task<User> CreateAsync(UserCreationDto dto)
     {
-        bool exists = userDao.UsernameExists(dto.UserName).Result;
+        bool exists = await userDao.UsernameExistsAsync(dto.UserName);
         if (exists)
             throw new UsernameTakenException("Username already taken!");
 
@@ -40,15 +40,18 @@ public class UserLogic : IUserLogic
             throw new InvalidUsernameException("Username max-length is 32 characters!");
     }
 
-    public bool DeleteUser(string userName)
+    public async Task DeleteUserAsync(string userName)
     {
-        bool deleted = userDao.DeleteUser(userName).Result;
-        return deleted;
+        if (!userDao.UsernameExistsAsync(userName).Result)
+        {
+            throw new Exception($"User with username {userName} was not found!");
+        }
+        await userDao.DeleteUserAsync(userName);
     }
 
-    public List<string> RetrieveUsers()
+    public async Task<List<string>> RetrieveUsers()
     {
-        List<string> usernames = userDao.RetrieveUsers().Result;
+        List<string> usernames = await userDao.RetrieveUsersAsync();
         return usernames;
     }
 }

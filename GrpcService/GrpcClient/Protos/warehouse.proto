@@ -4,16 +4,45 @@ package lager;
 
 service Warehouse{
   rpc createProduct(ProductCreationRequest) returns (ProductCreationResponse);
+  rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  rpc productExists(ProductExistsRequest) returns (ProductExistsResponse);
+  rpc retrieveProducts(RetrieveProductsRequest) returns (RetrieveProductsResponse);
 }
 
-message ProductCreationRequest {
+message Product{
   string ean = 1;
   string productName = 2;
   int32 stock = 3;
   string information = 4;
 }
 
+message ProductCreationRequest {
+  Product toCreate = 1;
+}
+
 message ProductCreationResponse{
   bool created = 1;
+}
+
+message DeleteProductRequest{
+  string ean = 1;
+}
+
+message DeleteProductResponse{
+  bool deleted = 1;
+}
+
+message ProductExistsRequest{
+  string ean = 1;
+}
+
+message ProductExistsResponse{
+  bool exists = 1;
+}
+
+message RetrieveProductsRequest{}
+
+message RetrieveProductsResponse{
+  repeated Product product = 1;
 }
 

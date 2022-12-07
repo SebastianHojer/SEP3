@@ -14,38 +14,14 @@ public class AuthLogic : IAuthLogic
         this.userDao = userDao;
     }
 
-    public Task<User> ValidateUser(string username, string password)
+    public async Task<User> ValidateUser(string username, string password)
     {
         User user = new User(username, password);
-        Console.WriteLine("AuthLogic");
-        Task<User> authentication = userDao.AuthenticatePassword(user);
-        Console.WriteLine(authentication);
-        if (authentication.Result.Authenticated == false)
+        User authentication = await userDao.AuthenticatePasswordAsync(user);
+        if (authentication.Authenticated == false)
         {
             throw new Exception("User or password is not found");
         }
-
-        return Task.FromResult(user);
-    }
-
-    public Task RegisterUser(User user)
-    {
-
-        if (string.IsNullOrEmpty(user.UserName))
-        {
-            throw new ValidationException("Username cannot be null");
-        }
-
-        if (string.IsNullOrEmpty(user.Password))
-        {
-            throw new ValidationException("Password cannot be null");
-        }
-        // Do more user info validation here
-        
-        // save to persistence instead of list
-        
-        //users.Add(user);
-        
-        return Task.CompletedTask;
+        return user;
     }
 }

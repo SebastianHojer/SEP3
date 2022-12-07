@@ -21,24 +21,24 @@ public class UserDao : IUserDao
         return user;
     }
 
-    public async Task<List<string>> RetrieveUsers()
+    public async Task<List<string>> RetrieveUsersAsync()
     {
-        UsernameRetrievalResponse response = await userClient.retrieveUsersAsync(new UsernameRetrievalRequest());
-        List<string> usernames = new List<string>();
-        for (int i = 0; i < response.Username.Count; i++)
+        var response = await userClient.retrieveUsersAsync(new UsernameRetrievalRequest());
+        var usernames = new List<string>();
+        foreach (var t in response.Username)
         {
-            usernames.Add(response.Username[i]);
+            usernames.Add(t);
         }
         return usernames;
     }
 
-    public async Task<bool> UsernameExists(string userName)
+    public async Task<bool> UsernameExistsAsync(string userName)
     {
         UsernameExistsResponse response = await userClient.usernameExistsAsync(new UsernameExistsRequest(){Username = userName});
         return response.Exists;
     }
 
-    public async Task<Shared.Models.User> AuthenticatePassword(Shared.Models.User user)
+    public async Task<Shared.Models.User> AuthenticatePasswordAsync(Shared.Models.User user)
     {
         PasswordAuthenticationResponse response = await userClient.authenticatePasswordAsync(new PasswordAuthenticationRequest(){Username = user.UserName, Password = user.Password});
         if (response.Authenticated)
@@ -46,13 +46,11 @@ public class UserDao : IUserDao
             user.Authenticated = true;
             if(response.IsAdmin){user.IsAdmin = true;}
         }
-        
         return user;
     }
 
-    public async Task<bool> DeleteUser(string userName)
+    public async Task DeleteUserAsync(string userName)
     {
-        DeleteUserResponse response = await userClient.deleteUserAsync(new DeleteUserRequest() { Username = userName });
-        return  response.Deleted;
+        await userClient.deleteUserAsync(new DeleteUserRequest() { Username = userName });
     }
 }
