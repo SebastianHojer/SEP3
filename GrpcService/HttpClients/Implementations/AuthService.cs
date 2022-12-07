@@ -63,11 +63,7 @@ public class AuthService : IAuthService
     
     public async Task LoginAsync(string username, string password)
     {
-        UserLoginDto userLoginDto = new()
-        {
-            Username = username,
-            Password = password
-        };
+        UserLoginDto userLoginDto = new(username, password);
 
         string userAsJson = JsonSerializer.Serialize(userLoginDto);
         StringContent content = new(userAsJson, Encoding.UTF8, "application/json");
