@@ -3,7 +3,6 @@
 @using global::Shared.Models
 @using HttpClients.ClientInterfaces
 @using System.Net.Http.Headers
-@using System.Net
 @inject IWarehouseService WarehouseService
 @inject HttpClient httpClient
 
@@ -31,9 +30,9 @@
                 }
             </div>
             <div class="form-group" style="margin-top: 1rem">
-                <label for="fileInput">Product information</label>
-                <!--<textarea id="info" class="form-control" aria-label="Info" @bind="information" @bind:event="oninput"></textarea>-->
-                <InputFile OnChange="@OnInputFileChange"></InputFile>
+                <label for="fileInput">Wanna upload an image?</label>
+                <br/>
+                <InputFile type="file" accept="image/*" OnChange="@OnInputFileChange"></InputFile>
             </div>
         </div>
         <div class="card-footer text-center">
