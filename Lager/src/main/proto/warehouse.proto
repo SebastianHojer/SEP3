@@ -7,7 +7,9 @@ service Warehouse{
   rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
   rpc productExists(ProductExistsRequest) returns (ProductExistsResponse);
   rpc retrieveProducts(RetrieveProductsRequest) returns (RetrieveProductsResponse);
+  rpc addLocation(AddLocationRequest) returns (AddLocationResponse);
 }
+
 
 message Product{
   string ean = 1;
@@ -44,4 +46,13 @@ message RetrieveProductsRequest{}
 
 message RetrieveProductsResponse{
   repeated Product product = 1;
+}
+
+message AddLocationRequest{
+  string ean = 1;
+  string location = 2;
+}
+
+message AddLocationResponse{
+  bool added = 1;
 }

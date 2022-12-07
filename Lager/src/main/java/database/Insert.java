@@ -50,4 +50,19 @@ public class Insert
     return false;
   }
 
+  public boolean addLocation(String ean, String location){
+    String SQL = "insert into sep3.location (ean, location) values (?, ?) ";
+    int affectedRows;
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      preparedStatement.setString(1, ean);
+      preparedStatement.setString(2, location);
+      affectedRows = preparedStatement.executeUpdate();
+      System.out.println("Affected rows: " + affectedRows);
+      if(affectedRows>0){return true;}
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    return false;
+  }
+
 }

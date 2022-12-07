@@ -75,6 +75,18 @@ public final class WarehouseGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.RetrieveProductsResponse.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.AddLocationRequest,
+      lager.AddLocationResponse> METHOD_ADD_LOCATION =
+      io.grpc.MethodDescriptor.<lager.AddLocationRequest, lager.AddLocationResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "addLocation"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.AddLocationRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.AddLocationResponse.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -131,6 +143,13 @@ public final class WarehouseGrpc {
       asyncUnimplementedUnaryCall(METHOD_RETRIEVE_PRODUCTS, responseObserver);
     }
 
+    /**
+     */
+    public void addLocation(lager.AddLocationRequest request,
+        io.grpc.stub.StreamObserver<lager.AddLocationResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_ADD_LOCATION, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -161,6 +180,13 @@ public final class WarehouseGrpc {
                 lager.RetrieveProductsRequest,
                 lager.RetrieveProductsResponse>(
                   this, METHODID_RETRIEVE_PRODUCTS)))
+          .addMethod(
+            METHOD_ADD_LOCATION,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.AddLocationRequest,
+                lager.AddLocationResponse>(
+                  this, METHODID_ADD_LOCATION)))
           .build();
     }
   }
@@ -214,6 +240,14 @@ public final class WarehouseGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_RETRIEVE_PRODUCTS, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void addLocation(lager.AddLocationRequest request,
+        io.grpc.stub.StreamObserver<lager.AddLocationResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_ADD_LOCATION, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -260,6 +294,13 @@ public final class WarehouseGrpc {
     public lager.RetrieveProductsResponse retrieveProducts(lager.RetrieveProductsRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_RETRIEVE_PRODUCTS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.AddLocationResponse addLocation(lager.AddLocationRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_ADD_LOCATION, getCallOptions(), request);
     }
   }
 
@@ -312,12 +353,21 @@ public final class WarehouseGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_RETRIEVE_PRODUCTS, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.AddLocationResponse> addLocation(
+        lager.AddLocationRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_ADD_LOCATION, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_PRODUCT = 0;
   private static final int METHODID_DELETE_PRODUCT = 1;
   private static final int METHODID_PRODUCT_EXISTS = 2;
   private static final int METHODID_RETRIEVE_PRODUCTS = 3;
+  private static final int METHODID_ADD_LOCATION = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -351,6 +401,10 @@ public final class WarehouseGrpc {
         case METHODID_RETRIEVE_PRODUCTS:
           serviceImpl.retrieveProducts((lager.RetrieveProductsRequest) request,
               (io.grpc.stub.StreamObserver<lager.RetrieveProductsResponse>) responseObserver);
+          break;
+        case METHODID_ADD_LOCATION:
+          serviceImpl.addLocation((lager.AddLocationRequest) request,
+              (io.grpc.stub.StreamObserver<lager.AddLocationResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -389,6 +443,7 @@ public final class WarehouseGrpc {
               .addMethod(METHOD_DELETE_PRODUCT)
               .addMethod(METHOD_PRODUCT_EXISTS)
               .addMethod(METHOD_RETRIEVE_PRODUCTS)
+              .addMethod(METHOD_ADD_LOCATION)
               .build();
         }
       }
