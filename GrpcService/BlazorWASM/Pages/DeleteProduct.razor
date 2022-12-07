@@ -19,7 +19,7 @@
 }
 else if (!products.Any())
 {
-    <span>No users to be found</span>
+    <span>No products to be found</span>
 }
 else
 {
@@ -44,7 +44,7 @@ else
 
   private int amount;
   private string EAN;
-  private string Location;
+  private string location;
   private string resultMsg = "";
 
   private string color = "";
@@ -70,6 +70,7 @@ else
     try
     {
       products = await WarehouseService.RetrieveAsync();
+      Console.WriteLine("Retrieved Products");
     }
     catch (Exception e)
     {
