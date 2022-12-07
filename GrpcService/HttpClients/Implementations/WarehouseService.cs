@@ -1,4 +1,3 @@
-using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using HttpClients.ClientInterfaces;
@@ -45,8 +44,8 @@ public class WarehouseService : IWarehouseService
     public async Task<List<Product>> RetrieveAsync()
     {
         HttpResponseMessage responseMessage = await client.GetAsync("/warehouse");
+        Console.WriteLine("CHingchong you made it");
         string result = await responseMessage.Content.ReadAsStringAsync();
-        Console.WriteLine();
         if (responseMessage.IsSuccessStatusCode)
         {
             string content = await responseMessage.Content.ReadAsStringAsync();

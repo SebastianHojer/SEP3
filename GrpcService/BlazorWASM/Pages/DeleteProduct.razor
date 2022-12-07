@@ -34,17 +34,14 @@ else
         <li class="list-group-item">EAN: @product.Ean </li>
         <li class="list-group-item">Information: @product.Information</li>
       </ul>
-      <a href="#" class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(product))">Delete Product</a>
+      <button @onclick="@(() => DeleteAndRefresh(product))">Delete Product</button>
     </div>
   </div>
 }
 }
 @code {
   private List<Product> products;
-
-  private int amount;
-  private string EAN;
-  private string Location;
+  
   private string resultMsg = "";
 
   private string color = "";
