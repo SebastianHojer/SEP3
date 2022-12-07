@@ -50,7 +50,7 @@ public class WarehouseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> retrieveProductsAsync()
+    public async Task<ActionResult<IEnumerable<Product>>> RetrieveProductsAsync()
     {
         try
         {

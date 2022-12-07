@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
 
-    private DatabaseMain db = DatabaseMain.getInstance();
+    private final DatabaseMain db = DatabaseMain.getInstance();
 
     @Override
     public void createProduct(ProductCreationRequest request, StreamObserver<ProductCreationResponse> responseObserver){
@@ -39,5 +39,7 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
     public void retrieveProducts(RetrieveProductsRequest request, StreamObserver<RetrieveProductsResponse> responseObserver){
         ArrayList<Product> products = db.retrieveProducts();
         RetrieveProductsResponse response = RetrieveProductsResponse.newBuilder().addAllProduct(products).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }
