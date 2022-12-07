@@ -1,7 +1,40 @@
 ﻿@page "/"
+@using System.Net.Http.Headers
+@using global::Shared.Models
+@inject HttpClient httpClient
 
 <PageTitle>Warehouse Manager</PageTitle>
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<InputFile OnChange="@OnInputFileChange"/>
+
+
+@code
+{
+    private int maxAllowedFiles = 1;
+    private long maxFileSize = long.MaxValue;
+    private List<string> fileNames = new();
+    private List<UploadResult> uploadResults = new();
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        using var content = new MultipartFormDataContent();
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+            
+            fileNames.Add(file.Name);
+            
+            content.Add(content: fileContent, name:"\"files\"", fileName:file.Name);
+        }
+        var response = await httpClient.PostAsync("/File", content);
+        var newUploadResults = await response.Content.ReadFromJsonAsync<List<UploadResult>>();
+
+        if (newUploadResults is not null)
+        {
+            uploadResults = uploadResults.Concat(newUploadResults).ToList();
+        }
+    }
+}

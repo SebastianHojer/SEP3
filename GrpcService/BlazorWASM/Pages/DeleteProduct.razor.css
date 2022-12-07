@@ -6,17 +6,19 @@
     height: 120px;
     animation: spin 2s linear infinite;
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 .card {
     display: inline-block;
     margin: 0 1.5rem 1rem 0;
+    width: 18rem;
 }
-
 .btn{
     margin-top: 1rem;
+}
+.card-img-top {
+    width: 100%;
+    height: 15vw;
 }
