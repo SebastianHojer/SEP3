@@ -52,7 +52,6 @@ public class WarehouseService : IWarehouseService
             string content = await responseMessage.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
-
         List<Product> products = JsonSerializer.Deserialize<List<Product>>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
