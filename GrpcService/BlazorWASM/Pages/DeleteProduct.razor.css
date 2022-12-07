@@ -11,3 +11,12 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.card {
+    display: inline-block;
+    margin: 0 1.5rem 1rem 0;
+}
+
+.btn{
+    margin-top: 1rem;
+}
