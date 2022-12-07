@@ -1,5 +1,6 @@
 ﻿using Application.DaoInterfaces;
 using Shared.DTOs;
+using Shared.Models;
 
 namespace GrpcClient.DAOs;
 

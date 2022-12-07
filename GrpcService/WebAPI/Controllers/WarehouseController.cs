@@ -23,7 +23,7 @@ public class WarehouseController : ControllerBase
         try
         {
             Product product = await warehouseLogic.CreateAsync(dto);
-            return Created($"/product/{product.Ean}", product);
+            return Created($"/warehouse/{product.Ean}", product);
         }
         catch(InvalidUsernameException e)
         {
