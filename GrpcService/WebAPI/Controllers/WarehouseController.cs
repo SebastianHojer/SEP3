@@ -34,13 +34,14 @@ public class WarehouseController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
     [HttpDelete]
-    public async Task<ActionResult<Product>> DeleteAsync(Product product)
+    public async Task<ActionResult<Product>> DeleteAsync(String ean)
     {
         try
         {
-            await warehouseLogic.DeleteProductAsync(product.Ean);
-            return Ok(product);
+            await warehouseLogic.DeleteProductAsync(ean);
+            return Ok();
         }
         catch (Exception e)
         {
@@ -50,11 +51,11 @@ public class WarehouseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> RetrieveProductsAsync()
+    public async Task<ActionResult<List<Product>>> RetrieveProductsAsync()
     {
         try
         {
-            IEnumerable<Product> products = await warehouseLogic.RetrieveProductsAsync();
+            List<Product> products = await warehouseLogic.RetrieveProductsAsync();
             return Ok(products);
         }
         catch (Exception e)

@@ -36,13 +36,13 @@ else
         <li class="list-group-item">EAN: @product.Ean </li>
         <li class="list-group-item">Information: @product.Information</li>
       </ul>
-      <a href="#" class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(product))">Delete Product</a>
+      <a class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(product))">Delete Product</a>
     </div>
   </div>
 }
 }
 @code {
-  private List<Product> products;
+  private IEnumerable<Product>? products;
 
   private int amount;
   private string EAN;
@@ -98,12 +98,10 @@ else
 
   private async Task DeleteAndRefresh(Product product)
   {
-
     try
     {
       await Delete(product);
       products = await WarehouseService.RetrieveAsync();
-
     }
     catch (Exception e)
     {
@@ -111,5 +109,4 @@ else
       resultMsg = e.Message;
     }
   }
-
 }
