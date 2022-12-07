@@ -20,4 +20,5 @@ public class Product
         Stock = stock;
         Information = information;
     }
+    public Product(){}
 }

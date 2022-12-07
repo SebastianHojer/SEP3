@@ -3,7 +3,7 @@
 @using global::Shared.Models
 @inject IWarehouseService WarehouseService;
 
-@attribute [Authorize("mustbeadmin")]
+@attribute [Authorize("MustBeAdmin")]
 <h3>DeleteProduct</h3>
 <button @onclick="@(() => PopulateProducts())"> Refresh </button>
 @if (!string.IsNullOrEmpty(resultMsg))
