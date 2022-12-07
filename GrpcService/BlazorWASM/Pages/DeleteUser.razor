@@ -2,7 +2,7 @@
 @using HttpClients.ClientInterfaces
 @inject IUserService userService;
 
-@attribute [Authorize("mustbeadmin")]
+@attribute [Authorize("MustBeAdmin")]
 <h3>Delete User</h3>
 <p> ayo </p>
 <button @onclick="@(() => RetrieveUsers())"> Refresh </button>
