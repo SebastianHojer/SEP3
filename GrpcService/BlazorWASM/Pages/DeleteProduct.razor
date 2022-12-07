@@ -1,27 +1,44 @@
 ﻿@page "/DeleteProduct"
-@page "/DeleteUser"
 @using HttpClients.ClientInterfaces
 @using global::Shared.Models
 @inject IWarehouseService WarehouseService;
 
-<!--@attribute [Authorize("mustbeadmin")]-->
+@attribute [Authorize("mustbeadmin")]
 <h3>DeleteProduct</h3>
+<button @onclick="@(() => PopulateProducts())"> Refresh </button>
+@if (!string.IsNullOrEmpty(resultMsg))
+{
+    <div>
+        <span>@resultMsg</span>
+    </div>
+}
+
+@if (products == null)
+{
+    <span>Loading..</span>
+}
+else if (!products.Any())
+{
+    <span>No users to be found</span>
+}
+else
+{
 @foreach (Product product in products)
 {
   <div class="card" style="width: 18rem">
     <img class="card-img-top" src="Images/Boremaskine.jpg" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">@product</h5>
+      <h5 class="card-title">@product.ProductName</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Antal på lager: @amount </li>
-        <li class="list-group-item">EAN: @EAN </li>
-        <li class="list-group-item">Lokation: @Location</li>
+        <li class="list-group-item">Antal på lager: @product.Stock </li>
+        <li class="list-group-item">EAN: @product.Ean </li>
+        <li class="list-group-item">Information: @product.Information</li>
       </ul>
-      <a href="#" class="btn btn-primary"  @onclick="@(() => DeleteAndRefresh(product))"> Refresh >Delete Product</a>
+      <a href="#" class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(product))">Delete Product</a>
     </div>
   </div>
 }
-
+}
 @code {
   private List<Product> products;
 
@@ -29,9 +46,9 @@
   private string EAN;
   private string Location;
   private string resultMsg = "";
-  
+
   private string color = "";
-    
+
   private async Task Delete(Product product)
   {
     resultMsg = "";
@@ -47,16 +64,20 @@
       color = "red";
     }
   }
-  protected override async Task OnInitializedAsync() {
+
+  protected override async Task OnInitializedAsync()
+  {
     try
     {
       products = await WarehouseService.RetrieveAsync();
     }
-    catch (Exception e) {
+    catch (Exception e)
+    {
       Console.WriteLine(e);
       resultMsg = e.Message;
     }
   }
+
   private async Task PopulateProducts()
   {
     resultMsg = "";
@@ -79,7 +100,7 @@
     {
       await Delete(product);
       products = await WarehouseService.RetrieveAsync();
-           
+
     }
     catch (Exception e)
     {
@@ -87,4 +108,5 @@
       resultMsg = e.Message;
     }
   }
+
 }

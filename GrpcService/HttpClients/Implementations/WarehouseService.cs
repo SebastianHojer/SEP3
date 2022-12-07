@@ -18,7 +18,7 @@ public class WarehouseService : IWarehouseService
 
     public async Task<Product> CreateAsync(ProductCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/product", dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/warehouse", dto);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -34,7 +34,7 @@ public class WarehouseService : IWarehouseService
 
     public async Task DeleteAsync(Product product)
     {
-        HttpResponseMessage response = await client.DeleteAsync($"/Product?product={product}");
+        HttpResponseMessage response = await client.DeleteAsync($"/warehouse?product={product}");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();
@@ -44,9 +44,10 @@ public class WarehouseService : IWarehouseService
 
     public async Task<List<Product>> RetrieveAsync()
     {
-        HttpResponseMessage responseMessage = await client.GetAsync("/product");
+        HttpResponseMessage responseMessage = await client.GetAsync("/warehouse");
         string result = await responseMessage.Content.ReadAsStringAsync();
-        if (!responseMessage.IsSuccessStatusCode)
+        Console.WriteLine();
+        if (responseMessage.IsSuccessStatusCode)
         {
             string content = await responseMessage.Content.ReadAsStringAsync();
             throw new Exception(content);
