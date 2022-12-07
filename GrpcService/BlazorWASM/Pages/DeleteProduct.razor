@@ -1,0 +1,90 @@
+﻿@page "/DeleteProduct"
+@page "/DeleteUser"
+@using HttpClients.ClientInterfaces
+@using global::Shared.Models
+@inject IProductService productService;
+
+<!--@attribute [Authorize("mustbeadmin")]-->
+<h3>DeleteProduct</h3>
+@foreach (Product product in products)
+{
+  <div class="card" style="width: 18rem">
+    <img class="card-img-top" src="Images/Boremaskine.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">@product</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Antal på lager: @amount </li>
+        <li class="list-group-item">EAN: @EAN </li>
+        <li class="list-group-item">Lokation: @Location</li>
+      </ul>
+      <a href="#" class="btn btn-primary"  @onclick="@(() => DeleteAndRefresh(product))"> Refresh >Delete Product</a>
+    </div>
+  </div>
+}
+
+@code {
+  private List<Product> products;
+
+  private int amount;
+  private string EAN;
+  private string Location;
+  private string resultMsg = "";
+  
+  private string color = "";
+    
+  private async Task Delete(Product product)
+  {
+    resultMsg = "";
+
+    try
+    {
+      await productService.DeleteProduct(product);
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
+      color = "red";
+    }
+  }
+  protected override async Task OnInitializedAsync() {
+    try
+    {
+      products = await productService.RetrieveProducts();
+    }
+    catch (Exception e) {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
+    }
+  }
+  private async Task PopulateProducts()
+  {
+    resultMsg = "";
+    try
+    {
+      products = await productService.RetrieveProducts();
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
+      color = "red";
+    }
+  }
+
+  private async Task DeleteAndRefresh(Product product)
+  {
+
+    try
+    {
+      await Delete(product);
+      products = await productService.RetrievProducts();
+           
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
+    }
+  }
+}
