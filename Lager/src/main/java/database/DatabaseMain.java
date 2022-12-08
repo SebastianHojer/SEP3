@@ -44,8 +44,8 @@ public class DatabaseMain
     return delete.deleteUser(username);
   }
 
-  public boolean createProduct(String ean, String productName, int stock, String information) {
-    return insert.createProduct(ean, productName, stock, information);
+  public boolean createProduct(String ean, String productName, int stock, String photoPath) {
+    return insert.createProduct(ean, productName, stock, photoPath);
   }
 
   public PasswordAuthenticationResponse authenticatePassword(String username, String password)

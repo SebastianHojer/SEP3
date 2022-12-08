@@ -33,12 +33,31 @@ public interface ProductOrBuilder extends
   int getStock();
 
   /**
-   * <code>string information = 4;</code>
+   * <code>string photoPath = 4;</code>
    */
-  java.lang.String getInformation();
+  java.lang.String getPhotoPath();
   /**
-   * <code>string information = 4;</code>
+   * <code>string photoPath = 4;</code>
    */
   com.google.protobuf.ByteString
-      getInformationBytes();
+      getPhotoPathBytes();
+
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  java.util.List<java.lang.String>
+      getLocationList();
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  int getLocationCount();
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  java.lang.String getLocation(int index);
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getLocationBytes(int index);
 }

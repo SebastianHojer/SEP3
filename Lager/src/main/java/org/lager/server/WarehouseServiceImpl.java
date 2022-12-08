@@ -13,7 +13,12 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
 
     @Override
     public void createProduct(ProductCreationRequest request, StreamObserver<ProductCreationResponse> responseObserver){
-        boolean created = db.createProduct(request.getToCreate().getEan(), request.getToCreate().getProductName(), request.getToCreate().getStock(), request.getToCreate().getInformation());
+        boolean created = db.createProduct(request.getToCreate().getEan(), request.getToCreate().getProductName(), request.getToCreate().getStock(), request.getToCreate().getPhotoPath());
+        if(request.getToCreate().getLocationCount()>0){
+            for(String location : request.getToCreate().getLocationList()){
+                db.addLocation(request.getToCreate().getEan(), location);
+            }
+        }
         ProductCreationResponse response = ProductCreationResponse.newBuilder().setCreated(created).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
@@ -39,14 +44,6 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
     public void retrieveProducts(RetrieveProductsRequest request, StreamObserver<RetrieveProductsResponse> responseObserver){
         ArrayList<Product> products = db.retrieveProducts();
         RetrieveProductsResponse response = RetrieveProductsResponse.newBuilder().addAllProduct(products).build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    @Override
-    public void addLocation(AddLocationRequest request, StreamObserver<AddLocationResponse> responseObserver){
-        boolean added = db.addLocation(request.getEan(), request.getLocation());
-        AddLocationResponse response = AddLocationResponse.newBuilder().setAdded(added).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

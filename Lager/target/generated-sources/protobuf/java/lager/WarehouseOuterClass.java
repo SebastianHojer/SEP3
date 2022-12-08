@@ -78,30 +78,31 @@ public final class WarehouseOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017warehouse.proto\022\005lager\"O\n\007Product\022\013\n\003e" +
+      "\n\017warehouse.proto\022\005lager\"_\n\007Product\022\013\n\003e" +
       "an\030\001 \001(\t\022\023\n\013productName\030\002 \001(\t\022\r\n\005stock\030\003" +
-      " \001(\005\022\023\n\013information\030\004 \001(\t\":\n\026ProductCrea" +
-      "tionRequest\022 \n\010toCreate\030\001 \001(\0132\016.lager.Pr" +
-      "oduct\"*\n\027ProductCreationResponse\022\017\n\007crea" +
-      "ted\030\001 \001(\010\"#\n\024DeleteProductRequest\022\013\n\003ean" +
-      "\030\001 \001(\t\"(\n\025DeleteProductResponse\022\017\n\007delet" +
-      "ed\030\001 \001(\010\"#\n\024ProductExistsRequest\022\013\n\003ean\030" +
-      "\001 \001(\t\"\'\n\025ProductExistsResponse\022\016\n\006exists" +
-      "\030\001 \001(\010\"\031\n\027RetrieveProductsRequest\";\n\030Ret",
-      "rieveProductsResponse\022\037\n\007product\030\001 \003(\0132\016" +
-      ".lager.Product\"3\n\022AddLocationRequest\022\013\n\003" +
-      "ean\030\001 \001(\t\022\020\n\010location\030\002 \001(\t\"$\n\023AddLocati" +
-      "onResponse\022\r\n\005added\030\001 \001(\0102\216\003\n\tWarehouse\022" +
-      "N\n\rcreateProduct\022\035.lager.ProductCreation" +
-      "Request\032\036.lager.ProductCreationResponse\022" +
-      "J\n\rdeleteProduct\022\033.lager.DeleteProductRe" +
-      "quest\032\034.lager.DeleteProductResponse\022J\n\rp" +
-      "roductExists\022\033.lager.ProductExistsReques" +
-      "t\032\034.lager.ProductExistsResponse\022S\n\020retri",
-      "eveProducts\022\036.lager.RetrieveProductsRequ" +
-      "est\032\037.lager.RetrieveProductsResponse\022D\n\013" +
-      "addLocation\022\031.lager.AddLocationRequest\032\032" +
-      ".lager.AddLocationResponseB\002P\001b\006proto3"
+      " \001(\005\022\021\n\tphotoPath\030\004 \001(\t\022\020\n\010location\030\005 \003(" +
+      "\t\":\n\026ProductCreationRequest\022 \n\010toCreate\030" +
+      "\001 \001(\0132\016.lager.Product\"*\n\027ProductCreation" +
+      "Response\022\017\n\007created\030\001 \001(\010\"#\n\024DeleteProdu" +
+      "ctRequest\022\013\n\003ean\030\001 \001(\t\"(\n\025DeleteProductR" +
+      "esponse\022\017\n\007deleted\030\001 \001(\010\"#\n\024ProductExist" +
+      "sRequest\022\013\n\003ean\030\001 \001(\t\"\'\n\025ProductExistsRe" +
+      "sponse\022\016\n\006exists\030\001 \001(\010\"\031\n\027RetrieveProduc",
+      "tsRequest\";\n\030RetrieveProductsResponse\022\037\n" +
+      "\007product\030\001 \003(\0132\016.lager.Product\"3\n\022AddLoc" +
+      "ationRequest\022\013\n\003ean\030\001 \001(\t\022\020\n\010location\030\002 " +
+      "\001(\t\"$\n\023AddLocationResponse\022\r\n\005added\030\001 \001(" +
+      "\0102\216\003\n\tWarehouse\022N\n\rcreateProduct\022\035.lager" +
+      ".ProductCreationRequest\032\036.lager.ProductC" +
+      "reationResponse\022J\n\rdeleteProduct\022\033.lager" +
+      ".DeleteProductRequest\032\034.lager.DeleteProd" +
+      "uctResponse\022J\n\rproductExists\022\033.lager.Pro" +
+      "ductExistsRequest\032\034.lager.ProductExistsR",
+      "esponse\022S\n\020retrieveProducts\022\036.lager.Retr" +
+      "ieveProductsRequest\032\037.lager.RetrieveProd" +
+      "uctsResponse\022D\n\013addLocation\022\031.lager.AddL" +
+      "ocationRequest\032\032.lager.AddLocationRespon" +
+      "seB\002P\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -120,7 +121,7 @@ public final class WarehouseOuterClass {
     internal_static_lager_Product_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_Product_descriptor,
-        new java.lang.String[] { "Ean", "ProductName", "Stock", "Information", });
+        new java.lang.String[] { "Ean", "ProductName", "Stock", "PhotoPath", "Location", });
     internal_static_lager_ProductCreationRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_lager_ProductCreationRequest_fieldAccessorTable = new

@@ -18,7 +18,8 @@ public  final class Product extends
     ean_ = "";
     productName_ = "";
     stock_ = 0;
-    information_ = "";
+    photoPath_ = "";
+    location_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -66,7 +67,16 @@ public  final class Product extends
           case 34: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            information_ = s;
+            photoPath_ = s;
+            break;
+          }
+          case 42: {
+            java.lang.String s = input.readStringRequireUtf8();
+            if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              location_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000010;
+            }
+            location_.add(s);
             break;
           }
         }
@@ -77,6 +87,9 @@ public  final class Product extends
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        location_ = location_.getUnmodifiableView();
+      }
       makeExtensionsImmutable();
     }
   }
@@ -92,6 +105,7 @@ public  final class Product extends
             lager.Product.class, lager.Product.Builder.class);
   }
 
+  private int bitField0_;
   public static final int EAN_FIELD_NUMBER = 1;
   private volatile java.lang.Object ean_;
   /**
@@ -169,38 +183,67 @@ public  final class Product extends
     return stock_;
   }
 
-  public static final int INFORMATION_FIELD_NUMBER = 4;
-  private volatile java.lang.Object information_;
+  public static final int PHOTOPATH_FIELD_NUMBER = 4;
+  private volatile java.lang.Object photoPath_;
   /**
-   * <code>string information = 4;</code>
+   * <code>string photoPath = 4;</code>
    */
-  public java.lang.String getInformation() {
-    java.lang.Object ref = information_;
+  public java.lang.String getPhotoPath() {
+    java.lang.Object ref = photoPath_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      information_ = s;
+      photoPath_ = s;
       return s;
     }
   }
   /**
-   * <code>string information = 4;</code>
+   * <code>string photoPath = 4;</code>
    */
   public com.google.protobuf.ByteString
-      getInformationBytes() {
-    java.lang.Object ref = information_;
+      getPhotoPathBytes() {
+    java.lang.Object ref = photoPath_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      information_ = b;
+      photoPath_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int LOCATION_FIELD_NUMBER = 5;
+  private com.google.protobuf.LazyStringList location_;
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  public com.google.protobuf.ProtocolStringList
+      getLocationList() {
+    return location_;
+  }
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  public int getLocationCount() {
+    return location_.size();
+  }
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  public java.lang.String getLocation(int index) {
+    return location_.get(index);
+  }
+  /**
+   * <code>repeated string location = 5;</code>
+   */
+  public com.google.protobuf.ByteString
+      getLocationBytes(int index) {
+    return location_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -224,8 +267,11 @@ public  final class Product extends
     if (stock_ != 0) {
       output.writeInt32(3, stock_);
     }
-    if (!getInformationBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, information_);
+    if (!getPhotoPathBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, photoPath_);
+    }
+    for (int i = 0; i < location_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, location_.getRaw(i));
     }
   }
 
@@ -244,8 +290,16 @@ public  final class Product extends
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(3, stock_);
     }
-    if (!getInformationBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, information_);
+    if (!getPhotoPathBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, photoPath_);
+    }
+    {
+      int dataSize = 0;
+      for (int i = 0; i < location_.size(); i++) {
+        dataSize += computeStringSizeNoTag(location_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getLocationList().size();
     }
     memoizedSize = size;
     return size;
@@ -269,8 +323,10 @@ public  final class Product extends
         .equals(other.getProductName());
     result = result && (getStock()
         == other.getStock());
-    result = result && getInformation()
-        .equals(other.getInformation());
+    result = result && getPhotoPath()
+        .equals(other.getPhotoPath());
+    result = result && getLocationList()
+        .equals(other.getLocationList());
     return result;
   }
 
@@ -287,8 +343,12 @@ public  final class Product extends
     hash = (53 * hash) + getProductName().hashCode();
     hash = (37 * hash) + STOCK_FIELD_NUMBER;
     hash = (53 * hash) + getStock();
-    hash = (37 * hash) + INFORMATION_FIELD_NUMBER;
-    hash = (53 * hash) + getInformation().hashCode();
+    hash = (37 * hash) + PHOTOPATH_FIELD_NUMBER;
+    hash = (53 * hash) + getPhotoPath().hashCode();
+    if (getLocationCount() > 0) {
+      hash = (37 * hash) + LOCATION_FIELD_NUMBER;
+      hash = (53 * hash) + getLocationList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -424,8 +484,10 @@ public  final class Product extends
 
       stock_ = 0;
 
-      information_ = "";
+      photoPath_ = "";
 
+      location_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000010);
       return this;
     }
 
@@ -448,10 +510,18 @@ public  final class Product extends
 
     public lager.Product buildPartial() {
       lager.Product result = new lager.Product(this);
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       result.ean_ = ean_;
       result.productName_ = productName_;
       result.stock_ = stock_;
-      result.information_ = information_;
+      result.photoPath_ = photoPath_;
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        location_ = location_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000010);
+      }
+      result.location_ = location_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -504,8 +574,18 @@ public  final class Product extends
       if (other.getStock() != 0) {
         setStock(other.getStock());
       }
-      if (!other.getInformation().isEmpty()) {
-        information_ = other.information_;
+      if (!other.getPhotoPath().isEmpty()) {
+        photoPath_ = other.photoPath_;
+        onChanged();
+      }
+      if (!other.location_.isEmpty()) {
+        if (location_.isEmpty()) {
+          location_ = other.location_;
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          ensureLocationIsMutable();
+          location_.addAll(other.location_);
+        }
         onChanged();
       }
       onChanged();
@@ -533,6 +613,7 @@ public  final class Product extends
       }
       return this;
     }
+    private int bitField0_;
 
     private java.lang.Object ean_ = "";
     /**
@@ -698,71 +779,165 @@ public  final class Product extends
       return this;
     }
 
-    private java.lang.Object information_ = "";
+    private java.lang.Object photoPath_ = "";
     /**
-     * <code>string information = 4;</code>
+     * <code>string photoPath = 4;</code>
      */
-    public java.lang.String getInformation() {
-      java.lang.Object ref = information_;
+    public java.lang.String getPhotoPath() {
+      java.lang.Object ref = photoPath_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        information_ = s;
+        photoPath_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string information = 4;</code>
+     * <code>string photoPath = 4;</code>
      */
     public com.google.protobuf.ByteString
-        getInformationBytes() {
-      java.lang.Object ref = information_;
+        getPhotoPathBytes() {
+      java.lang.Object ref = photoPath_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        information_ = b;
+        photoPath_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string information = 4;</code>
+     * <code>string photoPath = 4;</code>
      */
-    public Builder setInformation(
+    public Builder setPhotoPath(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      information_ = value;
+      photoPath_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string information = 4;</code>
+     * <code>string photoPath = 4;</code>
      */
-    public Builder clearInformation() {
+    public Builder clearPhotoPath() {
       
-      information_ = getDefaultInstance().getInformation();
+      photoPath_ = getDefaultInstance().getPhotoPath();
       onChanged();
       return this;
     }
     /**
-     * <code>string information = 4;</code>
+     * <code>string photoPath = 4;</code>
      */
-    public Builder setInformationBytes(
+    public Builder setPhotoPathBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      information_ = value;
+      photoPath_ = value;
+      onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.LazyStringList location_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureLocationIsMutable() {
+      if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        location_ = new com.google.protobuf.LazyStringArrayList(location_);
+        bitField0_ |= 0x00000010;
+       }
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getLocationList() {
+      return location_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public int getLocationCount() {
+      return location_.size();
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public java.lang.String getLocation(int index) {
+      return location_.get(index);
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getLocationBytes(int index) {
+      return location_.getByteString(index);
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public Builder setLocation(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLocationIsMutable();
+      location_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public Builder addLocation(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureLocationIsMutable();
+      location_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public Builder addAllLocation(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureLocationIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, location_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public Builder clearLocation() {
+      location_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string location = 5;</code>
+     */
+    public Builder addLocationBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      ensureLocationIsMutable();
+      location_.add(value);
       onChanged();
       return this;
     }
