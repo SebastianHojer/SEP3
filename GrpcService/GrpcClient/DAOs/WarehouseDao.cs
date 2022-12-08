@@ -45,6 +45,18 @@ public class WarehouseDao : IWarehouseDao
         return product;
     } 
 
+    public async Task<bool> UpdateAsync(Shared.Models.Product product)
+    {
+        Product productToUpdate = new Product();
+        productToUpdate.Ean = product.Ean;
+        productToUpdate.Stock = product.Stock;
+        productToUpdate.PhotoPath = product.PhotoPath;
+        productToUpdate.ProductName = product.ProductName;
+        productToUpdate.Location.AddRange(product.Location);
+        var response = await warehouseClient.updateProductAsync(new UpdateProductRequest() { Product = productToUpdate });
+        return response.Updated;
+    }
+
     public async Task<List<Shared.Models.Product>> RetrieveProductsAsync()
     {
         var response = await warehouseClient.retrieveProductsAsync(new RetrieveProductsRequest());

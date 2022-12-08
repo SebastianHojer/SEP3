@@ -33,14 +33,14 @@ public class Insert
     return false;
   }
 
-  public boolean createProduct(String ean, String productName, int stock, String information){
-    String SQL = "insert into sep3.warehouse (ean, productname, stock, information) values (?, ?, ?, ?)";
+  public boolean createProduct(String ean, String productName, int stock, String photopath){
+    String SQL = "insert into sep3.warehouse (ean, productname, stock, photopath) values (?, ?, ?, ?)";
     int affectedRows;
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
       preparedStatement.setString(1, ean);
       preparedStatement.setString(2, productName);
       preparedStatement.setInt(3, stock);
-      preparedStatement.setString(4, information);
+      preparedStatement.setString(4, photopath);
       affectedRows = preparedStatement.executeUpdate();
       System.out.println("Affected rows: " + affectedRows);
       if(affectedRows>0){ return true;}

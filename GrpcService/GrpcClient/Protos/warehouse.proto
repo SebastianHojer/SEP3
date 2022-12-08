@@ -5,6 +5,7 @@ package lager;
 service Warehouse{
   rpc createProduct(ProductCreationRequest) returns (ProductCreationResponse);
   rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  rpc updateProduct(UpdateProductRequest) returns (UpdateProductResponse);
   rpc productExists(ProductExistsRequest) returns (ProductExistsResponse);
   rpc retrieveProduct(RetrieveProductRequest) returns (RetrieveProductResponse);
   rpc retrieveProducts(RetrieveProductsRequest) returns (RetrieveProductsResponse);
@@ -33,6 +34,14 @@ message DeleteProductRequest{
 
 message DeleteProductResponse{
   bool deleted = 1;
+}
+
+message UpdateProductRequest{
+  Product product = 1;
+}
+
+message UpdateProductResponse{
+  bool updated = 1;
 }
 
 message ProductExistsRequest{

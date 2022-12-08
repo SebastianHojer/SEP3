@@ -3,6 +3,7 @@ package database;
 import dto.AuthenticationDto;
 import lager.PasswordAuthenticationResponse;
 import lager.Product;
+import org.checkerframework.checker.units.qual.A;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -120,5 +121,21 @@ public class Select
       e.printStackTrace();
     }
     return products;
+  }
+
+  public ArrayList<String> retrieveLocation(String ean)
+  {
+    String SQL = "select * from sep3.location where ean = '" + ean + "'";
+    ArrayList<String> locations = new ArrayList<>();
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      ResultSet rs = preparedStatement.executeQuery();
+      while(rs.next()){
+        String location = rs.getString("location");
+        locations.add(location);
+      }
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    return locations;
   }
 }
