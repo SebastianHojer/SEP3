@@ -64,4 +64,18 @@ public class WarehouseController : ControllerBase
             throw;
         }
     }
+    [HttpPatch]
+    public async Task<ActionResult> UpdateAsync(WarehouseUpdateDto dto)
+    {
+        try
+        {
+            await warehouseLogic.UpdateAsync(dto);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }
