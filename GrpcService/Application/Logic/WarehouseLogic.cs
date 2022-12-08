@@ -59,9 +59,15 @@ public class WarehouseLogic : IWarehouseLogic
         await warehouseDao.DeleteProductAsync(ean);
     }
 
+    public async Task<Product> RetrieveProductAsync(string ean)
+    {
+        Product product = await warehouseDao.RetrieveProductAsync(ean);
+        return product;
+    }
+
     public async Task<List<Product>> RetrieveProductsAsync()
     {
-        List<Product> products = await warehouseDao.RetrieveProducts();
+        List<Product> products = await warehouseDao.RetrieveProductsAsync();
         return products;
     }
 }

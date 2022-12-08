@@ -33,7 +33,19 @@ public class WarehouseDao : IWarehouseDao
         await warehouseClient.deleteProductAsync(new DeleteProductRequest(){Ean = ean});
     }
 
-    public async Task<List<Shared.Models.Product>> RetrieveProducts()
+    public async Task<Shared.Models.Product> RetrieveProductAsync(string ean)
+    {
+        var response = await warehouseClient.retrieveProductAsync(new RetrieveProductRequest() { Ean = ean });
+        List<string> location = new List<string>();
+        foreach (var s in response.Product.Location)
+        {
+            location.Add(s);
+        }
+        var product = new Shared.Models.Product(response.Product.Ean, response.Product.ProductName, response.Product.Stock, response.Product.PhotoPath, location);
+        return product;
+    }
+
+    public async Task<List<Shared.Models.Product>> RetrieveProductsAsync()
     {
         var response = await warehouseClient.retrieveProductsAsync(new RetrieveProductsRequest());
         var products = new List<Shared.Models.Product>();

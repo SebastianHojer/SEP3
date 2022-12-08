@@ -6,6 +6,7 @@ service Warehouse{
   rpc createProduct(ProductCreationRequest) returns (ProductCreationResponse);
   rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
   rpc productExists(ProductExistsRequest) returns (ProductExistsResponse);
+  rpc retrieveProduct(RetrieveProductRequest) returns (RetrieveProductResponse);
   rpc retrieveProducts(RetrieveProductsRequest) returns (RetrieveProductsResponse);
 }
 
@@ -40,6 +41,14 @@ message ProductExistsRequest{
 
 message ProductExistsResponse{
   bool exists = 1;
+}
+
+message RetrieveProductRequest{
+  string ean = 1;
+}
+
+message RetrieveProductResponse{
+  Product product = 1;
 }
 
 message RetrieveProductsRequest{}
