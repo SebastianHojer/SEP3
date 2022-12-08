@@ -8,4 +8,5 @@ public interface IWarehouseLogic
     Task<Product> CreateAsync(ProductCreationDto userToCreate);
     Task DeleteProductAsync(string ean);
     Task<List<Product>> RetrieveProductsAsync();
+    Task UpdateAsync(WarehouseUpdateDto dto);
 }

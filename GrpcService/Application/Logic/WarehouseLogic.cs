@@ -64,4 +64,25 @@ public class WarehouseLogic : IWarehouseLogic
         List<Product> products = await warehouseDao.RetrieveProducts();
         return products;
     }
-}
+
+    public async Task UpdateAsync(WarehouseUpdateDto dto)
+    {
+       Product? existing = await warehouseDao.GetByEanAsync(dto.Ean);
+       if (existing == null)
+            {
+                throw new Exception($"Product with EAN: {dto.Ean} not found!");
+            }
+
+            string productName = dto.ProductName ?? existing.ProductName;
+            int stockToUse= dto.Stock ?? existing.Stock;
+            string photoPath = dto.photoPath ?? existing.photoPath;
+
+            ProductCreationDto updated = new(existing.Ean, productName, stockToUse, photoPath);
+
+            ValidateData(updated);
+
+            Product updatedProduct = new Product(updated.Ean, updated.ProductName, updated.Stock, updated.photoPath);
+            
+            await warehouseDao.UpdateAsync(updatedProduct);
+        }
+    }
