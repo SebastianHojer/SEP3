@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Shared.Models;
 
 public class Product
@@ -12,7 +14,7 @@ public class Product
         Ean = ean;
         ProductName = productName;
     }
-
+    [JsonConstructor]
     public Product(string ean, string productName, int stock, string information)
     {
         Ean = ean;
@@ -20,5 +22,4 @@ public class Product
         Stock = stock;
         Information = information;
     }
-    public Product(){}
 }
