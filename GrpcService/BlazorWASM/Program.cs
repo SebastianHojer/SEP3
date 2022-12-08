@@ -24,4 +24,5 @@ builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 
 
 
+
 await builder.Build().RunAsync();

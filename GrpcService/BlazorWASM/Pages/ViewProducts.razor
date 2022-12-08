@@ -1,61 +1,82 @@
 @page "/ViewProducts"
-
+@using global::Shared.Models
+@using HttpClients.ClientInterfaces
+@inject IWarehouseService WarehouseService
 <PageTitle>View Products</PageTitle>
 <h3>View Products</h3>
 
-<div class="card" style="width: 18rem">
-  <img class="card-img-top" src="Images/Boremaskine.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Bosch boremaskine</h5>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Antal på lager:</li>
-      <li class="list-group-item">EAN:</li>
-      <li class="list-group-item">Lokation:</li>
-    </ul>
-    <a href="#" class="btn btn-primary">Rediger</a>
-    <a href="#" class="btn btn-primary">Udlever</a>
+@if (products == null)
+{
+  <div class="col d-flex justify-content-center">
+  <div class="loader"></div>
   </div>
-</div>
-<div class="card" style="width: 18rem">
-  <img class="card-img-top" src="Images/Boremaskine.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Bosch boremaskine</h5>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Antal på lager:</li>
-      <li class="list-group-item">EAN:</li>
-      <li class="list-group-item">Lokation:</li>
-    </ul>
-    <a href="#" class="btn btn-primary">Rediger</a>
-    <a href="#" class="btn btn-primary">Udlever</a>
+}
+else if (!products.Any())
+{
+    <span>No products to be found</span>
+}
+else
+{
+@foreach (var product in products)
+{
+  <div class="card">
+    <img class="card-img-top" src="Images/@product.Information" onerror="this.onerror=null; this.src='Images/Default.png'" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title text-truncate">@product.ProductName</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
+        <li class="list-group-item text-truncate"><strong>EAN: </strong>@product.Ean </li>
+        <li class="list-group-item text-truncate"><strong>Information: </strong><br/>@product.Information</li>
+      </ul>
+    </div>
   </div>
-</div>
-<div class="card" style="width: 18rem">
-  <img class="card-img-top" src="Images/Boremaskine.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Bosch boremaskine</h5>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Antal på lager:</li>
-      <li class="list-group-item">EAN:</li>
-      <li class="list-group-item">Lokation:</li>
-    </ul>
-    <a href="#" class="btn btn-primary">Rediger</a>
-    <a href="#" class="btn btn-primary">Udlever</a>
+}
+}
+<div class="col d-flex justify-content-center">
+    <button class="btn btn-primary" style="margin-bottom: 2rem" @onclick="@(() => PopulateProducts())"> Refresh </button>
   </div>
-</div>
-<div class="card" style="width: 18rem">
-  <img class="card-img-top" src="Images/Boremaskine.jpg" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Bosch boremaskine</h5>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Antal på lager:</li>
-      <li class="list-group-item">EAN:</li>
-      <li class="list-group-item">Lokation:</li>
-    </ul>
-    <button class="btn btn-primary">Rediger</button>
-    <button class="btn btn-primary">Udlever</button>
+@if (!string.IsNullOrEmpty(resultMsg))
+{
+  <div>
+    <span>@resultMsg</span>
   </div>
-</div>
+}
 
 @code {
-    
+  private IEnumerable<Product>? products;
+  private int amount;
+  private string EAN;
+  private string location;
+  private string resultMsg = "";
+
+  private string color = "";
+  
+  protected override async Task OnInitializedAsync()
+  {
+    try
+    {
+      products = await WarehouseService.RetrieveAsync();
+      Console.WriteLine("Retrieved Products");
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
+    }
+  }
+
+  private async Task PopulateProducts()
+  {
+    resultMsg = "";
+    try
+    {
+      products = await WarehouseService.RetrieveAsync();
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
+      color = "red";
+    }
+  }
 }

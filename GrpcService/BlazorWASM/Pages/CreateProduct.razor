@@ -1,7 +1,10 @@
 @page "/CreateProduct"
 @using global::Shared.DTOs
+@using global::Shared.Models
 @using HttpClients.ClientInterfaces
+@using System.Net.Http.Headers
 @inject IWarehouseService WarehouseService
+@inject HttpClient httpClient
 
 <PageTitle>Create Product</PageTitle>
 
@@ -27,8 +30,9 @@
                 }
             </div>
             <div class="form-group" style="margin-top: 1rem">
-                <label for="info">Product information</label>
-                <textarea id="info" class="form-control" aria-label="Info" @bind="information" @bind:event="oninput"></textarea>
+                <label for="fileInput">Wanna upload an image?</label>
+                <br/>
+                <InputFile type="file" accept="image/*" OnChange="@OnInputFileChange"></InputFile>
             </div>
         </div>
         <div class="card-footer text-center">
@@ -45,7 +49,11 @@
     private string information = "";
     private string resultMsg = "";
     private string color = "";
-    
+    private int maxAllowedFiles = 1;
+    private long maxFileSize = long.MaxValue;
+    private List<string> fileNames = new();
+    private List<UploadResult> uploadResults = new();
+
     private async Task Create()
     {
         resultMsg = "";
@@ -64,6 +72,27 @@
             Console.WriteLine(e);
             resultMsg = e.Message;
             color = "red";
+        }
+    }
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        using var content = new MultipartFormDataContent();
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+            
+            fileNames.Add(file.Name);
+            
+            content.Add(content: fileContent, name:"\"files\"", fileName:file.Name);
+            information = file.Name;
+        }
+        var response = await httpClient.PostAsync("/File", content);
+        var newUploadResults = await response.Content.ReadFromJsonAsync<List<UploadResult>>();
+
+        if (newUploadResults is not null)
+        {
+            uploadResults = uploadResults.Concat(newUploadResults).ToList();
         }
     }
 }

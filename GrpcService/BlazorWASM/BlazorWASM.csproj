@@ -14,10 +14,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\HttpClients\HttpClients.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\Images" />
+      <None Include="wwwroot\Images\laserpisk.png" />
     </ItemGroup>
 
 </Project>
