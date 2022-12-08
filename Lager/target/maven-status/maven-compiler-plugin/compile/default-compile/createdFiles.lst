@@ -15,6 +15,7 @@ lager\WarehouseGrpc.class
 lager\RetrieveProductResponse$Builder.class
 lager\PasswordAuthenticationResponse$Builder.class
 lager\PasswordAuthenticationRequest$1.class
+org\lager\server\WarehouseServiceImpl.class
 lager\RetrieveProductsResponse$Builder.class
 lager\PasswordAuthenticationResponse.class
 lager\ProductCreationRequest.class
@@ -71,6 +72,7 @@ lager\DeleteProductRequest.class
 lager\ProductCreationRequest$1.class
 lager\UsernameExistsRequestOrBuilder.class
 database\DatabaseMain.class
+lager\WarehouseOuterClass$1.class
 lager\UserCreationRequestOrBuilder.class
 lager\ProductExistsResponse.class
 database\Select.class
@@ -96,3 +98,4 @@ lager\UserCreationRequest$1.class
 lager\UpdateProductRequestOrBuilder.class
 lager\ProductCreationRequestOrBuilder.class
 lager\UpdateProductResponse.class
+lager\WarehouseOuterClass.class

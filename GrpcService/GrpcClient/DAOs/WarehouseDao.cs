@@ -17,7 +17,7 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<Shared.Models.Product> CreateProductAsync(Shared.Models.Product product)
     {
-        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, Stock = product.Stock, ProductName = product.ProductName}});
+        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, Stock = product.Stock, ProductName = product.ProductName, PhotoPath = product.PhotoPath}});
         return product;
     }
 
