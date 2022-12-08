@@ -10,4 +10,5 @@ public interface IWarehouseDao
     Task DeleteProductAsync(string ean);
     Task<List<Product>> RetrieveProductsAsync();
     Task<Shared.Models.Product> RetrieveProductAsync(string ean);
+    Task<bool> UpdateAsync(Product product);
 }
