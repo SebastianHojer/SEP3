@@ -8,5 +8,6 @@ public interface IWarehouseDao
     Task<Product> CreateProductAsync(Product product);
     Task<bool> ProductExistsAsync(string ean);
     Task DeleteProductAsync(string ean);
-    Task<List<Product>> RetrieveProducts();
+    Task<List<Product>> RetrieveProductsAsync();
+    Task<Shared.Models.Product> RetrieveProductAsync(string ean);
 }

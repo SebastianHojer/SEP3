@@ -9,4 +9,5 @@ public interface IWarehouseLogic
     Task DeleteProductAsync(string ean);
     Task<List<Product>> RetrieveProductsAsync();
     Task UpdateAsync(WarehouseUpdateDto dto);
+    Task<Shared.Models.Product> RetrieveProductAsync(string ean);
 }

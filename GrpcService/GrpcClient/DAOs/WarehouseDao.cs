@@ -17,7 +17,7 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<Shared.Models.Product> CreateProductAsync(Shared.Models.Product product)
     {
-        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, Information = product.Information, Stock = product.Stock, ProductName = product.ProductName}});
+        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, PhotoPath = product.PhotoPath, Stock = product.Stock, ProductName = product.ProductName}});
         return product;
     }
 
@@ -33,13 +33,30 @@ public class WarehouseDao : IWarehouseDao
         await warehouseClient.deleteProductAsync(new DeleteProductRequest(){Ean = ean});
     }
 
-    public async Task<List<Shared.Models.Product>> RetrieveProducts()
+    public async Task<Shared.Models.Product> RetrieveProductAsync(string ean)
+    {
+        var response = await warehouseClient.retrieveProductAsync(new RetrieveProductRequest() { Ean = ean });
+        List<string> location = new List<string>();
+        foreach (var s in response.Product.Location)
+        {
+            location.Add(s);
+        }
+        var product = new Shared.Models.Product(response.Product.Ean, response.Product.ProductName, response.Product.Stock, response.Product.PhotoPath, location);
+        return product;
+    }
+
+    public async Task<List<Shared.Models.Product>> RetrieveProductsAsync()
     {
         var response = await warehouseClient.retrieveProductsAsync(new RetrieveProductsRequest());
         var products = new List<Shared.Models.Product>();
         foreach (var t in response.Product)
         {
-            var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.Information);
+            List<string> location = new List<string>();
+            foreach (var s in t.Location)
+            {
+                location.Add(s);
+            }
+            var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.PhotoPath, location);
             products.Add(product);
         }
         return products;

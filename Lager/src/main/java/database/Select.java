@@ -95,8 +95,8 @@ public class Select
         String ean = rs.getString("ean");
         String productname = rs.getString("productname");
         int stock = rs.getInt("stock");
-        String information = rs.getString("information");
-        Product product = Product.newBuilder().setEan(ean).setProductName(productname).setStock(stock).setInformation(information).build();
+        String photopath = rs.getString("photopath");
+        Product product = Product.newBuilder().setEan(ean).setProductName(productname).setStock(stock).setPhotoPath(photopath).build();
         products.add(product);
       }
     } catch (SQLException e) {
