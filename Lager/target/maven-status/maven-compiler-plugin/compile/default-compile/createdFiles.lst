@@ -12,6 +12,7 @@ lager\UsernameRetrievalResponseOrBuilder.class
 lager\PasswordAuthenticationResponse$1.class
 lager\DeleteProductResponse$1.class
 lager\RetrieveProductsRequest$Builder.class
+lager\UpdateProductRequest$Builder.class
 lager\WarehouseGrpc.class
 lager\RetrieveProductResponse$Builder.class
 lager\PasswordAuthenticationResponse$Builder.class
@@ -26,6 +27,7 @@ lager\WarehouseGrpc$1.class
 lager\DeleteUserResponse$1.class
 lager\ProductExistsRequest$1.class
 lager\WarehouseGrpc$WarehouseFutureStub.class
+lager\UpdateProductResponseOrBuilder.class
 lager\UserCreationResponse$1.class
 lager\UserCreationResponse$Builder.class
 database\Delete.class
@@ -50,6 +52,8 @@ lager\UsernameRetrievalRequestOrBuilder.class
 lager\ProductExistsResponse$1.class
 lager\WarehouseGrpc$WarehouseImplBase.class
 lager\ProductExistsRequest$Builder.class
+lager\UpdateProductResponse$Builder.class
+lager\UpdateProductResponse$1.class
 lager\ProductExistsResponse$Builder.class
 org\lager\server\UserServiceImpl.class
 lager\UserGrpc$MethodHandlers.class
@@ -96,6 +100,7 @@ lager\RetrieveProductResponse.class
 lager\UsernameRetrievalRequest$1.class
 lager\PasswordAuthenticationRequest.class
 lager\Product$1.class
+lager\UpdateProductRequest.class
 lager\UserGrpc$1.class
 lager\ProductExistsRequest.class
 lager\RetrieveProductsResponse.class
@@ -103,8 +108,11 @@ lager\UserCreationRequest.class
 lager\UserGrpc.class
 lager\WarehouseGrpc$MethodHandlers.class
 lager\UsernameExistsResponse$1.class
+lager\UpdateProductRequest$1.class
 lager\UsernameExistsRequest$1.class
 lager\RetrieveProductResponse$1.class
 lager\UserCreationRequest$1.class
+lager\UpdateProductRequestOrBuilder.class
 lager\ProductCreationRequestOrBuilder.class
+lager\UpdateProductResponse.class
 lager\WarehouseOuterClass.class

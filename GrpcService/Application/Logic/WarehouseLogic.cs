@@ -73,7 +73,7 @@ public class WarehouseLogic : IWarehouseLogic
 
     public async Task UpdateAsync(WarehouseUpdateDto dto)
     {
-       Product? existing = await warehouseDao.GetByEanAsync(dto.Ean);
+       Product? existing = await warehouseDao.RetrieveProductAsync(dto.Ean);
        if (existing == null)
             {
                 throw new Exception($"Product with EAN: {dto.Ean} not found!");
@@ -81,14 +81,15 @@ public class WarehouseLogic : IWarehouseLogic
 
             string productName = dto.ProductName ?? existing.ProductName;
             int stockToUse= dto.Stock ?? existing.Stock;
-            string photoPath = dto.photoPath ?? existing.photoPath;
+            string photoPath = dto.PhotoPath ?? existing.PhotoPath;
+            List<string> location = null;
 
-            ProductCreationDto updated = new(existing.Ean, productName, stockToUse, photoPath);
+            ProductCreationDto updated = new(existing.Ean, productName, stockToUse, photoPath, location);
 
             ValidateData(updated);
 
-            Product updatedProduct = new Product(updated.Ean, updated.ProductName, updated.Stock, updated.photoPath);
+            Product updatedProduct = new Product(updated.Ean, updated.ProductName, updated.Stock, updated.PhotoPath, updated.Location);
             
-            await warehouseDao.UpdateAsync(updatedProduct);
+            //await warehouseDao.UpdateAsync(updatedProduct);
         }
     }

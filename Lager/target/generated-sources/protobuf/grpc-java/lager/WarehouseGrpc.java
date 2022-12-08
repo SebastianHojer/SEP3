@@ -52,6 +52,18 @@ public final class WarehouseGrpc {
               lager.DeleteProductResponse.getDefaultInstance()))
           .build();
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.UpdateProductRequest,
+      lager.UpdateProductResponse> METHOD_UPDATE_PRODUCT =
+      io.grpc.MethodDescriptor.<lager.UpdateProductRequest, lager.UpdateProductResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "updateProduct"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateProductRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateProductResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static final io.grpc.MethodDescriptor<lager.ProductExistsRequest,
       lager.ProductExistsResponse> METHOD_PRODUCT_EXISTS =
       io.grpc.MethodDescriptor.<lager.ProductExistsRequest, lager.ProductExistsResponse>newBuilder()
@@ -131,6 +143,13 @@ public final class WarehouseGrpc {
 
     /**
      */
+    public void updateProduct(lager.UpdateProductRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateProductResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_UPDATE_PRODUCT, responseObserver);
+    }
+
+    /**
+     */
     public void productExists(lager.ProductExistsRequest request,
         io.grpc.stub.StreamObserver<lager.ProductExistsResponse> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_PRODUCT_EXISTS, responseObserver);
@@ -166,6 +185,13 @@ public final class WarehouseGrpc {
                 lager.DeleteProductRequest,
                 lager.DeleteProductResponse>(
                   this, METHODID_DELETE_PRODUCT)))
+          .addMethod(
+            METHOD_UPDATE_PRODUCT,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.UpdateProductRequest,
+                lager.UpdateProductResponse>(
+                  this, METHODID_UPDATE_PRODUCT)))
           .addMethod(
             METHOD_PRODUCT_EXISTS,
             asyncUnaryCall(
@@ -227,6 +253,14 @@ public final class WarehouseGrpc {
 
     /**
      */
+    public void updateProduct(lager.UpdateProductRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateProductResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_PRODUCT, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void productExists(lager.ProductExistsRequest request,
         io.grpc.stub.StreamObserver<lager.ProductExistsResponse> responseObserver) {
       asyncUnaryCall(
@@ -280,6 +314,13 @@ public final class WarehouseGrpc {
     public lager.DeleteProductResponse deleteProduct(lager.DeleteProductRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_DELETE_PRODUCT, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.UpdateProductResponse updateProduct(lager.UpdateProductRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_UPDATE_PRODUCT, getCallOptions(), request);
     }
 
     /**
@@ -340,6 +381,14 @@ public final class WarehouseGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<lager.UpdateProductResponse> updateProduct(
+        lager.UpdateProductRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_PRODUCT, getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<lager.ProductExistsResponse> productExists(
         lager.ProductExistsRequest request) {
       return futureUnaryCall(
@@ -365,9 +414,10 @@ public final class WarehouseGrpc {
 
   private static final int METHODID_CREATE_PRODUCT = 0;
   private static final int METHODID_DELETE_PRODUCT = 1;
-  private static final int METHODID_PRODUCT_EXISTS = 2;
-  private static final int METHODID_RETRIEVE_PRODUCT = 3;
-  private static final int METHODID_RETRIEVE_PRODUCTS = 4;
+  private static final int METHODID_UPDATE_PRODUCT = 2;
+  private static final int METHODID_PRODUCT_EXISTS = 3;
+  private static final int METHODID_RETRIEVE_PRODUCT = 4;
+  private static final int METHODID_RETRIEVE_PRODUCTS = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -393,6 +443,10 @@ public final class WarehouseGrpc {
         case METHODID_DELETE_PRODUCT:
           serviceImpl.deleteProduct((lager.DeleteProductRequest) request,
               (io.grpc.stub.StreamObserver<lager.DeleteProductResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_PRODUCT:
+          serviceImpl.updateProduct((lager.UpdateProductRequest) request,
+              (io.grpc.stub.StreamObserver<lager.UpdateProductResponse>) responseObserver);
           break;
         case METHODID_PRODUCT_EXISTS:
           serviceImpl.productExists((lager.ProductExistsRequest) request,
@@ -441,6 +495,7 @@ public final class WarehouseGrpc {
               .setSchemaDescriptor(new WarehouseDescriptorSupplier())
               .addMethod(METHOD_CREATE_PRODUCT)
               .addMethod(METHOD_DELETE_PRODUCT)
+              .addMethod(METHOD_UPDATE_PRODUCT)
               .addMethod(METHOD_PRODUCT_EXISTS)
               .addMethod(METHOD_RETRIEVE_PRODUCT)
               .addMethod(METHOD_RETRIEVE_PRODUCTS)

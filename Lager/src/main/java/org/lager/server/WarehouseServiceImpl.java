@@ -33,6 +33,16 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
     }
 
     @Override
+    public void updateProduct(UpdateProductRequest request, StreamObserver<UpdateProductResponse> responseObserver){
+        ArrayList<String> location = new ArrayList<>(
+            request.getProduct().getLocationList());
+        boolean updated = db.updateProduct(request.getProduct().getEan(), request.getProduct().getProductName(), request.getProduct().getStock(), request.getProduct().getPhotoPath(), location);
+        UpdateProductResponse response = UpdateProductResponse.newBuilder().setUpdated(updated).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void productExists(ProductExistsRequest request, StreamObserver<ProductExistsResponse> responseObserver){
         boolean exists = db.productExists(request.getEan());
         ProductExistsResponse response = ProductExistsResponse.newBuilder().setExists(exists).build();
