@@ -74,8 +74,15 @@ public class DatabaseMain
     return insert.addLocation(ean, location);
   }
 
+  public ArrayList<String> retrieveLocation(String ean){
+    return select.retrieveLocation(ean);
+  }
+
   public boolean updateProduct(String ean, String productName, int stock, String photoPath, ArrayList<String> location)
   {
-    return update.updateProduct(ean, productName, stock, photoPath, location);
+    ArrayList<String> locationRetrieved = retrieveLocation(ean);
+    location.removeAll(locationRetrieved);
+    for(String s : location){ addLocation(ean, s);}
+    return update.updateProduct(ean, productName, stock, photoPath);
   }
 }
