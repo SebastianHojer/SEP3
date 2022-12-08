@@ -41,6 +41,14 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
     }
 
     @Override
+    public void retrieveProduct(RetrieveProductRequest request, StreamObserver<RetrieveProductResponse> responseObserver){
+        Product product = db.retrieveProduct(request.getEan());
+        RetrieveProductResponse response = RetrieveProductResponse.newBuilder().setProduct(product).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void retrieveProducts(RetrieveProductsRequest request, StreamObserver<RetrieveProductsResponse> responseObserver){
         ArrayList<Product> products = db.retrieveProducts();
         RetrieveProductsResponse response = RetrieveProductsResponse.newBuilder().addAllProduct(products).build();

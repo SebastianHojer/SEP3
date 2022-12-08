@@ -85,6 +85,23 @@ public class Select
     return PasswordAuthenticationResponse.newBuilder().setAuthenticated(authenticated).setIsAdmin(isAdmin).build();
   }
 
+  public Product retrieveProduct(String ean)
+  {
+    Product product = null;
+    String SQL = "select * from sep3.warehouse where ean = '" + ean + "'";
+    try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+      ResultSet rs = preparedStatement.executeQuery();
+      while(rs.next()){
+        String productname = rs.getString("productname");
+        int stock = rs.getInt("stock");
+        String photopath = rs.getString("photopath");
+        product = Product.newBuilder().setEan(ean).setProductName(productname).setStock(stock).setPhotoPath(photopath).build();
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return product;
+  }
 
   public ArrayList<Product> retrieveProducts() {
     String SQL = "select * from sep3.warehouse";
