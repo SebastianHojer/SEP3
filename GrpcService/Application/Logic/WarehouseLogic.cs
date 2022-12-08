@@ -22,7 +22,7 @@ public class WarehouseLogic : IWarehouseLogic
         if (exists) throw new EanTakenException("EAN is already taken");
         ValidateData(productToCreate);
         Product toCreate = new Product(productToCreate.Ean, productToCreate.ProductName, productToCreate.Stock,
-            productToCreate.Information);
+            productToCreate.PhotoPath, productToCreate.Location);
         Product created = await warehouseDao.CreateProductAsync(toCreate);
         return created;
     }
@@ -38,7 +38,7 @@ public class WarehouseLogic : IWarehouseLogic
             throw new InvalidProductException("Stock cannot be lower than 0!");
         }
 
-        if (productToCreate.Information.Length > 100)
+        if (productToCreate.PhotoPath.Length > 100)
         {
             throw new InvalidProductException("Information cannot contain more than 100 characters");
         }

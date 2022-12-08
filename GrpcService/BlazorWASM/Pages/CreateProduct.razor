@@ -46,7 +46,8 @@
     private string ean = "";
     private string productName = "";
     private int stock;
-    private string information = "";
+    private string photoPath = "";
+    private List<string> location = new List<string>();
     private string resultMsg = "";
     private string color = "";
     private int maxAllowedFiles = 1;
@@ -60,10 +61,10 @@
 
         try
         {
-            await WarehouseService.CreateAsync(new ProductCreationDto(ean, productName, stock, information));
+            await WarehouseService.CreateAsync(new ProductCreationDto(ean, productName, stock, photoPath, location));
             ean = "";
             productName = "";
-            information = "";
+            photoPath = "";
             resultMsg = "Product successfully created";
             color = "green";
         }
@@ -85,7 +86,7 @@
             fileNames.Add(file.Name);
             
             content.Add(content: fileContent, name:"\"files\"", fileName:file.Name);
-            information = file.Name;
+            photoPath = file.Name;
         }
         var response = await httpClient.PostAsync("/File", content);
         var newUploadResults = await response.Content.ReadFromJsonAsync<List<UploadResult>>();

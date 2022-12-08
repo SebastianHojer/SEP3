@@ -20,13 +20,13 @@ else
 @foreach (var product in products)
 {
   <div class="card">
-    <img class="card-img-top" src="Images/@product.Information" alt="Card image cap">
+    <img class="card-img-top" src="Images/@product.PhotoPath" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title text-truncate">@product.ProductName</h5>
       <ul class="list-group list-group-flush">
         <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
         <li class="list-group-item text-truncate"><strong>EAN: </strong>@product.Ean </li>
-        <li class="list-group-item text-truncate"><strong>Information: </strong><br/>@product.Information</li>
+        <li class="list-group-item text-truncate"><strong>Information: </strong><br/>@product.PhotoPath</li>
       </ul>
       <button class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(product))">Delete Product</button>
     </div>

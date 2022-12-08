@@ -17,7 +17,7 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<Shared.Models.Product> CreateProductAsync(Shared.Models.Product product)
     {
-        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, Information = product.Information, Stock = product.Stock, ProductName = product.ProductName}});
+        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, PhotoPath = product.PhotoPath, Stock = product.Stock, ProductName = product.ProductName}});
         return product;
     }
 
@@ -39,7 +39,12 @@ public class WarehouseDao : IWarehouseDao
         var products = new List<Shared.Models.Product>();
         foreach (var t in response.Product)
         {
-            var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.Information);
+            List<string> location = new List<string>();
+            foreach (var s in t.Location)
+            {
+                location.Add(s);
+            }
+            var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.PhotoPath, location);
             products.Add(product);
         }
         return products;
