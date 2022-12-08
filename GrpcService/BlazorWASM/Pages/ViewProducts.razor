@@ -55,7 +55,7 @@ else
   {
     try
     {
-      products = await WarehouseService.RetrieveAsync();
+      products = await WarehouseService.RetrieveAsync(null);
       Console.WriteLine("Retrieved Products");
     }
     catch (Exception e)
@@ -70,7 +70,7 @@ else
     resultMsg = "";
     try
     {
-      products = await WarehouseService.RetrieveAsync();
+      products = await WarehouseService.RetrieveAsync(null);
     }
     catch (Exception e)
     {

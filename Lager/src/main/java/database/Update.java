@@ -17,7 +17,7 @@ public class Update
     return DriverManager.getConnection(url, user, password);
   }
 
-  public boolean updateProduct(String ean, String productName, int stock, String photoPath, ArrayList<String> location)
+  /*public boolean updateProduct(String ean, String productName, int stock, String photoPath, ArrayList<String> location)
   {
-  }
+  }*/
 }

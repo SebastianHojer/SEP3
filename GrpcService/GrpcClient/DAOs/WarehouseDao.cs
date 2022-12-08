@@ -17,7 +17,7 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<Shared.Models.Product> CreateProductAsync(Shared.Models.Product product)
     {
-        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, PhotoPath = product.PhotoPath, Stock = product.Stock, ProductName = product.ProductName}});
+        await warehouseClient.createProductAsync(new ProductCreationRequest(){ToCreate = new Product(){Ean = product.Ean, Stock = product.Stock, ProductName = product.ProductName}});
         return product;
     }
 
@@ -43,7 +43,7 @@ public class WarehouseDao : IWarehouseDao
         }
         var product = new Shared.Models.Product(response.Product.Ean, response.Product.ProductName, response.Product.Stock, response.Product.PhotoPath, location);
         return product;
-    }
+    } 
 
     public async Task<List<Shared.Models.Product>> RetrieveProductsAsync()
     {
@@ -60,5 +60,5 @@ public class WarehouseDao : IWarehouseDao
             products.Add(product);
         }
         return products;
-    }
+    } 
 }

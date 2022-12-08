@@ -44,28 +44,47 @@ public class WarehouseService : IWarehouseService
         }
     }
 
-    public async Task<IEnumerable<Product>> RetrieveAsync()
+    public async Task<IEnumerable<Product>> RetrieveAsync(string? ean)
     {
-        HttpResponseMessage responseMessage = await client.GetAsync("/warehouse");
-        string result = await responseMessage.Content.ReadAsStringAsync();
-        if (!responseMessage.IsSuccessStatusCode)
+        if (ean == null)
         {
-            string content = await responseMessage.Content.ReadAsStringAsync();
-            throw new Exception(content);
-        }
+            HttpResponseMessage responseMessage = await client.GetAsync($"/warehouse");
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                string content = await responseMessage.Content.ReadAsStringAsync();
+                throw new Exception(content);
+            }
 
-        IEnumerable<Product> products = JsonSerializer.Deserialize<IEnumerable<Product>>(result, new JsonSerializerOptions
+            IEnumerable<Product> products = JsonSerializer.Deserialize<IEnumerable<Product>>(result, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            })!;
+            return products;
+        }
+        else
         {
-            PropertyNameCaseInsensitive = true
-        })!;
-        return products;
+            HttpResponseMessage responseMessage = await client.GetAsync($"/warehouse?ean={ean}");
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                string content = await responseMessage.Content.ReadAsStringAsync();
+                throw new Exception(content);
+            }
+
+            IEnumerable<Product> products = JsonSerializer.Deserialize<IEnumerable<Product>>(result, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            })!;
+            return products;
+        }
     }
     public async Task UpdateAsync(WarehouseUpdateDto dto)
     {
         string dtoAsJson = JsonSerializer.Serialize(dto);
         StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await client.PatchAsync("/warehouse", body);
+        HttpResponseMessage response = await client.PatchAsync($"/warehouse?ean={dto.Ean}", body);
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();

@@ -51,12 +51,23 @@ public class WarehouseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> RetrieveProductsAsync()
+    public async Task<ActionResult<List<Product>>> RetrieveProductsAsync([FromQuery]string? ean)
     {
         try
         {
-            List<Product> products = await warehouseLogic.RetrieveProductsAsync();
-            return Ok(products);
+            if (ean==null)
+            {
+                List<Product> products = await warehouseLogic.RetrieveProductsAsync();
+                return Ok(products); 
+            }
+            else
+            {
+                Product product = await warehouseLogic.RetrieveProductAsync(ean);
+                List<Product> products = new List<Product>();
+                products.Add(product);
+                return Ok(products);
+            }
+           
         }
         catch (Exception e)
         {

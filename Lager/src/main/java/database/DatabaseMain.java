@@ -74,8 +74,8 @@ public class DatabaseMain
     return insert.addLocation(ean, location);
   }
 
-  public boolean updateProduct(String ean, String productName, int stock, String photoPath, ArrayList<String> location)
+  /*public boolean updateProduct(String ean, String productName, int stock, String photoPath, ArrayList<String> location)
   {
     return update.updateProduct(ean, productName, stock, photoPath, location);
-  }
+  }*/
 }

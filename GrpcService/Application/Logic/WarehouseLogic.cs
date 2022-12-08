@@ -82,7 +82,7 @@ public class WarehouseLogic : IWarehouseLogic
             string productName = dto.ProductName ?? existing.ProductName;
             int stockToUse= dto.Stock ?? existing.Stock;
             string photoPath = dto.PhotoPath ?? existing.PhotoPath;
-            List<string> location = null;
+            List<string> location = dto.locations ?? existing.Location;
 
             ProductCreationDto updated = new(existing.Ean, productName, stockToUse, photoPath, location);
 

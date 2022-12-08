@@ -32,7 +32,7 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
         responseObserver.onCompleted();
     }
 
-    @Override
+   /* @Override
     public void updateProduct(UpdateProductRequest request, StreamObserver<UpdateProductResponse> responseObserver){
         ArrayList<String> location = new ArrayList<>(
             request.getProduct().getLocationList());
@@ -40,7 +40,7 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
         UpdateProductResponse response = UpdateProductResponse.newBuilder().setUpdated(updated).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
-    }
+    }*/
 
     @Override
     public void productExists(ProductExistsRequest request, StreamObserver<ProductExistsResponse> responseObserver){
