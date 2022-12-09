@@ -79,6 +79,26 @@ public final class WarehouseOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_lager_RetrieveProductsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UpdateStock_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UpdateStock_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UpdateStockRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UpdateStockRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UpdateStockResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UpdateStockResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UpdateStockMultipleRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UpdateStockMultipleRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -104,20 +124,29 @@ public final class WarehouseOuterClass {
       "\":\n\027RetrieveProductResponse\022\037\n\007product\030\001" +
       " \001(\0132\016.lager.Product\"\031\n\027RetrieveProducts" +
       "Request\";\n\030RetrieveProductsResponse\022\037\n\007p" +
-      "roduct\030\001 \003(\0132\016.lager.Product2\346\003\n\tWarehou" +
-      "se\022N\n\rcreateProduct\022\035.lager.ProductCreat" +
-      "ionRequest\032\036.lager.ProductCreationRespon" +
-      "se\022J\n\rdeleteProduct\022\033.lager.DeleteProduc",
-      "tRequest\032\034.lager.DeleteProductResponse\022J" +
-      "\n\rupdateProduct\022\033.lager.UpdateProductReq" +
-      "uest\032\034.lager.UpdateProductResponse\022J\n\rpr" +
-      "oductExists\022\033.lager.ProductExistsRequest" +
-      "\032\034.lager.ProductExistsResponse\022P\n\017retrie" +
-      "veProduct\022\035.lager.RetrieveProductRequest" +
-      "\032\036.lager.RetrieveProductResponse\022S\n\020retr" +
-      "ieveProducts\022\036.lager.RetrieveProductsReq" +
-      "uest\032\037.lager.RetrieveProductsResponseB\002P" +
-      "\001b\006proto3"
+      "roduct\030\001 \003(\0132\016.lager.Product\"*\n\013UpdateSt" +
+      "ock\022\013\n\003ean\030\001 \001(\t\022\016\n\006amount\030\002 \001(\005\"8\n\022Upda" +
+      "teStockRequest\022\"\n\006update\030\001 \001(\0132\022.lager.U" +
+      "pdateStock\"&\n\023UpdateStockResponse\022\017\n\007upd",
+      "ated\030\001 \001(\010\"@\n\032UpdateStockMultipleRequest" +
+      "\022\"\n\006update\030\001 \003(\0132\022.lager.UpdateStock2\202\005\n" +
+      "\tWarehouse\022N\n\rcreateProduct\022\035.lager.Prod" +
+      "uctCreationRequest\032\036.lager.ProductCreati" +
+      "onResponse\022J\n\rdeleteProduct\022\033.lager.Dele" +
+      "teProductRequest\032\034.lager.DeleteProductRe" +
+      "sponse\022J\n\rupdateProduct\022\033.lager.UpdatePr" +
+      "oductRequest\032\034.lager.UpdateProductRespon" +
+      "se\022J\n\rproductExists\022\033.lager.ProductExist" +
+      "sRequest\032\034.lager.ProductExistsResponse\022P",
+      "\n\017retrieveProduct\022\035.lager.RetrieveProduc" +
+      "tRequest\032\036.lager.RetrieveProductResponse" +
+      "\022S\n\020retrieveProducts\022\036.lager.RetrievePro" +
+      "ductsRequest\032\037.lager.RetrieveProductsRes" +
+      "ponse\022D\n\013updateStock\022\031.lager.UpdateStock" +
+      "Request\032\032.lager.UpdateStockResponse\022T\n\023u" +
+      "pdateStockMultiple\022!.lager.UpdateStockMu" +
+      "ltipleRequest\032\032.lager.UpdateStockRespons" +
+      "eB\002P\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -209,6 +238,30 @@ public final class WarehouseOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_RetrieveProductsResponse_descriptor,
         new java.lang.String[] { "Product", });
+    internal_static_lager_UpdateStock_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_lager_UpdateStock_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UpdateStock_descriptor,
+        new java.lang.String[] { "Ean", "Amount", });
+    internal_static_lager_UpdateStockRequest_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_lager_UpdateStockRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UpdateStockRequest_descriptor,
+        new java.lang.String[] { "Update", });
+    internal_static_lager_UpdateStockResponse_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_lager_UpdateStockResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UpdateStockResponse_descriptor,
+        new java.lang.String[] { "Updated", });
+    internal_static_lager_UpdateStockMultipleRequest_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_lager_UpdateStockMultipleRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UpdateStockMultipleRequest_descriptor,
+        new java.lang.String[] { "Update", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

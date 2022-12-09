@@ -32,15 +32,17 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
         responseObserver.onCompleted();
     }
 
-   /* @Override
+   @Override
     public void updateProduct(UpdateProductRequest request, StreamObserver<UpdateProductResponse> responseObserver){
         ArrayList<String> location = new ArrayList<>(
             request.getProduct().getLocationList());
-        boolean updated = db.updateProduct(request.getProduct().getEan(), request.getProduct().getProductName(), request.getProduct().getStock(), request.getProduct().getPhotoPath(), location);
+        boolean updated = db.updateProduct(request.getProduct().getEan(),
+            request.getProduct().getProductName(), request.getProduct().getStock(),
+            request.getProduct().getPhotoPath(), location);
         UpdateProductResponse response = UpdateProductResponse.newBuilder().setUpdated(updated).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
-    }*/
+    }
 
     @Override
     public void productExists(ProductExistsRequest request, StreamObserver<ProductExistsResponse> responseObserver){
@@ -64,5 +66,23 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
         RetrieveProductsResponse response = RetrieveProductsResponse.newBuilder().addAllProduct(products).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void updateStock(UpdateStockRequest request, StreamObserver<UpdateStockResponse> responseObserver){
+        boolean updated = db.updateStock(request.getUpdate().getEan(), request.getUpdate().getAmount());
+        UpdateStockResponse response = UpdateStockResponse.newBuilder().setUpdated(updated).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void updateStockMultiple(UpdateStockMultipleRequest request, StreamObserver<UpdateStockResponse> responseObserver){
+      for(UpdateStock u : request.getUpdateList()){
+        db.updateStock(u.getEan(), u.getAmount());
+      }
+      UpdateStockResponse response = UpdateStockResponse.newBuilder().setUpdated(true).build();
+      responseObserver.onNext(response);
+      responseObserver.onCompleted();
     }
 }

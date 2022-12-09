@@ -85,4 +85,9 @@ public class DatabaseMain
     for(String s : location){ addLocation(ean, s);}
     return update.updateProduct(ean, productName, stock, photoPath);
   }
+
+  public boolean updateStock(String ean, int amount)
+  {
+    return update.updateStock(ean, amount);
+  }
 }
