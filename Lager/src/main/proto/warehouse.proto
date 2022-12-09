@@ -13,7 +13,6 @@ service Warehouse{
   rpc updateStockMultiple(UpdateStockMultipleRequest) returns (UpdateStockResponse);
 }
 
-
 message Product{
   string ean = 1;
   string productName = 2;

@@ -17,16 +17,15 @@ public class Update
     return DriverManager.getConnection(url, user, password);
   }
 
-  public boolean updateProduct(String ean, String productName, int stock, String photoPath)
+  public boolean updateProduct(String ean, String productName, int stock)
   {
-    String SQL = "UPDATE Sep3.warehouse SET productName = ?, stock = ?, photopath = ? WHERE ean = ?";
+    String SQL = "UPDATE Sep3.warehouse SET productName = ?, stock = ? WHERE ean = ?";
     try (Connection conn = connect();
         PreparedStatement pstmt = conn.prepareStatement(SQL))
     {
       pstmt.setString(1, productName);
       pstmt.setInt(2, stock);
-      pstmt.setString(3, photoPath);
-      pstmt.setString(4, ean);
+      pstmt.setString(3, ean);
       pstmt.executeUpdate();
     }
     catch (SQLException ex)

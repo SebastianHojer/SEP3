@@ -38,7 +38,7 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
             request.getProduct().getLocationList());
         boolean updated = db.updateProduct(request.getProduct().getEan(),
             request.getProduct().getProductName(), request.getProduct().getStock(),
-            request.getProduct().getPhotoPath(), location);
+             location);
         UpdateProductResponse response = UpdateProductResponse.newBuilder().setUpdated(updated).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

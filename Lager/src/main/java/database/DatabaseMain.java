@@ -78,12 +78,12 @@ public class DatabaseMain
     return select.retrieveLocation(ean);
   }
 
-  public boolean updateProduct(String ean, String productName, int stock, String photoPath, ArrayList<String> location)
+  public boolean updateProduct(String ean, String productName, int stock, ArrayList<String> location)
   {
     ArrayList<String> locationRetrieved = retrieveLocation(ean);
     location.removeAll(locationRetrieved);
     for(String s : location){ addLocation(ean, s);}
-    return update.updateProduct(ean, productName, stock, photoPath);
+    return update.updateProduct(ean, productName, stock);
   }
 
   public boolean updateStock(String ean, int amount)

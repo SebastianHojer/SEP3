@@ -72,5 +72,29 @@ public class WarehouseDao : IWarehouseDao
             products.Add(product);
         }
         return products;
-    } 
+    }
+
+    public async Task<bool> UpdateStockOutgoingAsync(List<string> eans)
+    {
+        List<UpdateStock> toUpdate = new List<UpdateStock>();
+        foreach (var s in eans)
+        {
+            UpdateStock update = new UpdateStock() { Ean = s, Amount = -1 };
+            toUpdate.Add(update);
+        }
+        var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});
+        return response.Updated;
+    }
+
+    public async Task<bool> UpdateStockIngoingAsync(List<string> eans)
+    {
+        List<UpdateStock> toUpdate = new List<UpdateStock>();
+        foreach (var s in eans)
+        {
+            UpdateStock update = new UpdateStock() { Ean = s, Amount = 1 };
+            toUpdate.Add(update);
+        }
+        var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});
+        return response.Updated;
+    }
 }
