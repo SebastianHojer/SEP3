@@ -29,10 +29,6 @@ public class WarehouseLogic : IWarehouseLogic
 
     private static void ValidateData(ProductCreationDto productToCreate)
     {
-
-        if (productToCreate.Ean.Length > 15)
-            throw new InvalidProductException("EAN cannot be longer than 15 characters!");
-
         if (productToCreate.Stock < 0)
         {
             throw new InvalidProductException("Stock cannot be lower than 0!");
@@ -49,7 +45,7 @@ public class WarehouseLogic : IWarehouseLogic
         }
     }
 
-    public async Task DeleteProductAsync(string ean)
+    public async Task DeleteProductAsync(long ean)
     {
         if (!warehouseDao.ProductExistsAsync(ean).Result)
         {
@@ -59,7 +55,7 @@ public class WarehouseLogic : IWarehouseLogic
         await warehouseDao.DeleteProductAsync(ean);
     }
 
-    public async Task<Product> RetrieveProductAsync(string ean)
+    public async Task<Product> RetrieveProductAsync(long ean)
     {
         Product product = await warehouseDao.RetrieveProductAsync(ean);
         return product;
@@ -94,12 +90,12 @@ public class WarehouseLogic : IWarehouseLogic
         return await warehouseDao.UpdateAsync(updatedProduct);
     }
 
-    public async Task<bool> UpdateStockIngoingAsync(List<string> eans)
+    public async Task<bool> UpdateStockIngoingAsync(List<long> eans)
     {
         return await warehouseDao.UpdateStockIngoingAsync(eans);
     }
 
-    public async Task<bool> UpdateStockOutgoingAsync(List<string> eans)
+    public async Task<bool> UpdateStockOutgoingAsync(List<long> eans)
     {
         return await warehouseDao.UpdateStockOutgoingAsync(eans);
     }

@@ -4,19 +4,20 @@ namespace Shared.Models;
 
 public class Product
 {
-    public string Ean { get; set; }
+    public long Ean { get; set; }
     public string ProductName { get; set; }
     public int Stock { get; set; }
-    public string? PhotoPath { get; set; }
+    public string PhotoPath { get; set; }
     public IEnumerable<string> Location { get; set; }
 
-    public Product(string ean, string productName)
+    public Product(long ean, string productName)
     {
         Ean = ean;
         ProductName = productName;
+        Location = new List<string>();
     }
     [JsonConstructor]
-    public Product(string ean, string productName, int stock, string photoPath, IEnumerable<string> location)
+    public Product(long ean, string productName, int stock, string photoPath, IEnumerable<string> location)
     {
         Ean = ean;
         ProductName = productName;

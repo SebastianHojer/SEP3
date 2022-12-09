@@ -17,7 +17,7 @@ public class Update
     return DriverManager.getConnection(url, user, password);
   }
 
-  public boolean updateProduct(String ean, String productName, int stock)
+  public boolean updateProduct(long ean, String productName, int stock)
   {
     String SQL = "UPDATE Sep3.warehouse SET productName = ?, stock = ? WHERE ean = ?";
     try (Connection conn = connect();
@@ -25,7 +25,7 @@ public class Update
     {
       pstmt.setString(1, productName);
       pstmt.setInt(2, stock);
-      pstmt.setString(3, ean);
+      pstmt.setLong(3, ean);
       pstmt.executeUpdate();
     }
     catch (SQLException ex)
@@ -36,7 +36,7 @@ public class Update
     return true;
   }
 
-  public boolean updateStock(String ean, int amount)
+  public boolean updateStock(long ean, int amount)
   {
     String SQLSubtract = "UPDATE Sep3.warehouse SET stock = stock - " + amount + " where ean = '" + ean + "'";
     String SQLAdd = "UPDATE Sep3.warehouse SET stock = stock + " + amount + " where ean = '" + ean + "'";

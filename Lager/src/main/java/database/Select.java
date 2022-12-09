@@ -36,7 +36,7 @@ public class Select
     return false;
   }
 
-  public boolean productExists(String ean) {
+  public boolean productExists(long ean) {
     String SQL = "select * from sep3.warehouse where ean = '" + ean + "'";
     try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
       ResultSet rs = preparedStatement.executeQuery();
@@ -86,7 +86,7 @@ public class Select
     return PasswordAuthenticationResponse.newBuilder().setAuthenticated(authenticated).setIsAdmin(isAdmin).build();
   }
 
-  public Product retrieveProduct(String ean)
+  public Product retrieveProduct(long ean)
   {
     Product product = null;
     String SQL = "select * from sep3.warehouse where ean = '" + ean + "'";
@@ -110,7 +110,7 @@ public class Select
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
       ResultSet rs = preparedStatement.executeQuery();
       while(rs.next()){
-        String ean = rs.getString("ean");
+        long ean = rs.getLong("ean");
         String productname = rs.getString("productname");
         int stock = rs.getInt("stock");
         String photopath = rs.getString("photopath");
@@ -123,7 +123,7 @@ public class Select
     return products;
   }
 
-  public ArrayList<String> retrieveLocation(String ean)
+  public ArrayList<String> retrieveLocation(long ean)
   {
     String SQL = "select * from sep3.location where ean = '" + ean + "'";
     ArrayList<String> locations = new ArrayList<>();

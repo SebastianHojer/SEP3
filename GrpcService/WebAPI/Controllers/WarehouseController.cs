@@ -36,7 +36,7 @@ public class WarehouseController : ControllerBase
     }
     
     [HttpDelete]
-    public async Task<ActionResult<Product>> DeleteAsync(String ean)
+    public async Task<ActionResult<Product>> DeleteAsync(long ean)
     {
         try
         {
@@ -51,11 +51,11 @@ public class WarehouseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> RetrieveProductsAsync([FromQuery]string? ean)
+    public async Task<ActionResult<List<Product>>> RetrieveProductsAsync([FromQuery]long ean)
     {
         try
         {
-            if (ean==null)
+            if (ean==0)
             {
                 List<Product> products = await warehouseLogic.RetrieveProductsAsync();
                 return Ok(products); 

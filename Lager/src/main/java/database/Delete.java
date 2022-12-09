@@ -26,10 +26,10 @@ public class Delete
         }
     }
 
-    public boolean deleteProduct(String ean) {
+    public boolean deleteProduct(long ean) {
         String SQL = "delete from sep3.warehouse where ean = ?";
         try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
-            preparedStatement.setString(1, ean);
+            preparedStatement.setLong(1, ean);
             int affectedRows = preparedStatement.executeUpdate();
             System.out.println("Affected rows: " + affectedRows);
             return affectedRows > 0;

@@ -15,7 +15,7 @@ public  final class DeleteProductRequest extends
     super(builder);
   }
   private DeleteProductRequest() {
-    ean_ = "";
+    ean_ = 0L;
   }
 
   @java.lang.Override
@@ -43,10 +43,9 @@ public  final class DeleteProductRequest extends
             }
             break;
           }
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            ean_ = s;
+            ean_ = input.readInt64();
             break;
           }
         }
@@ -73,37 +72,12 @@ public  final class DeleteProductRequest extends
   }
 
   public static final int EAN_FIELD_NUMBER = 1;
-  private volatile java.lang.Object ean_;
+  private long ean_;
   /**
-   * <code>string ean = 1;</code>
+   * <code>int64 ean = 1;</code>
    */
-  public java.lang.String getEan() {
-    java.lang.Object ref = ean_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      ean_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string ean = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getEanBytes() {
-    java.lang.Object ref = ean_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      ean_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public long getEan() {
+    return ean_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -118,8 +92,8 @@ public  final class DeleteProductRequest extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getEanBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ean_);
+    if (ean_ != 0L) {
+      output.writeInt64(1, ean_);
     }
   }
 
@@ -128,8 +102,9 @@ public  final class DeleteProductRequest extends
     if (size != -1) return size;
 
     size = 0;
-    if (!getEanBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ean_);
+    if (ean_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(1, ean_);
     }
     memoizedSize = size;
     return size;
@@ -147,8 +122,8 @@ public  final class DeleteProductRequest extends
     lager.DeleteProductRequest other = (lager.DeleteProductRequest) obj;
 
     boolean result = true;
-    result = result && getEan()
-        .equals(other.getEan());
+    result = result && (getEan()
+        == other.getEan());
     return result;
   }
 
@@ -160,7 +135,8 @@ public  final class DeleteProductRequest extends
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + EAN_FIELD_NUMBER;
-    hash = (53 * hash) + getEan().hashCode();
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getEan());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -290,7 +266,7 @@ public  final class DeleteProductRequest extends
     }
     public Builder clear() {
       super.clear();
-      ean_ = "";
+      ean_ = 0L;
 
       return this;
     }
@@ -356,9 +332,8 @@ public  final class DeleteProductRequest extends
 
     public Builder mergeFrom(lager.DeleteProductRequest other) {
       if (other == lager.DeleteProductRequest.getDefaultInstance()) return this;
-      if (!other.getEan().isEmpty()) {
-        ean_ = other.ean_;
-        onChanged();
+      if (other.getEan() != 0L) {
+        setEan(other.getEan());
       }
       onChanged();
       return this;
@@ -386,71 +361,28 @@ public  final class DeleteProductRequest extends
       return this;
     }
 
-    private java.lang.Object ean_ = "";
+    private long ean_ ;
     /**
-     * <code>string ean = 1;</code>
+     * <code>int64 ean = 1;</code>
      */
-    public java.lang.String getEan() {
-      java.lang.Object ref = ean_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ean_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public long getEan() {
+      return ean_;
     }
     /**
-     * <code>string ean = 1;</code>
+     * <code>int64 ean = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getEanBytes() {
-      java.lang.Object ref = ean_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ean_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder setEan(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setEan(long value) {
+      
       ean_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string ean = 1;</code>
+     * <code>int64 ean = 1;</code>
      */
     public Builder clearEan() {
       
-      ean_ = getDefaultInstance().getEan();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder setEanBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      ean_ = value;
+      ean_ = 0L;
       onChanged();
       return this;
     }

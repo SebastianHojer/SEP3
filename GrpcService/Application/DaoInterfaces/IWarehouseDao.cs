@@ -6,11 +6,11 @@ namespace Application.DaoInterfaces;
 public interface IWarehouseDao
 {
     Task<Product> CreateProductAsync(Product product);
-    Task<bool> ProductExistsAsync(string ean);
-    Task DeleteProductAsync(string ean);
+    Task<bool> ProductExistsAsync(long ean);
+    Task DeleteProductAsync(long ean);
     Task<List<Product>> RetrieveProductsAsync();
-    Task<Shared.Models.Product> RetrieveProductAsync(string ean);
+    Task<Shared.Models.Product> RetrieveProductAsync(long ean);
     Task<bool> UpdateAsync(Product product);
-    Task<bool> UpdateStockOutgoingAsync(List<string> eans);
-    Task<bool> UpdateStockIngoingAsync(List<string> eans);
+    Task<bool> UpdateStockOutgoingAsync(List<long> eans);
+    Task<bool> UpdateStockIngoingAsync(List<long> eans);
 }

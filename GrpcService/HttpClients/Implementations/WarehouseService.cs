@@ -43,8 +43,8 @@ public class WarehouseService : IWarehouseService
             throw new Exception(content);
         }
     }
-
-    public async Task<IEnumerable<Product>> RetrieveAsync(string? ean)
+    
+    public async Task<IEnumerable<Product>> RetrieveAsync(long? ean)
     {
         if (ean == null)
         {

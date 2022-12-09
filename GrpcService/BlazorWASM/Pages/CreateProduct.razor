@@ -36,14 +36,14 @@
             </div>
         </div>
         <div class="card-footer text-center">
-            <button @onclick="Create" disabled="@(string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(ean))" class="btn btn-primary text-center">Create</button>
+            <button @onclick="Create" disabled="@(string.IsNullOrEmpty(productName) || ean==0)" class="btn btn-primary text-center">Create</button>
         </div>
     </div>
     
 </div>
 
 @code {
-    private string ean = "";
+    private long ean;
     private string productName = "";
     private int stock;
     private string photoPath = "";
@@ -62,7 +62,7 @@
         try
         {
             await WarehouseService.CreateAsync(new ProductCreationDto(ean, productName, stock, photoPath, location));
-            ean = "";
+            ean = 0;
             productName = "";
             photoPath = "";
             resultMsg = "Product successfully created";

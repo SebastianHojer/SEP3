@@ -33,11 +33,11 @@ public class Insert
     return false;
   }
 
-  public boolean createProduct(String ean, String productName, int stock, String photopath){
+  public boolean createProduct(long ean, String productName, int stock, String photopath){
     String SQL = "insert into sep3.warehouse (ean, productname, stock, photopath) values (?, ?, ?, ?)";
     int affectedRows;
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
-      preparedStatement.setString(1, ean);
+      preparedStatement.setLong(1, ean);
       preparedStatement.setString(2, productName);
       preparedStatement.setInt(3, stock);
       preparedStatement.setString(4, photopath);
@@ -50,11 +50,11 @@ public class Insert
     return false;
   }
 
-  public boolean addLocation(String ean, String location){
+  public boolean addLocation(long ean, String location){
     String SQL = "insert into sep3.location (ean, location) values (?, ?) ";
     int affectedRows;
     try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
-      preparedStatement.setString(1, ean);
+      preparedStatement.setLong(1, ean);
       preparedStatement.setString(2, location);
       affectedRows = preparedStatement.executeUpdate();
       System.out.println("Affected rows: " + affectedRows);

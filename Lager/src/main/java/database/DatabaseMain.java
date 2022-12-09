@@ -44,7 +44,7 @@ public class DatabaseMain
     return delete.deleteUser(username);
   }
 
-  public boolean createProduct(String ean, String productName, int stock, String photoPath) {
+  public boolean createProduct(long ean, String productName, int stock, String photoPath) {
     return insert.createProduct(ean, productName, stock, photoPath);
   }
 
@@ -53,15 +53,15 @@ public class DatabaseMain
     return select.authenticatePassword(username, password);
   }
 
-  public boolean deleteProduct(String ean) {
+  public boolean deleteProduct(long ean) {
     return delete.deleteProduct(ean);
   }
 
-  public boolean productExists(String ean) {
+  public boolean productExists(long ean) {
     return select.productExists(ean);
   }
 
-  public Product retrieveProduct(String ean)
+  public Product retrieveProduct(long ean)
   {
     return select.retrieveProduct(ean);
   }
@@ -70,15 +70,15 @@ public class DatabaseMain
     return select.retrieveProducts();
   }
 
-  public boolean addLocation(String ean, String location){
+  public boolean addLocation(long ean, String location){
     return insert.addLocation(ean, location);
   }
 
-  public ArrayList<String> retrieveLocation(String ean){
+  public ArrayList<String> retrieveLocation(long ean){
     return select.retrieveLocation(ean);
   }
 
-  public boolean updateProduct(String ean, String productName, int stock, ArrayList<String> location)
+  public boolean updateProduct(long ean, String productName, int stock, ArrayList<String> location)
   {
     ArrayList<String> locationRetrieved = retrieveLocation(ean);
     location.removeAll(locationRetrieved);
@@ -86,7 +86,7 @@ public class DatabaseMain
     return update.updateProduct(ean, productName, stock);
   }
 
-  public boolean updateStock(String ean, int amount)
+  public boolean updateStock(long ean, int amount)
   {
     return update.updateStock(ean, amount);
   }

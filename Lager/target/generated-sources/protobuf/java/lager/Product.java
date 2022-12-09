@@ -15,7 +15,7 @@ public  final class Product extends
     super(builder);
   }
   private Product() {
-    ean_ = "";
+    ean_ = 0L;
     productName_ = "";
     stock_ = 0;
     photoPath_ = "";
@@ -47,10 +47,9 @@ public  final class Product extends
             }
             break;
           }
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            ean_ = s;
+            ean_ = input.readInt64();
             break;
           }
           case 18: {
@@ -107,37 +106,12 @@ public  final class Product extends
 
   private int bitField0_;
   public static final int EAN_FIELD_NUMBER = 1;
-  private volatile java.lang.Object ean_;
+  private long ean_;
   /**
-   * <code>string ean = 1;</code>
+   * <code>int64 ean = 1;</code>
    */
-  public java.lang.String getEan() {
-    java.lang.Object ref = ean_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      ean_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string ean = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getEanBytes() {
-    java.lang.Object ref = ean_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      ean_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public long getEan() {
+    return ean_;
   }
 
   public static final int PRODUCTNAME_FIELD_NUMBER = 2;
@@ -258,8 +232,8 @@ public  final class Product extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getEanBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ean_);
+    if (ean_ != 0L) {
+      output.writeInt64(1, ean_);
     }
     if (!getProductNameBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, productName_);
@@ -280,8 +254,9 @@ public  final class Product extends
     if (size != -1) return size;
 
     size = 0;
-    if (!getEanBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ean_);
+    if (ean_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(1, ean_);
     }
     if (!getProductNameBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, productName_);
@@ -317,8 +292,8 @@ public  final class Product extends
     lager.Product other = (lager.Product) obj;
 
     boolean result = true;
-    result = result && getEan()
-        .equals(other.getEan());
+    result = result && (getEan()
+        == other.getEan());
     result = result && getProductName()
         .equals(other.getProductName());
     result = result && (getStock()
@@ -338,7 +313,8 @@ public  final class Product extends
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + EAN_FIELD_NUMBER;
-    hash = (53 * hash) + getEan().hashCode();
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getEan());
     hash = (37 * hash) + PRODUCTNAME_FIELD_NUMBER;
     hash = (53 * hash) + getProductName().hashCode();
     hash = (37 * hash) + STOCK_FIELD_NUMBER;
@@ -478,7 +454,7 @@ public  final class Product extends
     }
     public Builder clear() {
       super.clear();
-      ean_ = "";
+      ean_ = 0L;
 
       productName_ = "";
 
@@ -563,9 +539,8 @@ public  final class Product extends
 
     public Builder mergeFrom(lager.Product other) {
       if (other == lager.Product.getDefaultInstance()) return this;
-      if (!other.getEan().isEmpty()) {
-        ean_ = other.ean_;
-        onChanged();
+      if (other.getEan() != 0L) {
+        setEan(other.getEan());
       }
       if (!other.getProductName().isEmpty()) {
         productName_ = other.productName_;
@@ -615,71 +590,28 @@ public  final class Product extends
     }
     private int bitField0_;
 
-    private java.lang.Object ean_ = "";
+    private long ean_ ;
     /**
-     * <code>string ean = 1;</code>
+     * <code>int64 ean = 1;</code>
      */
-    public java.lang.String getEan() {
-      java.lang.Object ref = ean_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        ean_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public long getEan() {
+      return ean_;
     }
     /**
-     * <code>string ean = 1;</code>
+     * <code>int64 ean = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getEanBytes() {
-      java.lang.Object ref = ean_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ean_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder setEan(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setEan(long value) {
+      
       ean_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string ean = 1;</code>
+     * <code>int64 ean = 1;</code>
      */
     public Builder clearEan() {
       
-      ean_ = getDefaultInstance().getEan();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string ean = 1;</code>
-     */
-    public Builder setEanBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      ean_ = value;
+      ean_ = 0L;
       onChanged();
       return this;
     }

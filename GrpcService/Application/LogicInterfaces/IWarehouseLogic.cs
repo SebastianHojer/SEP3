@@ -6,10 +6,10 @@ namespace Application.LogicInterfaces;
 public interface IWarehouseLogic
 {
     Task<Product> CreateAsync(ProductCreationDto userToCreate);
-    Task DeleteProductAsync(string ean);
+    Task DeleteProductAsync(long ean);
     Task<List<Product>> RetrieveProductsAsync();
     Task<bool> UpdateAsync(WarehouseUpdateDto dto);
-    Task<Shared.Models.Product> RetrieveProductAsync(string ean);
-    Task<bool> UpdateStockIngoingAsync(List<string> eans);
-    Task<bool> UpdateStockOutgoingAsync(List<string> eans);
+    Task<Shared.Models.Product> RetrieveProductAsync(long ean);
+    Task<bool> UpdateStockIngoingAsync(List<long> eans);
+    Task<bool> UpdateStockOutgoingAsync(List<long> eans);
 }

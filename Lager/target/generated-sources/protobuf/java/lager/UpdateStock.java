@@ -4,18 +4,19 @@
 package lager;
 
 /**
- * Protobuf type {@code lager.ProductExistsRequest}
+ * Protobuf type {@code lager.UpdateStock}
  */
-public  final class ProductExistsRequest extends
+public  final class UpdateStock extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:lager.ProductExistsRequest)
-    ProductExistsRequestOrBuilder {
-  // Use ProductExistsRequest.newBuilder() to construct.
-  private ProductExistsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // @@protoc_insertion_point(message_implements:lager.UpdateStock)
+    UpdateStockOrBuilder {
+  // Use UpdateStock.newBuilder() to construct.
+  private UpdateStock(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private ProductExistsRequest() {
+  private UpdateStock() {
     ean_ = 0L;
+    amount_ = 0;
   }
 
   @java.lang.Override
@@ -23,7 +24,7 @@ public  final class ProductExistsRequest extends
   getUnknownFields() {
     return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
   }
-  private ProductExistsRequest(
+  private UpdateStock(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -48,6 +49,11 @@ public  final class ProductExistsRequest extends
             ean_ = input.readInt64();
             break;
           }
+          case 16: {
+
+            amount_ = input.readInt32();
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -61,14 +67,14 @@ public  final class ProductExistsRequest extends
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return lager.WarehouseOuterClass.internal_static_lager_ProductExistsRequest_descriptor;
+    return lager.WarehouseOuterClass.internal_static_lager_UpdateStock_descriptor;
   }
 
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return lager.WarehouseOuterClass.internal_static_lager_ProductExistsRequest_fieldAccessorTable
+    return lager.WarehouseOuterClass.internal_static_lager_UpdateStock_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            lager.ProductExistsRequest.class, lager.ProductExistsRequest.Builder.class);
+            lager.UpdateStock.class, lager.UpdateStock.Builder.class);
   }
 
   public static final int EAN_FIELD_NUMBER = 1;
@@ -78,6 +84,15 @@ public  final class ProductExistsRequest extends
    */
   public long getEan() {
     return ean_;
+  }
+
+  public static final int AMOUNT_FIELD_NUMBER = 2;
+  private int amount_;
+  /**
+   * <code>int32 amount = 2;</code>
+   */
+  public int getAmount() {
+    return amount_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -95,6 +110,9 @@ public  final class ProductExistsRequest extends
     if (ean_ != 0L) {
       output.writeInt64(1, ean_);
     }
+    if (amount_ != 0) {
+      output.writeInt32(2, amount_);
+    }
   }
 
   public int getSerializedSize() {
@@ -106,6 +124,10 @@ public  final class ProductExistsRequest extends
       size += com.google.protobuf.CodedOutputStream
         .computeInt64Size(1, ean_);
     }
+    if (amount_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, amount_);
+    }
     memoizedSize = size;
     return size;
   }
@@ -116,14 +138,16 @@ public  final class ProductExistsRequest extends
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof lager.ProductExistsRequest)) {
+    if (!(obj instanceof lager.UpdateStock)) {
       return super.equals(obj);
     }
-    lager.ProductExistsRequest other = (lager.ProductExistsRequest) obj;
+    lager.UpdateStock other = (lager.UpdateStock) obj;
 
     boolean result = true;
     result = result && (getEan()
         == other.getEan());
+    result = result && (getAmount()
+        == other.getAmount());
     return result;
   }
 
@@ -137,74 +161,76 @@ public  final class ProductExistsRequest extends
     hash = (37 * hash) + EAN_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getEan());
+    hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getAmount();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static lager.ProductExistsRequest parseFrom(byte[] data)
+  public static lager.UpdateStock parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static lager.ProductExistsRequest parseFrom(java.io.InputStream input)
+  public static lager.UpdateStock parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static lager.ProductExistsRequest parseDelimitedFrom(java.io.InputStream input)
+  public static lager.UpdateStock parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static lager.ProductExistsRequest parseDelimitedFrom(
+  public static lager.UpdateStock parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static lager.ProductExistsRequest parseFrom(
+  public static lager.UpdateStock parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -216,7 +242,7 @@ public  final class ProductExistsRequest extends
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(lager.ProductExistsRequest prototype) {
+  public static Builder newBuilder(lager.UpdateStock prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   public Builder toBuilder() {
@@ -231,25 +257,25 @@ public  final class ProductExistsRequest extends
     return builder;
   }
   /**
-   * Protobuf type {@code lager.ProductExistsRequest}
+   * Protobuf type {@code lager.UpdateStock}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:lager.ProductExistsRequest)
-      lager.ProductExistsRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:lager.UpdateStock)
+      lager.UpdateStockOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return lager.WarehouseOuterClass.internal_static_lager_ProductExistsRequest_descriptor;
+      return lager.WarehouseOuterClass.internal_static_lager_UpdateStock_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return lager.WarehouseOuterClass.internal_static_lager_ProductExistsRequest_fieldAccessorTable
+      return lager.WarehouseOuterClass.internal_static_lager_UpdateStock_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              lager.ProductExistsRequest.class, lager.ProductExistsRequest.Builder.class);
+              lager.UpdateStock.class, lager.UpdateStock.Builder.class);
     }
 
-    // Construct using lager.ProductExistsRequest.newBuilder()
+    // Construct using lager.UpdateStock.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -268,29 +294,32 @@ public  final class ProductExistsRequest extends
       super.clear();
       ean_ = 0L;
 
+      amount_ = 0;
+
       return this;
     }
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return lager.WarehouseOuterClass.internal_static_lager_ProductExistsRequest_descriptor;
+      return lager.WarehouseOuterClass.internal_static_lager_UpdateStock_descriptor;
     }
 
-    public lager.ProductExistsRequest getDefaultInstanceForType() {
-      return lager.ProductExistsRequest.getDefaultInstance();
+    public lager.UpdateStock getDefaultInstanceForType() {
+      return lager.UpdateStock.getDefaultInstance();
     }
 
-    public lager.ProductExistsRequest build() {
-      lager.ProductExistsRequest result = buildPartial();
+    public lager.UpdateStock build() {
+      lager.UpdateStock result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
       return result;
     }
 
-    public lager.ProductExistsRequest buildPartial() {
-      lager.ProductExistsRequest result = new lager.ProductExistsRequest(this);
+    public lager.UpdateStock buildPartial() {
+      lager.UpdateStock result = new lager.UpdateStock(this);
       result.ean_ = ean_;
+      result.amount_ = amount_;
       onBuilt();
       return result;
     }
@@ -322,18 +351,21 @@ public  final class ProductExistsRequest extends
       return (Builder) super.addRepeatedField(field, value);
     }
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof lager.ProductExistsRequest) {
-        return mergeFrom((lager.ProductExistsRequest)other);
+      if (other instanceof lager.UpdateStock) {
+        return mergeFrom((lager.UpdateStock)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(lager.ProductExistsRequest other) {
-      if (other == lager.ProductExistsRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(lager.UpdateStock other) {
+      if (other == lager.UpdateStock.getDefaultInstance()) return this;
       if (other.getEan() != 0L) {
         setEan(other.getEan());
+      }
+      if (other.getAmount() != 0) {
+        setAmount(other.getAmount());
       }
       onChanged();
       return this;
@@ -347,11 +379,11 @@ public  final class ProductExistsRequest extends
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      lager.ProductExistsRequest parsedMessage = null;
+      lager.UpdateStock parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (lager.ProductExistsRequest) e.getUnfinishedMessage();
+        parsedMessage = (lager.UpdateStock) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -386,6 +418,32 @@ public  final class ProductExistsRequest extends
       onChanged();
       return this;
     }
+
+    private int amount_ ;
+    /**
+     * <code>int32 amount = 2;</code>
+     */
+    public int getAmount() {
+      return amount_;
+    }
+    /**
+     * <code>int32 amount = 2;</code>
+     */
+    public Builder setAmount(int value) {
+      
+      amount_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 amount = 2;</code>
+     */
+    public Builder clearAmount() {
+      
+      amount_ = 0;
+      onChanged();
+      return this;
+    }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return this;
@@ -397,39 +455,39 @@ public  final class ProductExistsRequest extends
     }
 
 
-    // @@protoc_insertion_point(builder_scope:lager.ProductExistsRequest)
+    // @@protoc_insertion_point(builder_scope:lager.UpdateStock)
   }
 
-  // @@protoc_insertion_point(class_scope:lager.ProductExistsRequest)
-  private static final lager.ProductExistsRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:lager.UpdateStock)
+  private static final lager.UpdateStock DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new lager.ProductExistsRequest();
+    DEFAULT_INSTANCE = new lager.UpdateStock();
   }
 
-  public static lager.ProductExistsRequest getDefaultInstance() {
+  public static lager.UpdateStock getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<ProductExistsRequest>
-      PARSER = new com.google.protobuf.AbstractParser<ProductExistsRequest>() {
-    public ProductExistsRequest parsePartialFrom(
+  private static final com.google.protobuf.Parser<UpdateStock>
+      PARSER = new com.google.protobuf.AbstractParser<UpdateStock>() {
+    public UpdateStock parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ProductExistsRequest(input, extensionRegistry);
+        return new UpdateStock(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<ProductExistsRequest> parser() {
+  public static com.google.protobuf.Parser<UpdateStock> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<ProductExistsRequest> getParserForType() {
+  public com.google.protobuf.Parser<UpdateStock> getParserForType() {
     return PARSER;
   }
 
-  public lager.ProductExistsRequest getDefaultInstanceForType() {
+  public lager.UpdateStock getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

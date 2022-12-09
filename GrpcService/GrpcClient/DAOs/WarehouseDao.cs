@@ -21,19 +21,19 @@ public class WarehouseDao : IWarehouseDao
         return product;
     }
 
-    public async Task<bool> ProductExistsAsync(string ean)
+    public async Task<bool> ProductExistsAsync(long ean)
     {
         ProductExistsResponse response =
             await warehouseClient.productExistsAsync(new ProductExistsRequest() { Ean = ean });
         return response.Exists;
     }
 
-    public async Task DeleteProductAsync(string ean)
+    public async Task DeleteProductAsync(long ean)
     {
         await warehouseClient.deleteProductAsync(new DeleteProductRequest(){Ean = ean});
     }
 
-    public async Task<Shared.Models.Product> RetrieveProductAsync(string ean)
+    public async Task<Shared.Models.Product> RetrieveProductAsync(long ean)
     {
         var response = await warehouseClient.retrieveProductAsync(new RetrieveProductRequest() { Ean = ean });
         List<string> location = new List<string>();
@@ -74,24 +74,24 @@ public class WarehouseDao : IWarehouseDao
         return products;
     }
 
-    public async Task<bool> UpdateStockOutgoingAsync(List<string> eans)
+    public async Task<bool> UpdateStockOutgoingAsync(List<long> eans)
     {
         List<UpdateStock> toUpdate = new List<UpdateStock>();
-        foreach (var s in eans)
+        foreach (var ean in eans)
         {
-            UpdateStock update = new UpdateStock() { Ean = s, Amount = -1 };
+            UpdateStock update = new UpdateStock() { Ean = ean, Amount = -1 };
             toUpdate.Add(update);
         }
         var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});
         return response.Updated;
     }
 
-    public async Task<bool> UpdateStockIngoingAsync(List<string> eans)
+    public async Task<bool> UpdateStockIngoingAsync(List<long> eans)
     {
         List<UpdateStock> toUpdate = new List<UpdateStock>();
-        foreach (var s in eans)
+        foreach (var ean in eans)
         {
-            UpdateStock update = new UpdateStock() { Ean = s, Amount = 1 };
+            UpdateStock update = new UpdateStock() { Ean = ean, Amount = 1 };
             toUpdate.Add(update);
         }
         var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});

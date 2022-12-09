@@ -3,12 +3,17 @@
 
 package lager;
 
-public interface RetrieveProductRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:lager.RetrieveProductRequest)
+public interface UpdateStockOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:lager.UpdateStock)
     com.google.protobuf.MessageOrBuilder {
 
   /**
    * <code>int64 ean = 1;</code>
    */
   long getEan();
+
+  /**
+   * <code>int32 amount = 2;</code>
+   */
+  int getAmount();
 }

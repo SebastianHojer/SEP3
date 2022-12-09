@@ -14,7 +14,7 @@ service Warehouse{
 }
 
 message Product{
-  string ean = 1;
+  int64 ean = 1;
   string productName = 2;
   int32 stock = 3;
   string photoPath = 4;
@@ -30,7 +30,7 @@ message ProductCreationResponse{
 }
 
 message DeleteProductRequest{
-  string ean = 1;
+  int64 ean = 1;
 }
 
 message DeleteProductResponse{
@@ -46,7 +46,7 @@ message UpdateProductResponse{
 }
 
 message ProductExistsRequest{
-  string ean = 1;
+  int64 ean = 1;
 }
 
 message ProductExistsResponse{
@@ -54,7 +54,7 @@ message ProductExistsResponse{
 }
 
 message RetrieveProductRequest{
-  string ean = 1;
+  int64 ean = 1;
 }
 
 message RetrieveProductResponse{
@@ -68,7 +68,7 @@ message RetrieveProductsResponse{
 }
 
 message UpdateStock{
-  string ean = 1;
+  int64 ean = 1;
   int32 amount = 2;
 }
 

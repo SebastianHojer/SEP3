@@ -63,7 +63,7 @@ else
   private string ProductName;
   private int amount;
   private string photoPath;
-  private string EAN;
+  private long ean;
   private string locationtemp;
   private List<string> location;
   private string resultMsg = "";
@@ -103,7 +103,7 @@ else
     return strings;
   }
   
-  private async Task BeginEditing(string ean)
+  private async Task BeginEditing(long ean)
   {
     resultMsg = "";
     try
@@ -117,7 +117,7 @@ else
       resultMsg = e.Message;
     }
   }
-  private async Task EditProduct(string ean)
+  private async Task EditProduct(long ean)
   {
     resultMsg = "";
     try

@@ -109,23 +109,23 @@ public final class WarehouseOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\017warehouse.proto\022\005lager\"_\n\007Product\022\013\n\003e" +
-      "an\030\001 \001(\t\022\023\n\013productName\030\002 \001(\t\022\r\n\005stock\030\003" +
+      "an\030\001 \001(\003\022\023\n\013productName\030\002 \001(\t\022\r\n\005stock\030\003" +
       " \001(\005\022\021\n\tphotoPath\030\004 \001(\t\022\020\n\010location\030\005 \003(" +
       "\t\":\n\026ProductCreationRequest\022 \n\010toCreate\030" +
       "\001 \001(\0132\016.lager.Product\"*\n\027ProductCreation" +
       "Response\022\017\n\007created\030\001 \001(\010\"#\n\024DeleteProdu" +
-      "ctRequest\022\013\n\003ean\030\001 \001(\t\"(\n\025DeleteProductR" +
+      "ctRequest\022\013\n\003ean\030\001 \001(\003\"(\n\025DeleteProductR" +
       "esponse\022\017\n\007deleted\030\001 \001(\010\"7\n\024UpdateProduc" +
       "tRequest\022\037\n\007product\030\001 \001(\0132\016.lager.Produc" +
       "t\"(\n\025UpdateProductResponse\022\017\n\007updated\030\001 ",
-      "\001(\010\"#\n\024ProductExistsRequest\022\013\n\003ean\030\001 \001(\t" +
+      "\001(\010\"#\n\024ProductExistsRequest\022\013\n\003ean\030\001 \001(\003" +
       "\"\'\n\025ProductExistsResponse\022\016\n\006exists\030\001 \001(" +
-      "\010\"%\n\026RetrieveProductRequest\022\013\n\003ean\030\001 \001(\t" +
+      "\010\"%\n\026RetrieveProductRequest\022\013\n\003ean\030\001 \001(\003" +
       "\":\n\027RetrieveProductResponse\022\037\n\007product\030\001" +
       " \001(\0132\016.lager.Product\"\031\n\027RetrieveProducts" +
       "Request\";\n\030RetrieveProductsResponse\022\037\n\007p" +
       "roduct\030\001 \003(\0132\016.lager.Product\"*\n\013UpdateSt" +
-      "ock\022\013\n\003ean\030\001 \001(\t\022\016\n\006amount\030\002 \001(\005\"8\n\022Upda" +
+      "ock\022\013\n\003ean\030\001 \001(\003\022\016\n\006amount\030\002 \001(\005\"8\n\022Upda" +
       "teStockRequest\022\"\n\006update\030\001 \001(\0132\022.lager.U" +
       "pdateStock\"&\n\023UpdateStockResponse\022\017\n\007upd",
       "ated\030\001 \001(\010\"@\n\032UpdateStockMultipleRequest" +
