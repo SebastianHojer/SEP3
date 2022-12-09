@@ -96,14 +96,10 @@ else
     return toReturn;
   }
 
-  private List<string> toList(string locations)
+  private IEnumerable<string> ToList(string locations)
   {
     string[] locationStrings = locations.Split(",");
-    List<string> strings = locationStrings.ToList();
-    foreach (var s in strings)
-    {
-      s.Trim();
-    }
+    IEnumerable<string> strings = locationStrings.ToList();
     return strings;
   }
   
@@ -128,13 +124,14 @@ else
     {
       WarehouseUpdateDto dto = new WarehouseUpdateDto(ean)
       {
-        locations = toList(locationtemp),
+        locations = ToList(locationtemp),
         Ean = ean,
         PhotoPath = photoPath,
         Stock = amount,
         ProductName = ProductName
       };
       showModal = false;
+      Console.WriteLine("ViewProducts: " + " EAN: " + dto.Ean + " photoPath = " + dto.PhotoPath + " Stock: " + dto.Stock + " Locations: " + dto.locations.ToString() + " name: " + dto.ProductName);
       await WarehouseService.UpdateAsync(dto);
     }
     catch (Exception e)

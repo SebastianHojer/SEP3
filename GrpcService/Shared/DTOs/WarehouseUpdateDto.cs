@@ -6,7 +6,7 @@ public class WarehouseUpdateDto
     public string? ProductName { get; set; }
     public int? Stock { get; set; }
     public string? PhotoPath { get; set; }
-    public List<string>? locations { get; set; }
+    public IEnumerable<string>? locations { get; set; }
 
     public WarehouseUpdateDto(string ean)
     {
