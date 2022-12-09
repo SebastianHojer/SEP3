@@ -26,7 +26,7 @@ public class WarehouseLogic : IWarehouseLogic
         Product created = await warehouseDao.CreateProductAsync(toCreate);
         return created;
     }
-    
+
     private static void ValidateData(ProductCreationDto productToCreate)
     {
 
@@ -71,16 +71,16 @@ public class WarehouseLogic : IWarehouseLogic
         return products;
     }
 
-    public async Task UpdateAsync(WarehouseUpdateDto dto)
+    public async Task<bool> UpdateAsync(WarehouseUpdateDto dto)
     {
-       Product? existing = await warehouseDao.RetrieveProductAsync(dto.Ean);
-       if (existing == null)
-       {
-           throw new Exception($"Product with EAN: {dto.Ean} not found!");
+        Product? existing = await warehouseDao.RetrieveProductAsync(dto.Ean);
+        if (existing == null)
+        {
+            throw new Exception($"Product with EAN: {dto.Ean} not found!");
         }
 
         string productName = dto.ProductName ?? existing.ProductName;
-        int stockToUse= dto.Stock ?? existing.Stock;
+        int stockToUse = dto.Stock ?? existing.Stock;
         string photoPath = dto.PhotoPath ?? existing.PhotoPath;
         List<string> location = null;
 
@@ -88,8 +88,19 @@ public class WarehouseLogic : IWarehouseLogic
 
         ValidateData(updated);
 
-        Product updatedProduct = new Product(updated.Ean, updated.ProductName, updated.Stock, updated.PhotoPath, updated.Location);
-            
-        await warehouseDao.UpdateAsync(updatedProduct);
+        Product updatedProduct = new Product(updated.Ean, updated.ProductName, updated.Stock, updated.PhotoPath,
+            updated.Location);
+
+        return await warehouseDao.UpdateAsync(updatedProduct);
+    }
+
+    public async Task<bool> UpdateStockIngoingAsync(List<string> eans)
+    {
+        return await warehouseDao.UpdateStockIngoingAsync(eans);
+    }
+
+    public async Task<bool> UpdateStockOutgoingAsync(List<string> eans)
+    {
+        return await warehouseDao.UpdateStockOutgoingAsync(eans);
     }
 }

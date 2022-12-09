@@ -99,6 +99,30 @@ public final class WarehouseGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.RetrieveProductsResponse.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.UpdateStockRequest,
+      lager.UpdateStockResponse> METHOD_UPDATE_STOCK =
+      io.grpc.MethodDescriptor.<lager.UpdateStockRequest, lager.UpdateStockResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "updateStock"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateStockRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateStockResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.UpdateStockMultipleRequest,
+      lager.UpdateStockResponse> METHOD_UPDATE_STOCK_MULTIPLE =
+      io.grpc.MethodDescriptor.<lager.UpdateStockMultipleRequest, lager.UpdateStockResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "updateStockMultiple"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateStockMultipleRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateStockResponse.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -169,6 +193,20 @@ public final class WarehouseGrpc {
       asyncUnimplementedUnaryCall(METHOD_RETRIEVE_PRODUCTS, responseObserver);
     }
 
+    /**
+     */
+    public void updateStock(lager.UpdateStockRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateStockResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_UPDATE_STOCK, responseObserver);
+    }
+
+    /**
+     */
+    public void updateStockMultiple(lager.UpdateStockMultipleRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateStockResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_UPDATE_STOCK_MULTIPLE, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -213,6 +251,20 @@ public final class WarehouseGrpc {
                 lager.RetrieveProductsRequest,
                 lager.RetrieveProductsResponse>(
                   this, METHODID_RETRIEVE_PRODUCTS)))
+          .addMethod(
+            METHOD_UPDATE_STOCK,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.UpdateStockRequest,
+                lager.UpdateStockResponse>(
+                  this, METHODID_UPDATE_STOCK)))
+          .addMethod(
+            METHOD_UPDATE_STOCK_MULTIPLE,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.UpdateStockMultipleRequest,
+                lager.UpdateStockResponse>(
+                  this, METHODID_UPDATE_STOCK_MULTIPLE)))
           .build();
     }
   }
@@ -282,6 +334,22 @@ public final class WarehouseGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_RETRIEVE_PRODUCTS, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void updateStock(lager.UpdateStockRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateStockResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_STOCK, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateStockMultiple(lager.UpdateStockMultipleRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateStockResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_STOCK_MULTIPLE, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -342,6 +410,20 @@ public final class WarehouseGrpc {
     public lager.RetrieveProductsResponse retrieveProducts(lager.RetrieveProductsRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_RETRIEVE_PRODUCTS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.UpdateStockResponse updateStock(lager.UpdateStockRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_UPDATE_STOCK, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.UpdateStockResponse updateStockMultiple(lager.UpdateStockMultipleRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_UPDATE_STOCK_MULTIPLE, getCallOptions(), request);
     }
   }
 
@@ -410,6 +492,22 @@ public final class WarehouseGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_RETRIEVE_PRODUCTS, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.UpdateStockResponse> updateStock(
+        lager.UpdateStockRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_STOCK, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.UpdateStockResponse> updateStockMultiple(
+        lager.UpdateStockMultipleRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_STOCK_MULTIPLE, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_PRODUCT = 0;
@@ -418,6 +516,8 @@ public final class WarehouseGrpc {
   private static final int METHODID_PRODUCT_EXISTS = 3;
   private static final int METHODID_RETRIEVE_PRODUCT = 4;
   private static final int METHODID_RETRIEVE_PRODUCTS = 5;
+  private static final int METHODID_UPDATE_STOCK = 6;
+  private static final int METHODID_UPDATE_STOCK_MULTIPLE = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -460,6 +560,14 @@ public final class WarehouseGrpc {
           serviceImpl.retrieveProducts((lager.RetrieveProductsRequest) request,
               (io.grpc.stub.StreamObserver<lager.RetrieveProductsResponse>) responseObserver);
           break;
+        case METHODID_UPDATE_STOCK:
+          serviceImpl.updateStock((lager.UpdateStockRequest) request,
+              (io.grpc.stub.StreamObserver<lager.UpdateStockResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_STOCK_MULTIPLE:
+          serviceImpl.updateStockMultiple((lager.UpdateStockMultipleRequest) request,
+              (io.grpc.stub.StreamObserver<lager.UpdateStockResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -499,6 +607,8 @@ public final class WarehouseGrpc {
               .addMethod(METHOD_PRODUCT_EXISTS)
               .addMethod(METHOD_RETRIEVE_PRODUCT)
               .addMethod(METHOD_RETRIEVE_PRODUCTS)
+              .addMethod(METHOD_UPDATE_STOCK)
+              .addMethod(METHOD_UPDATE_STOCK_MULTIPLE)
               .build();
         }
       }

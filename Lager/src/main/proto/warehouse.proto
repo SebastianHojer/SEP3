@@ -9,8 +9,9 @@ service Warehouse{
   rpc productExists(ProductExistsRequest) returns (ProductExistsResponse);
   rpc retrieveProduct(RetrieveProductRequest) returns (RetrieveProductResponse);
   rpc retrieveProducts(RetrieveProductsRequest) returns (RetrieveProductsResponse);
+  rpc updateStock(UpdateStockRequest) returns (UpdateStockResponse);
+  rpc updateStockMultiple(UpdateStockMultipleRequest) returns (UpdateStockResponse);
 }
-
 
 message Product{
   string ean = 1;
@@ -66,3 +67,19 @@ message RetrieveProductsResponse{
   repeated Product product = 1;
 }
 
+message UpdateStock{
+  string ean = 1;
+  int32 amount = 2;
+}
+
+message UpdateStockRequest{
+  UpdateStock update = 1;
+}
+
+message UpdateStockResponse{
+  bool updated = 1;
+}
+
+message UpdateStockMultipleRequest{
+  repeated UpdateStock update = 1;
+}
