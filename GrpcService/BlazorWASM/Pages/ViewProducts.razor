@@ -8,6 +8,8 @@
 <PageTitle>View Products</PageTitle>
 <h3>View Products</h3>
 
+<input @oninput="Search" placeholder = "Search..." class="col d-flex justify-content-center"/>
+
 @if (products == null)
 {
   <div class="col d-flex justify-content-center">
@@ -27,10 +29,9 @@ else
     <div class="card-body">
       <h5 class="card-title text-truncate">@product.ProductName</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item text-truncate"><strong>Location: </strong>@product.Location.ToString() </li>
         <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
         <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
-        <li class="list-group-item text-truncate"><strong>Information: </strong><br/>@product.PhotoPath</li>
+        <li class="list-group-item text-truncate"><strong>Location: </strong><br/>@String.Join(", ", product.Location)</li>
       </ul>
       <button @onclick="@(() => navMgr.NavigateTo($"/EditProduct/{product.Ean}"))">Edit Product</button>
     </div>
@@ -49,6 +50,7 @@ else
 @code {
   private bool showModal;
   private IEnumerable<Product>? products;
+  private IEnumerable<Product>? products_temp;
   private string ProductName;
   private int amount;
   private string photoPath;
@@ -56,6 +58,7 @@ else
   private string locationtemp;
   private List<string> location;
   private string resultMsg = "";
+  int length = 0;
 /*
  @locationtemp = @ToString(product.Location);
           <input type="text" id="Locations" name="Locations" @bind="locationtemp"><br><br>
@@ -70,6 +73,7 @@ else
     try
     {
       products = await WarehouseService.RetrieveAsync(null);
+      products_temp = products;
       Console.WriteLine("Retrieved Products");
     }
     catch (Exception e)
@@ -79,30 +83,48 @@ else
     }
   }
 
-  private string ToString(List<string> locations)
-  {
-    string toReturn = String.Join(", ", locations);
-    return toReturn;
-  }
-
   private IEnumerable<string> ToList(string locations)
   {
     string[] locationStrings = locations.Split(",");
     IEnumerable<string> strings = locationStrings.ToList();
     return strings;
   }
+  
   private async Task PopulateProducts()
   {
     resultMsg = "";
     try
     {
+      products = null;
       products = await WarehouseService.RetrieveAsync(null);
+      products_temp = products;
     }
     catch (Exception e)
     {
       Console.WriteLine(e);
       resultMsg = e.Message;
       color = "red";
+    }
+  }
+
+  private void Search(ChangeEventArgs args)
+  {
+    var searchString = (string)args.Value;
+    if (searchString.Length<length)
+    {
+      products = products_temp;
+      if (searchString.Length>0)
+      {
+        length = searchString.Length;
+        products = products.Where(x => x.Ean.ToString().Contains(searchString)).OrderByDescending(x => x.Ean).ToList();
+        StateHasChanged();
+      }
+    }
+    else
+    {
+      length = searchString.Length;
+      products = products.Where(x => x.Ean.ToString().Contains(searchString)).OrderByDescending(x => x.Ean).ToList();
+      StateHasChanged();
     }
   }
 }

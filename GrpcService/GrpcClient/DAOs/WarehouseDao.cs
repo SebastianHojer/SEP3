@@ -64,9 +64,11 @@ public class WarehouseDao : IWarehouseDao
         foreach (var t in response.Product)
         {
             List<string> location = new List<string>();
+            Console.WriteLine("The location array is so long: " + t.Location.Count);
             foreach (var s in t.Location)
             {
                 location.Add(s);
+                Console.WriteLine("added location" + s);
             }
             var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.PhotoPath, location);
             products.Add(product);
