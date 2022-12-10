@@ -1,58 +1,69 @@
-@page "/ViewProducts"
+﻿@page "/EditProduct/{ean:long}"
+<h3>EditProduct</h3>
 @using global::Shared.Models
 @using HttpClients.ClientInterfaces
 @using BlazorWASM.Pages.UIComponents
 @using global::Shared.DTOs
 @inject IWarehouseService WarehouseService
-@inject NavigationManager navMgr
 <PageTitle>View Products</PageTitle>
 <h3>View Products</h3>
 
-@if (products == null)
+@if (product == null)
 {
   <div class="col d-flex justify-content-center">
   <div class="loader"></div>
   </div>
 }
-else if (!products.Any())
+else if (!product.Any())
 {
     <span>No products to be found</span>
 }
 else
 {
-@foreach (var product in products)
+@foreach (var product in product)
 {
   <div class="card">
     <img class="card-img-top" src="Images/@product.PhotoPath" onerror="this.onerror=null; this.src='Images/Default.png'" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title text-truncate">@product.ProductName</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item text-truncate"><strong>Location: </strong>@product.Location.ToString() </li>
+         <li class="list-group-item text-truncate"><strong>Location: </strong>@product.Location.ToString() </li>
         <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
         <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
         <li class="list-group-item text-truncate"><strong>Information: </strong><br/>@product.PhotoPath</li>
       </ul>
-      <button @onclick="@(() => navMgr.NavigateTo($"/EditProduct/{product.Ean}"))">Edit Product</button>
+       <button @onclick="@(() => BeginEditing())">Edit</button>
+      <Modal ShowModal="showModal">
+        <form action="/action_page.php">
+          <label for="ProductName">Product Name:</label>
+          <input type="text" id="ProductName" name="ProductName" @bind="ProductName"><br><br>
+          <label for="Stock">Stock:</label>
+          <input type="text" id="Stock" name="Stock" @bind="amount"><br><br>
+          <label for="ProductName">Location:</label>
+          <input type="text" id="Locations" name="Locations" @bind="locationtemp"><br><br>
+        </form>
+        <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>
+      </Modal>
     </div>
   </div>
 }
 }
-<div class="col d-flex justify-content-center">
-    <button class="btn btn-primary" style="margin-bottom: 2rem" @onclick="@(() => PopulateProducts())"> Refresh </button>
-  </div>
 @if (!string.IsNullOrEmpty(resultMsg))
 {
   <div>
     <span>@resultMsg</span>
   </div>
 }
-@code {
+@code 
+{
+  [Parameter]
+  public long ean { get; set; }
+  
   private bool showModal;
-  private IEnumerable<Product>? products;
+  private IEnumerable<Product> product;
   private string ProductName;
   private int amount;
   private string photoPath;
-  private long ean;
   private string locationtemp;
   private List<string> location;
   private string resultMsg = "";
@@ -69,7 +80,7 @@ else
   {
     try
     {
-      products = await WarehouseService.RetrieveAsync(null);
+      product = await WarehouseService.RetrieveAsync(ean);
       Console.WriteLine("Retrieved Products");
     }
     catch (Exception e)
@@ -78,12 +89,7 @@ else
       resultMsg = e.Message;
     }
   }
-
-  private string ToString(List<string> locations)
-  {
-    string toReturn = String.Join(", ", locations);
-    return toReturn;
-  }
+  
 
   private IEnumerable<string> ToList(string locations)
   {
@@ -91,18 +97,43 @@ else
     IEnumerable<string> strings = locationStrings.ToList();
     return strings;
   }
-  private async Task PopulateProducts()
+  
+  private async Task BeginEditing()
   {
     resultMsg = "";
     try
     {
-      products = await WarehouseService.RetrieveAsync(null);
+      await WarehouseService.RetrieveAsync(ean);
+        showModal = true;
     }
     catch (Exception e)
     {
       Console.WriteLine(e);
       resultMsg = e.Message;
-      color = "red";
+    }
+  }
+  private async Task EditProducts(long ean)
+  {
+    resultMsg = "";
+    try
+    {
+      WarehouseUpdateDto dto = new WarehouseUpdateDto(ean)
+      {
+        locations = ToList(locationtemp),
+        Ean = ean,
+        PhotoPath = photoPath,
+        Stock = amount,
+        ProductName = ProductName
+      };
+      showModal = false;
+      Console.WriteLine("ViewProducts: " + " EAN: " + dto.Ean + " photoPath = " + dto.PhotoPath + " Stock: " + dto.Stock + " Locations: " + dto.locations.ToString() + " name: " + dto.ProductName);
+      await WarehouseService.UpdateAsync(dto);
+      await WarehouseService.RetrieveAsync(ean);
+    }
+    catch (Exception e)
+    {
+      Console.WriteLine(e);
+      resultMsg = e.Message;
     }
   }
 }
