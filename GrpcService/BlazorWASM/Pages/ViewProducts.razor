@@ -29,10 +29,9 @@ else
     <div class="card-body">
       <h5 class="card-title text-truncate">@product.ProductName</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item text-truncate"><strong>Location: </strong>@product.Location.ToString() </li>
         <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
         <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
-        <li class="list-group-item text-truncate"><strong>Location: </strong><br/>@product.Location</li>
+        <li class="list-group-item text-truncate"><strong>Location: </strong><br/>@String.Join(", ", product.Location)</li>
       </ul>
       <button @onclick="@(() => navMgr.NavigateTo($"/EditProduct/{product.Ean}"))">Edit Product</button>
     </div>
@@ -84,23 +83,19 @@ else
     }
   }
 
-  private string ToString(List<string> locations)
-  {
-    string toReturn = String.Join(", ", locations);
-    return toReturn;
-  }
-
   private IEnumerable<string> ToList(string locations)
   {
     string[] locationStrings = locations.Split(",");
     IEnumerable<string> strings = locationStrings.ToList();
     return strings;
   }
+  
   private async Task PopulateProducts()
   {
     resultMsg = "";
     try
     {
+      products = null;
       products = await WarehouseService.RetrieveAsync(null);
       products_temp = products;
     }
