@@ -1,12 +1,9 @@
 ﻿@page "/EditProduct/{ean:long}"
-<h3>EditProduct</h3>
 @using global::Shared.Models
 @using HttpClients.ClientInterfaces
 @using BlazorWASM.Pages.UIComponents
 @using global::Shared.DTOs
 @inject IWarehouseService WarehouseService
-<PageTitle>View Products</PageTitle>
-<h3>View Products</h3>
 
 @if (product == null)
 {
@@ -22,17 +19,24 @@ else
 {
 @foreach (var product in product)
 {
-  <div class="card">
-    <img class="card-img-top" src="Images/@product.PhotoPath" onerror="this.onerror=null; this.src='Images/Default.png'" alt="Card image cap">
+  amount = product.Stock;
+  ProductName = product.ProductName;
+  location = String.Join(",", product.Location);
+  <div class="card" style = "width: 18rem; display: inline-block">
+    <img class="card-img-top" style="width: 100%; height: 15vw" src="Images/@product.PhotoPath" onerror="this.onerror=null; this.src='Images/Default.png'" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title text-truncate">@product.ProductName</h5>
-      <ul class="list-group list-group-flush">
-         <li class="list-group-item text-truncate"><strong>Location: </strong>@product.Location.ToString() </li>
-        <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
-        <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
-        <li class="list-group-item text-truncate"><strong>Information: </strong><br/>@product.PhotoPath</li>
-      </ul>
-       <button @onclick="@(() => BeginEditing())">Edit</button>
+      <form action="/action_page.php">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
+          <li class="list-group-item text-truncate"><strong>@product.ProductName</strong></li>
+          <input type="text" id="ProductName" name="ProductName" placeholder="Product name" @bind="ProductName"><br><br>
+          <li class="list-group-item text-truncate"><strong>Location: </strong>@location </li>
+          <input type="text" id="Locations" name="Locations" placeholder="Locations" @bind="location"><br><br>
+          <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
+          <input type="text" id="Stock" name="Stock" placeholder="@amount" @bind="amount"><br><br>
+        </ul>
+      </form>
+      <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>
       <Modal ShowModal="showModal">
         <form action="/action_page.php">
           <label for="ProductName">Product Name:</label>
@@ -40,7 +44,7 @@ else
           <label for="Stock">Stock:</label>
           <input type="text" id="Stock" name="Stock" @bind="amount"><br><br>
           <label for="ProductName">Location:</label>
-          <input type="text" id="Locations" name="Locations" @bind="locationtemp"><br><br>
+          <input type="text" id="Locations" name="Locations" @bind="location"><br><br>
         </form>
         <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>
       </Modal>
@@ -61,11 +65,10 @@ else
   
   private bool showModal;
   private IEnumerable<Product> product;
-  private string ProductName;
-  private int amount;
+  private string? ProductName;
+  private int? amount;
   private string photoPath;
-  private string locationtemp;
-  private List<string> location;
+  private string location;
   private string resultMsg = "";
 /*
  @locationtemp = @ToString(product.Location);
@@ -119,7 +122,7 @@ else
     {
       WarehouseUpdateDto dto = new WarehouseUpdateDto(ean)
       {
-        locations = ToList(locationtemp),
+        locations = ToList(location),
         Ean = ean,
         PhotoPath = photoPath,
         Stock = amount,
