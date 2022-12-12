@@ -96,7 +96,8 @@ public class Select
         String productname = rs.getString("productname");
         int stock = rs.getInt("stock");
         String photopath = rs.getString("photopath");
-        product = Product.newBuilder().setEan(ean).setProductName(productname).setStock(stock).setPhotoPath(photopath).build();
+        List<String> locations = retrieveLocation(ean);
+        product = Product.newBuilder().setEan(ean).setProductName(productname).setStock(stock).setPhotoPath(photopath).addAllLocation(locations).build();
       }
     } catch (SQLException e) {
       e.printStackTrace();
