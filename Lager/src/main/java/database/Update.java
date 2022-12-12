@@ -38,10 +38,8 @@ public class Update
 
   public boolean updateStock(long ean, int amount)
   {
-    String SQLSubtract = "UPDATE Sep3.warehouse SET stock = stock - " + amount + " where ean = '" + ean + "'";
+    //String SQLSubtract = "UPDATE Sep3.warehouse SET stock = stock  " + amount + " where ean = '" + ean + "'";
     String SQLAdd = "UPDATE Sep3.warehouse SET stock = stock + " + amount + " where ean = '" + ean + "'";
-
-    if(amount>0){
       try(Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(SQLAdd))
       {
         int affectedRows = pstmt.executeUpdate();
@@ -54,22 +52,6 @@ public class Update
         ex.printStackTrace();
         return false;
       }
-    } else
-    {
-      try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(SQLSubtract))
-      {
-        int affectedRows = pstmt.executeUpdate();
-        if (affectedRows == 0)
-        {
-          return false;
-        }
-      }
-      catch (SQLException ex)
-      {
-        ex.printStackTrace();
-        return false;
-      }
-    }
     return true;
   }
   public boolean updateLocation(long ean, ArrayList<String> location){

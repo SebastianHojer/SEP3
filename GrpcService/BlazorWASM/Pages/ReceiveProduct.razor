@@ -1,4 +1,4 @@
-@page "/HandoutProduct"
+@page "/ReceiveProduct"
 @using global::Shared.DTOs
 @using HttpClients.ClientInterfaces
 @inject IWarehouseService service
@@ -6,14 +6,14 @@
 @attribute [Authorize]
 <div class="col d-flex justify-content-center">
     <div class="card">
-        <h5 class="card-header text-center">Product Handout</h5>
+        <h5 class="card-header text-center">Product Receival</h5>
         <div class="card-body">
             <div class="form-group">
                 <label for="EAN">EAN</label>
                 <input type="text" class="form-control" id="EAN" placeholder="Scan or type EAN here..." @bind="eanTemp" @oninput="@(e => { eanTemp = e.Value.ToString(); })">
             </div>
             <div class="text-center" style="margin-bottom: 1rem">
-                <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to handout list</button>
+                <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to receival list</button>
             </div>
             <div class="scroller">
                 <table class="table table-striped">
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-primary" @onclick="@(() => Handout(ean))">Handout</button>
+            <button class="btn btn-primary" @onclick="@(() => Handout(ean))">Add Products</button>
         </div>
     </div>
 </div>
@@ -52,8 +52,8 @@
     {
         try
         {
-            string outgoing = "outgoing";
-            StockDto dto = new StockDto(handoutList, outgoing);
+            string ingoing = "ingoing";
+            StockDto dto = new StockDto(handoutList, ingoing);
             await service.StockUpdateAsync(dto);
         }
         catch (Exception e)

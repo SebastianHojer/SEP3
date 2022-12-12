@@ -98,6 +98,7 @@ public class WarehouseService : IWarehouseService
         StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PatchAsync($"/stock", body);
+            Console.WriteLine(response);
             if (!response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();

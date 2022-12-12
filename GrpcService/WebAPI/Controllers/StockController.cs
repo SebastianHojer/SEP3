@@ -2,7 +2,6 @@
 using Application.LogicInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
-using Shared.Exceptions;
 using Product = Shared.Models.Product;
 
 
@@ -45,6 +44,7 @@ public class StockController : ControllerBase
     [HttpPatch]
     public async Task<ActionResult> UpdateAsync(StockDto dto)
     {
+        Console.WriteLine(dto.status);
         if (dto.status.Equals("outgoing"))
             try
             {
@@ -56,15 +56,20 @@ public class StockController : ControllerBase
                 Console.WriteLine(e);
                 return StatusCode(500, e.Message);
             }
-        try
+        else if (dto.status.Equals("ingoing"))
+            try
+            {
+                await warehouseLogic.UpdateStockIngoingAsync(dto.eans);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        else
         {
-            await warehouseLogic.UpdateStockIngoingAsync(dto.eans);
-            return Ok();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
+            return StatusCode(500, "string");
         }
     }
 }
