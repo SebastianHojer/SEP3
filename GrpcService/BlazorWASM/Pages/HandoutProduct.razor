@@ -2,6 +2,9 @@
 @using global::Shared.DTOs
 @using HttpClients.ClientInterfaces
 @inject IWarehouseService service
+@inject NavigationManager navMngr
+
+<PageTitle>Handout Product</PageTitle>
 
 @attribute [Authorize]
 <div class="col d-flex justify-content-center">
@@ -55,6 +58,7 @@
             string outgoing = "outgoing";
             StockDto dto = new StockDto(handoutList, outgoing);
             await service.StockUpdateAsync(dto);
+            navMngr.NavigateTo("ViewProducts");
         }
         catch (Exception e)
         {

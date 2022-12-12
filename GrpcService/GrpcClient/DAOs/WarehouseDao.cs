@@ -80,11 +80,18 @@ public class WarehouseDao : IWarehouseDao
     public async Task<bool> UpdateStockOutgoingAsync(List<long> eans)
     {
         List<UpdateStock> toUpdate = new List<UpdateStock>();
+        List<long> eansToRemove = new List<long>();
         foreach (var ean in eans)
         {
-            UpdateStock update = new UpdateStock() { Ean = ean, Amount = -1 };
-            toUpdate.Add(update);
+            if (!eansToRemove.Contains(ean))
+            {
+                int count = eans.Where(x => x.Equals(ean)).Count();
+                UpdateStock update = new UpdateStock() { Ean = ean, Amount = -count };
+                toUpdate.Add(update);
+                eansToRemove.Add(ean);
+            }
         }
+        
         var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});
         return response.Updated;
     }
@@ -92,12 +99,20 @@ public class WarehouseDao : IWarehouseDao
     public async Task<bool> UpdateStockIngoingAsync(List<long> eans)
     {
         List<UpdateStock> toUpdate = new List<UpdateStock>();
+        List<long> eansToRemove = new List<long>();
         foreach (var ean in eans)
         {
-            UpdateStock update = new UpdateStock() { Ean = ean, Amount = 1 };
-            toUpdate.Add(update);
+            if (!eansToRemove.Contains(ean))
+            {
+                int count = eans.Where(x => x.Equals(ean)).Count();
+                UpdateStock update = new UpdateStock() { Ean = ean, Amount = count };
+                toUpdate.Add(update);
+                eansToRemove.Add(ean);
+            }
         }
+        
         var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});
         return response.Updated;
     }
+    
 }
