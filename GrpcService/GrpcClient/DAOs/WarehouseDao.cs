@@ -73,6 +73,7 @@ public class WarehouseDao : IWarehouseDao
             var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.PhotoPath, location);
             products.Add(product);
         }
+        Console.WriteLine("Done retrieving products");
         return products;
     }
 

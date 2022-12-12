@@ -72,4 +72,28 @@ public class Update
     }
     return true;
   }
+  public boolean updateLocation(long ean, ArrayList<String> location){
+    String DeleteSQL = "delete from sep3.location where ean = " + ean;
+    String StartSQL = "insert into sep3.location (ean, location) values ('" + ean + "' , '" + location.get(0) + "')";
+    for (int i=1; i<location.size(); i++)
+    {
+      StartSQL = String.join(" , ", StartSQL, "('" + ean + "','" + location.get(i) +"')");
+    }
+    System.out.println("SQL: " + StartSQL);
+    int affectedRows;
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(DeleteSQL)){
+      affectedRows = preparedStatement.executeUpdate();
+      System.out.println("Affected rows: " + affectedRows);
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(StartSQL)){
+      affectedRows = preparedStatement.executeUpdate();
+      System.out.println("Affected rows: " + affectedRows);
+      if(affectedRows>0){return true;}
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    return false;
+  }
 }

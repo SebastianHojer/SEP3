@@ -46,7 +46,7 @@ public class WarehouseService : IWarehouseService
     
     public async Task<IEnumerable<Product>> RetrieveAsync(long? ean)
     {
-        if (ean == null)
+        if (ean == null | ean == 0)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"/warehouse");
             string result = await responseMessage.Content.ReadAsStringAsync();
@@ -90,5 +90,18 @@ public class WarehouseService : IWarehouseService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
+    }
+
+    public async Task StockUpdateAsync(StockDto dto)
+    {
+        string dtoAsJson = JsonSerializer.Serialize(dto);
+        StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PatchAsync($"/stock", body);
+            if (!response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                throw new Exception(content);
+            }
     }
 }

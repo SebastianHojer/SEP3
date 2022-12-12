@@ -1,53 +1,20 @@
-﻿using Application.LogicInterfaces;
+﻿namespace WebAPI.Controllers;
+using Application.LogicInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
 using Shared.Exceptions;
 using Product = Shared.Models.Product;
 
-namespace WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WarehouseController : ControllerBase
+public class StockController : ControllerBase
 {
     private readonly IWarehouseLogic warehouseLogic;
 
-    public WarehouseController(IWarehouseLogic warehouseLogic)
+    public StockController(IWarehouseLogic warehouseLogic)
     {
         this.warehouseLogic = warehouseLogic;
-    }
-    
-    [HttpPost]
-    public async Task<ActionResult<Product>> CreateAsync(ProductCreationDto dto)
-    {
-        try
-        {
-            Product product = await warehouseLogic.CreateAsync(dto);
-            return Created($"/warehouse/{product.Ean}", product);
-        }
-        catch(InvalidUsernameException e)
-        {
-            return StatusCode(400, e.Message);
-        }
-        catch (Exception e)
-        {
-            return StatusCode(500, e.Message);
-        }
-    }
-    
-    [HttpDelete]
-    public async Task<ActionResult<Product>> DeleteAsync(long ean)
-    {
-        try
-        {
-            await warehouseLogic.DeleteProductAsync(ean);
-            return Ok();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }
     }
 
     [HttpGet]
@@ -55,7 +22,7 @@ public class WarehouseController : ControllerBase
     {
         try
         {
-            if (ean==0 | ean==null)
+            if (ean==0)
             {
                 List<Product> products = await warehouseLogic.RetrieveProductsAsync();
                 return Ok(products); 
@@ -76,11 +43,22 @@ public class WarehouseController : ControllerBase
         }
     }
     [HttpPatch]
-    public async Task<ActionResult> UpdateAsync(WarehouseUpdateDto dto)
+    public async Task<ActionResult> UpdateAsync(StockDto dto)
     {
+        if (dto.status.Equals("outgoing"))
+            try
+            {
+                await warehouseLogic.UpdateStockOutgoingAsync(dto.eans);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
         try
         {
-            await warehouseLogic.UpdateAsync(dto);
+            await warehouseLogic.UpdateStockIngoingAsync(dto.eans);
             return Ok();
         }
         catch (Exception e)

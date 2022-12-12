@@ -82,7 +82,7 @@ public class DatabaseMain
   {
     ArrayList<String> locationRetrieved = retrieveLocation(ean);
     location.removeAll(locationRetrieved);
-    for(String s : location){ addLocation(ean, s.trim());}
+    update.updateLocation(ean, location);
     return update.updateProduct(ean, productName, stock);
   }
 
