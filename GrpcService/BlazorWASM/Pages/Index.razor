@@ -2,4 +2,19 @@
 
 <PageTitle>Warehouse Manager</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="col justify-content-center">
+    
+    <AuthorizeView>
+        <NotAuthorized>
+            <h1>Welcome</h1>
+            <p>
+                Please login using the button above to get access to your resources
+            </p>
+        </NotAuthorized>
+        <Authorized>
+            <h1>Good to see you!</h1>
+            <p>Use the navigation pane to the left to start your work</p>
+        </Authorized>
+    </AuthorizeView>
+
+</div>
