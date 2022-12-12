@@ -4,6 +4,10 @@
     flex-direction: column;
 }
 
+.card{
+    height: 40px;
+}
+
 main {
     flex: 1;
 }
@@ -15,7 +19,6 @@ main {
 .top-row {
     background-color: #3d3dbd;
     border-bottom: 1px solid #3a3a3a;
-    justify-content: flex-end;
     height: 3.5rem;
     display: flex;
     align-items: center;

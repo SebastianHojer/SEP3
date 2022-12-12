@@ -7,8 +7,16 @@
     background-color: rgba(0,0,0,0.4);
 }
 
+.menu-logo{
+    width: 2rem;
+    height: 1.7rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
 .navbar-brand {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
+    font-family: 'Lucida Handwriting', cursive;
 }
 
 .oi {
@@ -58,5 +66,10 @@
     .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .visibility {
+        display: none;
     }
 }

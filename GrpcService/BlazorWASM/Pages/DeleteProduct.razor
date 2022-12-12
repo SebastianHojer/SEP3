@@ -3,8 +3,10 @@
 @using global::Shared.Models
 @inject IWarehouseService WarehouseService;
 
+<PageTitle>Delete Product</PageTitle>
+
 @attribute [Authorize("MustBeAdmin")]
-<h3>DeleteProduct</h3>
+
 @if (products == null)
 {
   <div class="col d-flex justify-content-center">

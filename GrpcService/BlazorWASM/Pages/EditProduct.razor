@@ -6,6 +6,8 @@
 @inject IWarehouseService WarehouseService
 @inject NavigationManager navMgr
 
+<PageTitle>Edit Product</PageTitle>
+
 @if (product == null)
 {
   <div class="col d-flex justify-content-center">
@@ -27,11 +29,11 @@ else
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
           <li class="list-group-item text-truncate"><strong>Product name:</strong></li>
-          <input type="text" id="ProductName" name="ProductName" placeholder="@product.ProductName" @bind="ProductName" @oninput="@(e => { ProductName = e.Value.ToString(); })"><br><br>
+          <input class="form-control" type="text" id="ProductName" name="ProductName" placeholder="@product.ProductName" @bind="ProductName" @oninput="@(e => { ProductName = e.Value.ToString(); })"><br><br>
           <li class="list-group-item text-truncate"><strong>Location: </strong></li>
-          <input type="text" id="Locations" name="Locations" placeholder="@String.Join(", ", product.Location)" @bind="location" @oninput="@(e => { location = e.Value.ToString(); })"><br><br>
+          <input class="form-control" type="text" id="Locations" name="Locations" placeholder="@String.Join(", ", product.Location)" @bind="location" @oninput="@(e => { location = e.Value.ToString(); })"><br><br>
           <li class="list-group-item text-truncate"><strong>Antal på lager: </strong></li>
-          <input type="text" id="Stock" name="Stock" placeholder="@product.Stock" @bind="@amount" @oninput="@(e => { amount = int.Parse(e.Value.ToString()); })"><br><br>
+          <input class="form-control" type="text" id="Stock" name="Stock" placeholder="@product.Stock" @bind="@amount" @oninput="@(e => { amount = int.Parse(e.Value.ToString()); })"><br><br>
         </ul>
       </form>
       <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>

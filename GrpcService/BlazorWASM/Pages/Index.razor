@@ -2,18 +2,34 @@
 
 <PageTitle>Warehouse Manager</PageTitle>
 
-<div class="col justify-content-center">
+<div class="col d-flex justify-content-center">
     
     <AuthorizeView>
         <NotAuthorized>
-            <h1>Welcome</h1>
-            <p>
-                Please login using the button above to get access to your resources
-            </p>
+            <div class="col d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>!</strong>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Welcome</h5>
+                        <p class="card-text">Please login using the button above to gain access to your resources</p>
+                    </div>
+                </div>
+            </div>
         </NotAuthorized>
         <Authorized>
-            <h1>Good to see you!</h1>
-            <p>Use the navigation pane to the left to start your work</p>
+            <div class="col d-flex justify-content-center">
+                            <div class="card">
+                                <div class="card-header">
+                                    Welcome
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Nice to see you, @context.User.Identity.Name!</h5>
+                                    <p class="card-text">Get started working by using the navigation pane to the left</p>
+                                </div>
+                            </div>
+                        </div>
         </Authorized>
     </AuthorizeView>
 
