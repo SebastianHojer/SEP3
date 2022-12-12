@@ -55,7 +55,7 @@ public class WarehouseController : ControllerBase
     {
         try
         {
-            if (ean==0)
+            if (ean==0 | ean==null)
             {
                 List<Product> products = await warehouseLogic.RetrieveProductsAsync();
                 return Ok(products); 

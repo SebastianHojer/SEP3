@@ -4,6 +4,7 @@
 @using BlazorWASM.Pages.UIComponents
 @using global::Shared.DTOs
 @inject IWarehouseService WarehouseService
+@inject NavigationManager navMgr
 
 @if (product == null)
 {
@@ -19,35 +20,21 @@ else
 {
 @foreach (var product in product)
 {
-  amount = product.Stock;
-  ProductName = product.ProductName;
-  location = String.Join(",", product.Location);
   <div class="card" style = "width: 18rem; display: inline-block">
     <img class="card-img-top" style="width: 100%; height: 15vw" src="Images/@product.PhotoPath" onerror="this.onerror=null; this.src='Images/Default.png'" alt="Card image cap">
     <div class="card-body">
       <form action="/action_page.php">
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
-          <li class="list-group-item text-truncate"><strong>@product.ProductName</strong></li>
-          <input type="text" id="ProductName" name="ProductName" placeholder="Product name" @bind="ProductName"><br><br>
-          <li class="list-group-item text-truncate"><strong>Location: </strong>@location </li>
-          <input type="text" id="Locations" name="Locations" placeholder="Locations" @bind="location"><br><br>
-          <li class="list-group-item text-truncate"><strong>Antal på lager: </strong>@product.Stock </li>
-          <input type="text" id="Stock" name="Stock" placeholder="@amount" @bind="amount"><br><br>
+          <li class="list-group-item text-truncate"><strong>Product name:</strong></li>
+          <input type="text" id="ProductName" name="ProductName" placeholder="@product.ProductName" @bind="ProductName" @oninput="@(e => { ProductName = e.Value.ToString(); })"><br><br>
+          <li class="list-group-item text-truncate"><strong>Location: </strong></li>
+          <input type="text" id="Locations" name="Locations" placeholder="@String.Join(", ", product.Location)" @bind="location" @oninput="@(e => { location = e.Value.ToString(); })"><br><br>
+          <li class="list-group-item text-truncate"><strong>Antal på lager: </strong></li>
+          <input type="text" id="Stock" name="Stock" placeholder="@product.Stock" @bind="@amount" @oninput="@(e => { amount = int.Parse(e.Value.ToString()); })"><br><br>
         </ul>
       </form>
       <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>
-      <Modal ShowModal="showModal">
-        <form action="/action_page.php">
-          <label for="ProductName">Product Name:</label>
-          <input type="text" id="ProductName" name="ProductName" @bind="ProductName"><br><br>
-          <label for="Stock">Stock:</label>
-          <input type="text" id="Stock" name="Stock" @bind="amount"><br><br>
-          <label for="ProductName">Location:</label>
-          <input type="text" id="Locations" name="Locations" @bind="location"><br><br>
-        </form>
-        <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>
-      </Modal>
     </div>
   </div>
 }
@@ -107,7 +94,6 @@ else
     try
     {
       await WarehouseService.RetrieveAsync(ean);
-        showModal = true;
     }
     catch (Exception e)
     {
@@ -128,10 +114,9 @@ else
         Stock = amount,
         ProductName = ProductName
       };
-      showModal = false;
       Console.WriteLine("ViewProducts: " + " EAN: " + dto.Ean + " photoPath = " + dto.PhotoPath + " Stock: " + dto.Stock + " Locations: " + dto.locations.ToString() + " name: " + dto.ProductName);
       await WarehouseService.UpdateAsync(dto);
-      await WarehouseService.RetrieveAsync(ean);
+      navMgr.NavigateTo("/ViewProducts");
     }
     catch (Exception e)
     {
