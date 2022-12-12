@@ -9,4 +9,5 @@ public interface IWarehouseService
     Task DeleteAsync(Product product);
     Task<IEnumerable<Product>> RetrieveAsync(long? ean);
     Task UpdateAsync(WarehouseUpdateDto dto);
+    Task StockUpdateAsync(StockDto dto);
 }

@@ -91,4 +91,17 @@ public class WarehouseService : IWarehouseService
             throw new Exception(content);
         }
     }
+
+    public async Task StockUpdateAsync(StockDto dto)
+    {
+        string dtoAsJson = JsonSerializer.Serialize(dto);
+        StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PatchAsync($"/stock", body);
+            if (!response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                throw new Exception(content);
+            }
+    }
 }
