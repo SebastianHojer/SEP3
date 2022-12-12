@@ -46,7 +46,7 @@ public class WarehouseService : IWarehouseService
     
     public async Task<IEnumerable<Product>> RetrieveAsync(long? ean)
     {
-        if (ean == null)
+        if (ean == null | ean == 0)
         {
             HttpResponseMessage responseMessage = await client.GetAsync($"/warehouse");
             string result = await responseMessage.Content.ReadAsStringAsync();
