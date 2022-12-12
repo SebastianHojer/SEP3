@@ -1,0 +1,45 @@
+@page "/HandoutProduct"
+@using HttpClients.Implementations
+
+@attribute [Authorize]
+<div class="col d-flex justify-content-center">
+    <div class="card">
+        <h5 class="card-header text-center">Product Handout</h5>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="EAN">EAN</label>
+                <input type="text" class="form-control" id="EAN" placeholder="Scan or type EAN here..." @bind="eanTemp" @oninput="@(e => { eanTemp = e.Value.ToString(); })">
+            </div>
+            <div class="text-center" style="margin-bottom: 1rem">
+                <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to handout list</button>
+            </div>
+            @foreach (var item in ean)
+            {
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@item</li>
+                </ul>
+            }
+        </div>
+        
+    </div>
+</div>
+@code {
+
+    private List<long> ean = new();
+    private string eanTemp;
+    private long eanTempLong;
+
+    private void BindEan()
+    {
+        eanTempLong = long.Parse(eanTemp);
+        ean.Add(eanTempLong);
+        
+        StateHasChanged();
+    }
+
+    private async Task<List<long>> Handout(List<long> handoutList)
+    {
+
+        await WarehouseService.StockUpdateAsync(dto);
+    }
+}
