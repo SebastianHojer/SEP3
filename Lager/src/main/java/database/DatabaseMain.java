@@ -4,6 +4,7 @@ import lager.PasswordAuthenticationResponse;
 import lager.Product;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DatabaseMain
 {
@@ -89,5 +90,22 @@ public class DatabaseMain
   public boolean updateStock(long ean, int amount)
   {
     return update.updateStock(ean, amount);
+  }
+
+  public ArrayList<Long> retrieveAllProductsEan(){
+    return select.retrieveAllProductsEan();
+  }
+
+  public boolean registerLoss(Map<Long, Integer> lossMap) {
+    boolean registered = false;
+    System.out.println("i am about to enter the loop");
+
+    System.out.println("The entryset is so long: " + lossMap.entrySet().size());
+    for (Map.Entry<Long, Integer> entry : lossMap.entrySet()) {
+      System.out.println("i am in the loop");
+      registered = insert.registerLoss(entry.getKey(), entry.getValue());
+    }
+    System.out.println("i have returned");
+    return registered;
   }
 }

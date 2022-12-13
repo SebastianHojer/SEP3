@@ -25,10 +25,6 @@ public class WarehouseController : ControllerBase
             Product product = await warehouseLogic.CreateAsync(dto);
             return Created($"/warehouse/{product.Ean}", product);
         }
-        catch(InvalidUsernameException e)
-        {
-            return StatusCode(400, e.Message);
-        }
         catch (Exception e)
         {
             return StatusCode(500, e.Message);
@@ -55,7 +51,7 @@ public class WarehouseController : ControllerBase
     {
         try
         {
-            if (ean==0 | ean==null)
+            if (ean==0)
             {
                 List<Product> products = await warehouseLogic.RetrieveProductsAsync();
                 return Ok(products); 

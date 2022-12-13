@@ -140,4 +140,24 @@ public class Select
     }
     return locations;
   }
+
+  public ArrayList<Long> retrieveAllProductsEan(){
+    String SQL = "select * from sep3.warehouse";
+    ArrayList<Long> toReturn = new ArrayList<>();
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      ResultSet rs = preparedStatement.executeQuery();
+      while(rs.next()){
+        long ean = rs.getLong("ean");
+        int stock = rs.getInt("stock");
+        System.out.println(stock);
+        for (int i = 0; i<stock; i++){
+          toReturn.add(ean);
+        }
+        System.out.println(toReturn);
+      }
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    return toReturn;
+  }
 }

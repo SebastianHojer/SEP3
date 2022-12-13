@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class Insert
 {
@@ -62,6 +63,22 @@ public class Insert
     } catch(SQLException e){
       e.printStackTrace();
     }
+    return false;
+  }
+
+  public boolean registerLoss(long ean, int amount) {
+    String SQL = "insert into sep3.productloss (ean, amount) values (?, ?) ";
+    int affectedRows;
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      preparedStatement.setLong(1, ean);
+      preparedStatement.setInt(2, amount);
+      affectedRows = preparedStatement.executeUpdate();
+      System.out.println("affected : " + affectedRows);
+      if(affectedRows>0){return true;}
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    System.out.println("shit dont work");
     return false;
   }
 }

@@ -98,11 +98,37 @@ public class WarehouseService : IWarehouseService
         StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PatchAsync($"/stock", body);
-            Console.WriteLine(response);
             if (!response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
                 throw new Exception(content);
             }
+    }
+
+    public async Task<List<long>> RetrieveStock()
+    {
+        HttpResponseMessage response = await client.GetAsync("/stock");
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+
+        List<long> eans = JsonSerializer.Deserialize<List<long>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return eans;
+    }
+
+    public async Task RegisterLoss(Dictionary<long, int> dictionary)
+    {
+        HttpResponseMessage response = await client.PostAsJsonAsync("/loss", dictionary);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
     }
 }

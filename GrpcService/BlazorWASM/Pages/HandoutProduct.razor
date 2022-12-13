@@ -1,5 +1,6 @@
 @page "/HandoutProduct"
 @using global::Shared.DTOs
+@using global::Shared.Models
 @using HttpClients.ClientInterfaces
 @inject IWarehouseService service
 @inject NavigationManager navMngr
@@ -17,6 +18,10 @@
             </div>
             <div class="text-center" style="margin-bottom: 1rem">
                 <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to handout list</button>
+                @if (!string.IsNullOrEmpty(resultMsg))
+                {
+                    <label style="color: @color">@resultMsg</label>
+                }
             </div>
             <div class="scroller">
                 <table class="table table-striped">
@@ -25,6 +30,7 @@
                     {
                         <tr>
                             <td>@item</td>
+                            <td><button class="" @onclick="@(() => Delete(item))"> &times; </button></td>
                         </tr>
                     }
                     </tbody>
@@ -32,7 +38,7 @@
             </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-primary" @onclick="@(() => Handout(ean))">Handout</button>
+            <button class="btn btn-primary" @onclick="@(() => Handout())">Handout</button>
         </div>
     </div>
 </div>
@@ -42,6 +48,7 @@
     private string eanTemp;
     private long eanTempLong;
     private string resultMsg = "";
+    private string color = "";
 
     private void BindEan()
     {
@@ -51,14 +58,33 @@
         StateHasChanged();
     }
 
-    private async Task Handout(List<long> handoutList)
+    private async Task Handout()
     {
         try
         {
-            string outgoing = "outgoing";
-            StockDto dto = new StockDto(handoutList, outgoing);
+            List<long> eansToHandout = new List<long>();
+            IEnumerable<Product> existing = await service.RetrieveAsync(null);
+            List<long> eansExisting = new List<long>();
+            List<long> eanCopy = new List<long>();
+            ean.ForEach((item) => {eanCopy.Add(item);});
+            foreach (var e in existing)
+            {
+                eansExisting.Add(e.Ean);
+            }
+            eansToHandout = ean.Intersect(eansExisting.Select(s => s)).ToList();
+            eanCopy.ForEach((item) => {if(eansExisting.Contains(item)){ ean.Remove(item);}});
+            StockDto dto = new StockDto(eansToHandout, "outgoing");
             await service.StockUpdateAsync(dto);
-            navMngr.NavigateTo("ViewProducts");
+            if (ean.Count == 0)
+            {
+                navMngr.NavigateTo("ViewProducts");
+            }
+            else
+            {
+                resultMsg = "The following products couldn't be handed out as they don't exist. Either create the product in 'Create Product' or remove it from the Handout List.";
+                color = "red";
+            }
+            
         }
         catch (Exception e)
         {
@@ -66,5 +92,12 @@
             resultMsg = e.Message;
         }
         
+    }
+
+    private Task Delete(long eanToDelete)
+    {
+        ean.Remove(eanToDelete);
+        StateHasChanged();
+        return Task.CompletedTask;
     }
 }

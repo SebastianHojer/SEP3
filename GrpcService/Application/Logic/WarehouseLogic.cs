@@ -29,6 +29,11 @@ public class WarehouseLogic : IWarehouseLogic
 
     private static void ValidateData(ProductCreationDto productToCreate)
     {
+        if (productToCreate.Ean < 0)
+        {
+            throw new InvalidProductException("Ean cannot be lower than 0!");
+        }
+        
         if (productToCreate.Stock < 0)
         {
             throw new InvalidProductException("Stock cannot be lower than 0!");
@@ -98,5 +103,16 @@ public class WarehouseLogic : IWarehouseLogic
     public async Task<bool> UpdateStockOutgoingAsync(List<long> eans)
     {
         return await warehouseDao.UpdateStockOutgoingAsync(eans);
+    }
+
+    public async Task<List<long>> RetrieveAllProductsEanAsync()
+    {
+        return await warehouseDao.RetrieveAllProductsEanAsync();
+    }
+
+    public async Task<bool> RegisterLoss(Dictionary<long, int> dictionary)
+    {
+        bool registered = await warehouseDao.RegisterLossAsync(dictionary);
+        return registered;
     }
 }

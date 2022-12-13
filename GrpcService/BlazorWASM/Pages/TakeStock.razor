@@ -1,0 +1,157 @@
+@page "/TakeStock"
+@using global::Shared.DTOs
+@using global::Shared.Models
+@using HttpClients.ClientInterfaces
+@inject IWarehouseService service
+@inject NavigationManager navMngr
+
+<PageTitle>Take Stock</PageTitle>
+
+@attribute [Authorize]
+<div class="col d-flex justify-content-center">
+    <div class="card">
+        <h5 class="card-header text-center">Take Stock</h5>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="EAN">EAN</label>
+                <input type="text" class="form-control" id="EAN" placeholder="Scan or type EAN here..." @bind="eanTemp" @oninput="@(e => { eanTemp = e.Value.ToString(); })">
+            </div>
+            <div class="text-center" style="margin-bottom: 1rem">
+                <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to stocktaking list</button>
+                @if (!string.IsNullOrEmpty(resultMsg))
+                {
+                    <label style="color: @color">@resultMsg</label>
+                }
+            </div>
+            <div class="scroller">
+                <table class="table table-striped">
+                    <tbody>
+                    @foreach (var item in ean)
+                    {
+                        <tr>
+                            <td>@item</td>
+                            <td><button class="" @onclick="@(() => Delete(item))"> &times; </button></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button class="btn btn-primary" @onclick="@(() => StockTaking())">Handout</button>
+        </div>
+    </div>
+</div>
+@code {
+
+    private List<long> ean = new();
+    private string eanTemp;
+    private long eanTempLong;
+    private string resultMsg = "";
+    private string color = "";
+
+    private void BindEan()
+    {
+        eanTempLong = long.Parse(eanTemp);
+        ean.Add(eanTempLong);
+        StateHasChanged();
+    }
+    
+
+    private Task Delete(long eanToDelete)
+    {
+        ean.Remove(eanToDelete);
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private async Task StockTaking()
+    {
+        try
+        {
+            List<long> scannedExistingEans = new List<long>();
+            List<long> existing = await service.RetrieveStock();
+            Dictionary<long, int> productLoss = new Dictionary<long, int>();
+
+            foreach (var e in ean)
+            {
+                if (existing.Contains(e))
+                {
+                    scannedExistingEans.Add(e);
+                }
+            }
+
+            List<long> eanCopy = new List<long>();
+            ean.ForEach((item) => eanCopy.Add(item));
+            
+            foreach (var e in eanCopy)
+            {
+                if (scannedExistingEans.Contains(e))
+                {
+                    ean.Remove(e);
+                }
+            }
+            
+            List<long> tooMany = new List<long>();
+            List<long> tooFew = new List<long>();
+            scannedExistingEans.ForEach((item) => tooMany.Add(item));
+            existing.ForEach((item) => tooFew.Add(item));
+            
+            foreach (var e in scannedExistingEans)
+            {
+                tooFew.Remove(e);
+            }
+
+            foreach (var e in existing)
+            {
+                tooMany.Remove(e);
+            }
+
+            foreach (var e in tooMany)
+            {
+                if (!productLoss.ContainsKey(e))
+                {
+                    productLoss.Add(e, 1);
+                }
+                else
+                {
+                    int count;
+                    productLoss.TryGetValue(e, out count);
+                    productLoss[e] = count + 1;
+                }
+            }
+
+            foreach (var e in tooFew)
+            {
+                if (!productLoss.ContainsKey(e))
+                {
+                    productLoss.Add(e, -1);
+                }
+                else
+                {
+                    int count;
+                    productLoss.TryGetValue(e, out count);
+                    productLoss[e] = count - 1;
+                }
+            }
+
+            await service.RegisterLoss(productLoss);
+            if (ean.Count == 0)
+            {
+                navMngr.NavigateTo("ViewProducts");
+            }
+            else
+            {
+                resultMsg = "The following products couldn't be received as they don't exist. Either create the product in 'Create Product' or remove it from the Handout List.";
+                color = "red";
+            }
+            
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+        }
+    }
+
+}

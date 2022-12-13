@@ -12,4 +12,6 @@ public interface IWarehouseLogic
     Task<Shared.Models.Product> RetrieveProductAsync(long ean);
     Task<bool> UpdateStockIngoingAsync(List<long> eans);
     Task<bool> UpdateStockOutgoingAsync(List<long> eans);
+    Task<List<long>> RetrieveAllProductsEanAsync();
+    Task<bool> RegisterLoss(Dictionary<long, int> dictionary);
 }

@@ -10,4 +10,6 @@ public interface IWarehouseService
     Task<IEnumerable<Product>> RetrieveAsync(long? ean);
     Task UpdateAsync(WarehouseUpdateDto dto);
     Task StockUpdateAsync(StockDto dto);
+    Task<List<long>> RetrieveStock();
+    Task RegisterLoss(Dictionary<long, int> dictionary);
 }

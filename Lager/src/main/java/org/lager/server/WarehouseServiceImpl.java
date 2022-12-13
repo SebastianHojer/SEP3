@@ -85,4 +85,21 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
       responseObserver.onNext(response);
       responseObserver.onCompleted();
     }
+    @Override
+    public void retrieveAllProductsEan(RetrieveAllProductsEanRequest request, StreamObserver<RetrieveAllProductsEanResponse> responseObserver){
+        ArrayList<Long> eans = db.retrieveAllProductsEan();
+        RetrieveAllProductsEanResponse response = RetrieveAllProductsEanResponse.newBuilder().addAllEan(eans).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void registerLoss(RegisterLossRequest request, StreamObserver<RegisterLossResponse> responseObserver){
+        System.out.println("map: " + request.getLossMap().size());
+        System.out.println("map entry set: " + request.getLossMap().entrySet().size());
+        boolean registered = db.registerLoss(request.getLossMap());
+        RegisterLossResponse response = RegisterLossResponse.newBuilder().setRegistered(registered).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 }

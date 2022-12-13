@@ -13,4 +13,6 @@ public interface IWarehouseDao
     Task<bool> UpdateAsync(Product product);
     Task<bool> UpdateStockOutgoingAsync(List<long> eans);
     Task<bool> UpdateStockIngoingAsync(List<long> eans);
+    Task<List<long>> RetrieveAllProductsEanAsync();
+    Task<bool> RegisterLossAsync(Dictionary<long, int> dictionary);
 }

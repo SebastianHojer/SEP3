@@ -2,6 +2,7 @@
 option csharp_namespace = "GrpcClient";
 package lager;
 
+
 service Warehouse{
   rpc createProduct(ProductCreationRequest) returns (ProductCreationResponse);
   rpc deleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
@@ -11,8 +12,9 @@ service Warehouse{
   rpc retrieveProducts(RetrieveProductsRequest) returns (RetrieveProductsResponse);
   rpc updateStock(UpdateStockRequest) returns (UpdateStockResponse);
   rpc updateStockMultiple(UpdateStockMultipleRequest) returns (UpdateStockResponse);
+  rpc retrieveAllProductsEan(RetrieveAllProductsEanRequest) returns (RetrieveAllProductsEanResponse);
+  rpc registerLoss(RegisterLossRequest) returns (RegisterLossResponse);
 }
-
 
 message Product{
   int64 ean = 1;
@@ -83,4 +85,18 @@ message UpdateStockResponse{
 
 message UpdateStockMultipleRequest{
   repeated UpdateStock update = 1;
+}
+
+message RetrieveAllProductsEanRequest{}
+
+message RetrieveAllProductsEanResponse{
+  repeated int64 ean = 1;
+}
+
+message RegisterLossRequest{
+  map<int64, int32> loss = 1;
+}
+
+message RegisterLossResponse{
+  bool registered = 1;
 }

@@ -123,6 +123,30 @@ public final class WarehouseGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.UpdateStockResponse.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.RetrieveAllProductsEanRequest,
+      lager.RetrieveAllProductsEanResponse> METHOD_RETRIEVE_ALL_PRODUCTS_EAN =
+      io.grpc.MethodDescriptor.<lager.RetrieveAllProductsEanRequest, lager.RetrieveAllProductsEanResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "retrieveAllProductsEan"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RetrieveAllProductsEanRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RetrieveAllProductsEanResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.RegisterLossRequest,
+      lager.RegisterLossResponse> METHOD_REGISTER_LOSS =
+      io.grpc.MethodDescriptor.<lager.RegisterLossRequest, lager.RegisterLossResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "registerLoss"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RegisterLossRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RegisterLossResponse.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -207,6 +231,20 @@ public final class WarehouseGrpc {
       asyncUnimplementedUnaryCall(METHOD_UPDATE_STOCK_MULTIPLE, responseObserver);
     }
 
+    /**
+     */
+    public void retrieveAllProductsEan(lager.RetrieveAllProductsEanRequest request,
+        io.grpc.stub.StreamObserver<lager.RetrieveAllProductsEanResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_RETRIEVE_ALL_PRODUCTS_EAN, responseObserver);
+    }
+
+    /**
+     */
+    public void registerLoss(lager.RegisterLossRequest request,
+        io.grpc.stub.StreamObserver<lager.RegisterLossResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_REGISTER_LOSS, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -265,6 +303,20 @@ public final class WarehouseGrpc {
                 lager.UpdateStockMultipleRequest,
                 lager.UpdateStockResponse>(
                   this, METHODID_UPDATE_STOCK_MULTIPLE)))
+          .addMethod(
+            METHOD_RETRIEVE_ALL_PRODUCTS_EAN,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.RetrieveAllProductsEanRequest,
+                lager.RetrieveAllProductsEanResponse>(
+                  this, METHODID_RETRIEVE_ALL_PRODUCTS_EAN)))
+          .addMethod(
+            METHOD_REGISTER_LOSS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.RegisterLossRequest,
+                lager.RegisterLossResponse>(
+                  this, METHODID_REGISTER_LOSS)))
           .build();
     }
   }
@@ -350,6 +402,22 @@ public final class WarehouseGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_UPDATE_STOCK_MULTIPLE, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void retrieveAllProductsEan(lager.RetrieveAllProductsEanRequest request,
+        io.grpc.stub.StreamObserver<lager.RetrieveAllProductsEanResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_ALL_PRODUCTS_EAN, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void registerLoss(lager.RegisterLossRequest request,
+        io.grpc.stub.StreamObserver<lager.RegisterLossResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_REGISTER_LOSS, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -424,6 +492,20 @@ public final class WarehouseGrpc {
     public lager.UpdateStockResponse updateStockMultiple(lager.UpdateStockMultipleRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_UPDATE_STOCK_MULTIPLE, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.RetrieveAllProductsEanResponse retrieveAllProductsEan(lager.RetrieveAllProductsEanRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_RETRIEVE_ALL_PRODUCTS_EAN, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.RegisterLossResponse registerLoss(lager.RegisterLossRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_REGISTER_LOSS, getCallOptions(), request);
     }
   }
 
@@ -508,6 +590,22 @@ public final class WarehouseGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_UPDATE_STOCK_MULTIPLE, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.RetrieveAllProductsEanResponse> retrieveAllProductsEan(
+        lager.RetrieveAllProductsEanRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_ALL_PRODUCTS_EAN, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.RegisterLossResponse> registerLoss(
+        lager.RegisterLossRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_REGISTER_LOSS, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_PRODUCT = 0;
@@ -518,6 +616,8 @@ public final class WarehouseGrpc {
   private static final int METHODID_RETRIEVE_PRODUCTS = 5;
   private static final int METHODID_UPDATE_STOCK = 6;
   private static final int METHODID_UPDATE_STOCK_MULTIPLE = 7;
+  private static final int METHODID_RETRIEVE_ALL_PRODUCTS_EAN = 8;
+  private static final int METHODID_REGISTER_LOSS = 9;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -568,6 +668,14 @@ public final class WarehouseGrpc {
           serviceImpl.updateStockMultiple((lager.UpdateStockMultipleRequest) request,
               (io.grpc.stub.StreamObserver<lager.UpdateStockResponse>) responseObserver);
           break;
+        case METHODID_RETRIEVE_ALL_PRODUCTS_EAN:
+          serviceImpl.retrieveAllProductsEan((lager.RetrieveAllProductsEanRequest) request,
+              (io.grpc.stub.StreamObserver<lager.RetrieveAllProductsEanResponse>) responseObserver);
+          break;
+        case METHODID_REGISTER_LOSS:
+          serviceImpl.registerLoss((lager.RegisterLossRequest) request,
+              (io.grpc.stub.StreamObserver<lager.RegisterLossResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -609,6 +717,8 @@ public final class WarehouseGrpc {
               .addMethod(METHOD_RETRIEVE_PRODUCTS)
               .addMethod(METHOD_UPDATE_STOCK)
               .addMethod(METHOD_UPDATE_STOCK_MULTIPLE)
+              .addMethod(METHOD_RETRIEVE_ALL_PRODUCTS_EAN)
+              .addMethod(METHOD_REGISTER_LOSS)
               .build();
         }
       }

@@ -64,16 +64,13 @@ public class WarehouseDao : IWarehouseDao
         foreach (var t in response.Product)
         {
             List<string> location = new List<string>();
-            Console.WriteLine("The location array is so long: " + t.Location.Count);
             foreach (var s in t.Location)
             {
                 location.Add(s);
-                Console.WriteLine("added location" + s);
             }
             var product = new Shared.Models.Product(t.Ean, t.ProductName, t.Stock, t.PhotoPath, location);
             products.Add(product);
         }
-        Console.WriteLine("Done retrieving products");
         return products;
     }
 
@@ -85,7 +82,7 @@ public class WarehouseDao : IWarehouseDao
         {
             if (!eansToRemove.Contains(ean))
             {
-                int count = eans.Where(x => x.Equals(ean)).Count();
+                int count = eans.Count(x => x.Equals(ean));
                 UpdateStock update = new UpdateStock() { Ean = ean, Amount = -count };
                 toUpdate.Add(update);
                 eansToRemove.Add(ean);
@@ -104,15 +101,31 @@ public class WarehouseDao : IWarehouseDao
         {
             if (!eansToRemove.Contains(ean))
             {
-                int count = eans.Where(x => x.Equals(ean)).Count();
+                int count = eans.Count(x => x.Equals(ean));
                 UpdateStock update = new UpdateStock() { Ean = ean, Amount = count };
                 toUpdate.Add(update);
                 eansToRemove.Add(ean);
             }
         }
-        
         var response = await warehouseClient.updateStockMultipleAsync(new UpdateStockMultipleRequest(){Update = { toUpdate }});
         return response.Updated;
     }
-    
+
+    public async Task<List<long>> RetrieveAllProductsEanAsync()
+    {
+        var response = await warehouseClient.retrieveAllProductsEanAsync(new RetrieveAllProductsEanRequest());
+        var list = new List<long>();
+        var repeatedField = response.Ean;
+        foreach (var e in repeatedField)
+        {
+            list.Add(e);
+        }
+        return list;
+    }
+
+    public async Task<bool> RegisterLossAsync(Dictionary<long, int> dictionary)
+    {
+        RegisterLossResponse response = await warehouseClient.registerLossAsync(new RegisterLossRequest(){Loss = { dictionary }});
+        return response.Registered;
+    }
 }

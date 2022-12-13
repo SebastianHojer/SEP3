@@ -99,6 +99,31 @@ public final class WarehouseOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_lager_UpdateStockMultipleRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveAllProductsEanRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveAllProductsEanRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveAllProductsEanResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveAllProductsEanResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RegisterLossRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RegisterLossRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RegisterLossRequest_LossEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RegisterLossRequest_LossEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RegisterLossResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RegisterLossResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -129,24 +154,34 @@ public final class WarehouseOuterClass {
       "teStockRequest\022\"\n\006update\030\001 \001(\0132\022.lager.U" +
       "pdateStock\"&\n\023UpdateStockResponse\022\017\n\007upd",
       "ated\030\001 \001(\010\"@\n\032UpdateStockMultipleRequest" +
-      "\022\"\n\006update\030\001 \003(\0132\022.lager.UpdateStock2\202\005\n" +
-      "\tWarehouse\022N\n\rcreateProduct\022\035.lager.Prod" +
-      "uctCreationRequest\032\036.lager.ProductCreati" +
-      "onResponse\022J\n\rdeleteProduct\022\033.lager.Dele" +
-      "teProductRequest\032\034.lager.DeleteProductRe" +
-      "sponse\022J\n\rupdateProduct\022\033.lager.UpdatePr" +
-      "oductRequest\032\034.lager.UpdateProductRespon" +
-      "se\022J\n\rproductExists\022\033.lager.ProductExist" +
-      "sRequest\032\034.lager.ProductExistsResponse\022P",
-      "\n\017retrieveProduct\022\035.lager.RetrieveProduc" +
-      "tRequest\032\036.lager.RetrieveProductResponse" +
-      "\022S\n\020retrieveProducts\022\036.lager.RetrievePro" +
-      "ductsRequest\032\037.lager.RetrieveProductsRes" +
-      "ponse\022D\n\013updateStock\022\031.lager.UpdateStock" +
-      "Request\032\032.lager.UpdateStockResponse\022T\n\023u" +
-      "pdateStockMultiple\022!.lager.UpdateStockMu" +
-      "ltipleRequest\032\032.lager.UpdateStockRespons" +
-      "eB\002P\001b\006proto3"
+      "\022\"\n\006update\030\001 \003(\0132\022.lager.UpdateStock\"\037\n\035" +
+      "RetrieveAllProductsEanRequest\"-\n\036Retriev" +
+      "eAllProductsEanResponse\022\013\n\003ean\030\001 \003(\003\"v\n\023" +
+      "RegisterLossRequest\0222\n\004loss\030\001 \003(\0132$.lage" +
+      "r.RegisterLossRequest.LossEntry\032+\n\tLossE" +
+      "ntry\022\013\n\003key\030\001 \001(\003\022\r\n\005value\030\002 \001(\005:\0028\001\"*\n\024" +
+      "RegisterLossResponse\022\022\n\nregistered\030\001 \001(\010" +
+      "2\262\006\n\tWarehouse\022N\n\rcreateProduct\022\035.lager." +
+      "ProductCreationRequest\032\036.lager.ProductCr",
+      "eationResponse\022J\n\rdeleteProduct\022\033.lager." +
+      "DeleteProductRequest\032\034.lager.DeleteProdu" +
+      "ctResponse\022J\n\rupdateProduct\022\033.lager.Upda" +
+      "teProductRequest\032\034.lager.UpdateProductRe" +
+      "sponse\022J\n\rproductExists\022\033.lager.ProductE" +
+      "xistsRequest\032\034.lager.ProductExistsRespon" +
+      "se\022P\n\017retrieveProduct\022\035.lager.RetrievePr" +
+      "oductRequest\032\036.lager.RetrieveProductResp" +
+      "onse\022S\n\020retrieveProducts\022\036.lager.Retriev" +
+      "eProductsRequest\032\037.lager.RetrieveProduct",
+      "sResponse\022D\n\013updateStock\022\031.lager.UpdateS" +
+      "tockRequest\032\032.lager.UpdateStockResponse\022" +
+      "T\n\023updateStockMultiple\022!.lager.UpdateSto" +
+      "ckMultipleRequest\032\032.lager.UpdateStockRes" +
+      "ponse\022e\n\026retrieveAllProductsEan\022$.lager." +
+      "RetrieveAllProductsEanRequest\032%.lager.Re" +
+      "trieveAllProductsEanResponse\022G\n\014register" +
+      "Loss\022\032.lager.RegisterLossRequest\032\033.lager" +
+      ".RegisterLossResponseB\002P\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -262,6 +297,36 @@ public final class WarehouseOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_UpdateStockMultipleRequest_descriptor,
         new java.lang.String[] { "Update", });
+    internal_static_lager_RetrieveAllProductsEanRequest_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_lager_RetrieveAllProductsEanRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveAllProductsEanRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_lager_RetrieveAllProductsEanResponse_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_lager_RetrieveAllProductsEanResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveAllProductsEanResponse_descriptor,
+        new java.lang.String[] { "Ean", });
+    internal_static_lager_RegisterLossRequest_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_lager_RegisterLossRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RegisterLossRequest_descriptor,
+        new java.lang.String[] { "Loss", });
+    internal_static_lager_RegisterLossRequest_LossEntry_descriptor =
+      internal_static_lager_RegisterLossRequest_descriptor.getNestedTypes().get(0);
+    internal_static_lager_RegisterLossRequest_LossEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RegisterLossRequest_LossEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_lager_RegisterLossResponse_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_lager_RegisterLossResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RegisterLossResponse_descriptor,
+        new java.lang.String[] { "Registered", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
