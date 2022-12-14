@@ -147,6 +147,54 @@ public final class WarehouseGrpc {
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               lager.RegisterLossResponse.getDefaultInstance()))
           .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.RetrieveLossRequest,
+      lager.RetrieveLossResponse> METHOD_RETRIEVE_LOSS =
+      io.grpc.MethodDescriptor.<lager.RetrieveLossRequest, lager.RetrieveLossResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "retrieveLoss"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RetrieveLossRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RetrieveLossResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.RetrieveAllLossRequest,
+      lager.RetrieveAllLossResponse> METHOD_RETRIEVE_ALL_LOSS =
+      io.grpc.MethodDescriptor.<lager.RetrieveAllLossRequest, lager.RetrieveAllLossResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "retrieveAllLoss"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RetrieveAllLossRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.RetrieveAllLossResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.UpdateLossRequest,
+      lager.UpdateLossResponse> METHOD_UPDATE_LOSS =
+      io.grpc.MethodDescriptor.<lager.UpdateLossRequest, lager.UpdateLossResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "updateLoss"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateLossRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.UpdateLossResponse.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<lager.DeleteLossRequest,
+      lager.DeleteLossResponse> METHOD_DELETE_LOSS =
+      io.grpc.MethodDescriptor.<lager.DeleteLossRequest, lager.DeleteLossResponse>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "lager.Warehouse", "deleteLoss"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.DeleteLossRequest.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              lager.DeleteLossResponse.getDefaultInstance()))
+          .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -245,6 +293,34 @@ public final class WarehouseGrpc {
       asyncUnimplementedUnaryCall(METHOD_REGISTER_LOSS, responseObserver);
     }
 
+    /**
+     */
+    public void retrieveLoss(lager.RetrieveLossRequest request,
+        io.grpc.stub.StreamObserver<lager.RetrieveLossResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_RETRIEVE_LOSS, responseObserver);
+    }
+
+    /**
+     */
+    public void retrieveAllLoss(lager.RetrieveAllLossRequest request,
+        io.grpc.stub.StreamObserver<lager.RetrieveAllLossResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_RETRIEVE_ALL_LOSS, responseObserver);
+    }
+
+    /**
+     */
+    public void updateLoss(lager.UpdateLossRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateLossResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_UPDATE_LOSS, responseObserver);
+    }
+
+    /**
+     */
+    public void deleteLoss(lager.DeleteLossRequest request,
+        io.grpc.stub.StreamObserver<lager.DeleteLossResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_DELETE_LOSS, responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -317,6 +393,34 @@ public final class WarehouseGrpc {
                 lager.RegisterLossRequest,
                 lager.RegisterLossResponse>(
                   this, METHODID_REGISTER_LOSS)))
+          .addMethod(
+            METHOD_RETRIEVE_LOSS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.RetrieveLossRequest,
+                lager.RetrieveLossResponse>(
+                  this, METHODID_RETRIEVE_LOSS)))
+          .addMethod(
+            METHOD_RETRIEVE_ALL_LOSS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.RetrieveAllLossRequest,
+                lager.RetrieveAllLossResponse>(
+                  this, METHODID_RETRIEVE_ALL_LOSS)))
+          .addMethod(
+            METHOD_UPDATE_LOSS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.UpdateLossRequest,
+                lager.UpdateLossResponse>(
+                  this, METHODID_UPDATE_LOSS)))
+          .addMethod(
+            METHOD_DELETE_LOSS,
+            asyncUnaryCall(
+              new MethodHandlers<
+                lager.DeleteLossRequest,
+                lager.DeleteLossResponse>(
+                  this, METHODID_DELETE_LOSS)))
           .build();
     }
   }
@@ -418,6 +522,38 @@ public final class WarehouseGrpc {
       asyncUnaryCall(
           getChannel().newCall(METHOD_REGISTER_LOSS, getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void retrieveLoss(lager.RetrieveLossRequest request,
+        io.grpc.stub.StreamObserver<lager.RetrieveLossResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_LOSS, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void retrieveAllLoss(lager.RetrieveAllLossRequest request,
+        io.grpc.stub.StreamObserver<lager.RetrieveAllLossResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_ALL_LOSS, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateLoss(lager.UpdateLossRequest request,
+        io.grpc.stub.StreamObserver<lager.UpdateLossResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_LOSS, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void deleteLoss(lager.DeleteLossRequest request,
+        io.grpc.stub.StreamObserver<lager.DeleteLossResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_DELETE_LOSS, getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -506,6 +642,34 @@ public final class WarehouseGrpc {
     public lager.RegisterLossResponse registerLoss(lager.RegisterLossRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_REGISTER_LOSS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.RetrieveLossResponse retrieveLoss(lager.RetrieveLossRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_RETRIEVE_LOSS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.RetrieveAllLossResponse retrieveAllLoss(lager.RetrieveAllLossRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_RETRIEVE_ALL_LOSS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.UpdateLossResponse updateLoss(lager.UpdateLossRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_UPDATE_LOSS, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public lager.DeleteLossResponse deleteLoss(lager.DeleteLossRequest request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_DELETE_LOSS, getCallOptions(), request);
     }
   }
 
@@ -606,6 +770,38 @@ public final class WarehouseGrpc {
       return futureUnaryCall(
           getChannel().newCall(METHOD_REGISTER_LOSS, getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.RetrieveLossResponse> retrieveLoss(
+        lager.RetrieveLossRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_LOSS, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.RetrieveAllLossResponse> retrieveAllLoss(
+        lager.RetrieveAllLossRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_RETRIEVE_ALL_LOSS, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.UpdateLossResponse> updateLoss(
+        lager.UpdateLossRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_UPDATE_LOSS, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<lager.DeleteLossResponse> deleteLoss(
+        lager.DeleteLossRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_DELETE_LOSS, getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CREATE_PRODUCT = 0;
@@ -618,6 +814,10 @@ public final class WarehouseGrpc {
   private static final int METHODID_UPDATE_STOCK_MULTIPLE = 7;
   private static final int METHODID_RETRIEVE_ALL_PRODUCTS_EAN = 8;
   private static final int METHODID_REGISTER_LOSS = 9;
+  private static final int METHODID_RETRIEVE_LOSS = 10;
+  private static final int METHODID_RETRIEVE_ALL_LOSS = 11;
+  private static final int METHODID_UPDATE_LOSS = 12;
+  private static final int METHODID_DELETE_LOSS = 13;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -676,6 +876,22 @@ public final class WarehouseGrpc {
           serviceImpl.registerLoss((lager.RegisterLossRequest) request,
               (io.grpc.stub.StreamObserver<lager.RegisterLossResponse>) responseObserver);
           break;
+        case METHODID_RETRIEVE_LOSS:
+          serviceImpl.retrieveLoss((lager.RetrieveLossRequest) request,
+              (io.grpc.stub.StreamObserver<lager.RetrieveLossResponse>) responseObserver);
+          break;
+        case METHODID_RETRIEVE_ALL_LOSS:
+          serviceImpl.retrieveAllLoss((lager.RetrieveAllLossRequest) request,
+              (io.grpc.stub.StreamObserver<lager.RetrieveAllLossResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_LOSS:
+          serviceImpl.updateLoss((lager.UpdateLossRequest) request,
+              (io.grpc.stub.StreamObserver<lager.UpdateLossResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_LOSS:
+          serviceImpl.deleteLoss((lager.DeleteLossRequest) request,
+              (io.grpc.stub.StreamObserver<lager.DeleteLossResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -719,6 +935,10 @@ public final class WarehouseGrpc {
               .addMethod(METHOD_UPDATE_STOCK_MULTIPLE)
               .addMethod(METHOD_RETRIEVE_ALL_PRODUCTS_EAN)
               .addMethod(METHOD_REGISTER_LOSS)
+              .addMethod(METHOD_RETRIEVE_LOSS)
+              .addMethod(METHOD_RETRIEVE_ALL_LOSS)
+              .addMethod(METHOD_UPDATE_LOSS)
+              .addMethod(METHOD_DELETE_LOSS)
               .build();
         }
       }

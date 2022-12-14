@@ -124,6 +124,51 @@ public final class WarehouseOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_lager_RegisterLossResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_Loss_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_Loss_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveLossRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveLossRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveLossResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveLossResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveAllLossRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveAllLossRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_RetrieveAllLossResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_RetrieveAllLossResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UpdateLossRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UpdateLossRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_UpdateLossResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_UpdateLossResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_DeleteLossRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_DeleteLossRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_lager_DeleteLossResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_lager_DeleteLossResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -161,27 +206,45 @@ public final class WarehouseOuterClass {
       "r.RegisterLossRequest.LossEntry\032+\n\tLossE" +
       "ntry\022\013\n\003key\030\001 \001(\003\022\r\n\005value\030\002 \001(\005:\0028\001\"*\n\024" +
       "RegisterLossResponse\022\022\n\nregistered\030\001 \001(\010" +
-      "2\262\006\n\tWarehouse\022N\n\rcreateProduct\022\035.lager." +
-      "ProductCreationRequest\032\036.lager.ProductCr",
-      "eationResponse\022J\n\rdeleteProduct\022\033.lager." +
-      "DeleteProductRequest\032\034.lager.DeleteProdu" +
-      "ctResponse\022J\n\rupdateProduct\022\033.lager.Upda" +
-      "teProductRequest\032\034.lager.UpdateProductRe" +
-      "sponse\022J\n\rproductExists\022\033.lager.ProductE" +
-      "xistsRequest\032\034.lager.ProductExistsRespon" +
-      "se\022P\n\017retrieveProduct\022\035.lager.RetrievePr" +
-      "oductRequest\032\036.lager.RetrieveProductResp" +
-      "onse\022S\n\020retrieveProducts\022\036.lager.Retriev" +
-      "eProductsRequest\032\037.lager.RetrieveProduct",
-      "sResponse\022D\n\013updateStock\022\031.lager.UpdateS" +
-      "tockRequest\032\032.lager.UpdateStockResponse\022" +
-      "T\n\023updateStockMultiple\022!.lager.UpdateSto" +
-      "ckMultipleRequest\032\032.lager.UpdateStockRes" +
-      "ponse\022e\n\026retrieveAllProductsEan\022$.lager." +
-      "RetrieveAllProductsEanRequest\032%.lager.Re" +
-      "trieveAllProductsEanResponse\022G\n\014register" +
-      "Loss\022\032.lager.RegisterLossRequest\032\033.lager" +
-      ".RegisterLossResponseB\002P\001b\006proto3"
+      "\"U\n\004Loss\022\016\n\006caseId\030\001 \001(\005\022\013\n\003ean\030\002 \001(\003\022\017\n" +
+      "\007comment\030\003 \001(\t\022\017\n\007handled\030\004 \001(\010\022\016\n\006amoun",
+      "t\030\005 \001(\005\"%\n\023RetrieveLossRequest\022\016\n\006caseId" +
+      "\030\001 \001(\005\"1\n\024RetrieveLossResponse\022\031\n\004loss\030\001" +
+      " \001(\0132\013.lager.Loss\"\030\n\026RetrieveAllLossRequ" +
+      "est\"4\n\027RetrieveAllLossResponse\022\031\n\004loss\030\001" +
+      " \003(\0132\013.lager.Loss\".\n\021UpdateLossRequest\022\031" +
+      "\n\004loss\030\001 \001(\0132\013.lager.Loss\"%\n\022UpdateLossR" +
+      "esponse\022\017\n\007updated\030\001 \001(\010\"#\n\021DeleteLossRe" +
+      "quest\022\016\n\006caseId\030\001 \001(\005\"\024\n\022DeleteLossRespo" +
+      "nse2\323\010\n\tWarehouse\022N\n\rcreateProduct\022\035.lag" +
+      "er.ProductCreationRequest\032\036.lager.Produc",
+      "tCreationResponse\022J\n\rdeleteProduct\022\033.lag" +
+      "er.DeleteProductRequest\032\034.lager.DeletePr" +
+      "oductResponse\022J\n\rupdateProduct\022\033.lager.U" +
+      "pdateProductRequest\032\034.lager.UpdateProduc" +
+      "tResponse\022J\n\rproductExists\022\033.lager.Produ" +
+      "ctExistsRequest\032\034.lager.ProductExistsRes" +
+      "ponse\022P\n\017retrieveProduct\022\035.lager.Retriev" +
+      "eProductRequest\032\036.lager.RetrieveProductR" +
+      "esponse\022S\n\020retrieveProducts\022\036.lager.Retr" +
+      "ieveProductsRequest\032\037.lager.RetrieveProd",
+      "uctsResponse\022D\n\013updateStock\022\031.lager.Upda" +
+      "teStockRequest\032\032.lager.UpdateStockRespon" +
+      "se\022T\n\023updateStockMultiple\022!.lager.Update" +
+      "StockMultipleRequest\032\032.lager.UpdateStock" +
+      "Response\022e\n\026retrieveAllProductsEan\022$.lag" +
+      "er.RetrieveAllProductsEanRequest\032%.lager" +
+      ".RetrieveAllProductsEanResponse\022G\n\014regis" +
+      "terLoss\022\032.lager.RegisterLossRequest\032\033.la" +
+      "ger.RegisterLossResponse\022G\n\014retrieveLoss" +
+      "\022\032.lager.RetrieveLossRequest\032\033.lager.Ret",
+      "rieveLossResponse\022P\n\017retrieveAllLoss\022\035.l" +
+      "ager.RetrieveAllLossRequest\032\036.lager.Retr" +
+      "ieveAllLossResponse\022A\n\nupdateLoss\022\030.lage" +
+      "r.UpdateLossRequest\032\031.lager.UpdateLossRe" +
+      "sponse\022A\n\ndeleteLoss\022\030.lager.DeleteLossR" +
+      "equest\032\031.lager.DeleteLossResponseB\002P\001b\006p" +
+      "roto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -327,6 +390,60 @@ public final class WarehouseOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_lager_RegisterLossResponse_descriptor,
         new java.lang.String[] { "Registered", });
+    internal_static_lager_Loss_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static_lager_Loss_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_Loss_descriptor,
+        new java.lang.String[] { "CaseId", "Ean", "Comment", "Handled", "Amount", });
+    internal_static_lager_RetrieveLossRequest_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_lager_RetrieveLossRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveLossRequest_descriptor,
+        new java.lang.String[] { "CaseId", });
+    internal_static_lager_RetrieveLossResponse_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_lager_RetrieveLossResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveLossResponse_descriptor,
+        new java.lang.String[] { "Loss", });
+    internal_static_lager_RetrieveAllLossRequest_descriptor =
+      getDescriptor().getMessageTypes().get(24);
+    internal_static_lager_RetrieveAllLossRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveAllLossRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_lager_RetrieveAllLossResponse_descriptor =
+      getDescriptor().getMessageTypes().get(25);
+    internal_static_lager_RetrieveAllLossResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_RetrieveAllLossResponse_descriptor,
+        new java.lang.String[] { "Loss", });
+    internal_static_lager_UpdateLossRequest_descriptor =
+      getDescriptor().getMessageTypes().get(26);
+    internal_static_lager_UpdateLossRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UpdateLossRequest_descriptor,
+        new java.lang.String[] { "Loss", });
+    internal_static_lager_UpdateLossResponse_descriptor =
+      getDescriptor().getMessageTypes().get(27);
+    internal_static_lager_UpdateLossResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_UpdateLossResponse_descriptor,
+        new java.lang.String[] { "Updated", });
+    internal_static_lager_DeleteLossRequest_descriptor =
+      getDescriptor().getMessageTypes().get(28);
+    internal_static_lager_DeleteLossRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_DeleteLossRequest_descriptor,
+        new java.lang.String[] { "CaseId", });
+    internal_static_lager_DeleteLossResponse_descriptor =
+      getDescriptor().getMessageTypes().get(29);
+    internal_static_lager_DeleteLossResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_lager_DeleteLossResponse_descriptor,
+        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

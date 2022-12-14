@@ -14,6 +14,10 @@ service Warehouse{
   rpc updateStockMultiple(UpdateStockMultipleRequest) returns (UpdateStockResponse);
   rpc retrieveAllProductsEan(RetrieveAllProductsEanRequest) returns (RetrieveAllProductsEanResponse);
   rpc registerLoss(RegisterLossRequest) returns (RegisterLossResponse);
+  rpc retrieveLoss(RetrieveLossRequest) returns (RetrieveLossResponse);
+  rpc retrieveAllLoss(RetrieveAllLossRequest) returns (RetrieveAllLossResponse);
+  rpc updateLoss(UpdateLossRequest) returns (UpdateLossResponse);
+  rpc deleteLoss(DeleteLossRequest) returns (DeleteLossResponse);
 }
 
 message Product{
@@ -100,3 +104,39 @@ message RegisterLossRequest{
 message RegisterLossResponse{
   bool registered = 1;
 }
+
+message Loss{
+  int32 caseId = 1;
+  int64 ean = 2;
+  string comment = 3;
+  bool handled = 4;
+  int32 amount = 5;
+}
+
+message RetrieveLossRequest{
+  int32 caseId = 1;
+}
+
+message RetrieveLossResponse{
+  Loss loss = 1;
+}
+
+message RetrieveAllLossRequest{}
+
+message RetrieveAllLossResponse{
+  repeated Loss loss = 1;
+}
+
+message UpdateLossRequest{
+  Loss loss = 1;
+}
+
+message UpdateLossResponse{
+  bool updated = 1;
+}
+
+message DeleteLossRequest{
+  int32 caseId = 1;
+}
+
+message DeleteLossResponse{}

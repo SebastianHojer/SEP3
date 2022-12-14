@@ -115,4 +115,29 @@ public class WarehouseLogic : IWarehouseLogic
         bool registered = await warehouseDao.RegisterLossAsync(dictionary);
         return registered;
     }
+
+    public async Task<Loss> RetrieveLossAsync(int caseId)
+    {
+        return await warehouseDao.RetrieveLossAsync(caseId);
+    }
+
+    public async Task<List<Loss>> RetrieveAllLossAsync()
+    {
+        return await warehouseDao.RetrieveAllLossAsync();
+    }
+
+    public async Task<bool> UpdateLossAsync(Loss loss)
+    {
+        return await warehouseDao.UpdateLossAsync(loss);
+    }
+
+    public async Task DeleteLossAsync(int caseId)
+    {
+        if (warehouseDao.RetrieveLossAsync(caseId).Result != null)
+        {
+            throw new Exception($"Loss with caseId {caseId} was not found!");
+        }
+
+        await warehouseDao.DeleteLossAsync(caseId);
+    }
 }

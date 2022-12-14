@@ -1,6 +1,7 @@
 package database;
 
 import dto.AuthenticationDto;
+import lager.Loss;
 import lager.PasswordAuthenticationResponse;
 import lager.Product;
 import org.checkerframework.checker.units.qual.A;
@@ -159,5 +160,43 @@ public class Select
       e.printStackTrace();
     }
     return toReturn;
+  }
+
+  public Loss retrieveLoss(int caseId) {
+    String SQL = "select * from sep3.productloss where caseid = '" + caseId + "'";
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      ResultSet rs = preparedStatement.executeQuery();
+      rs.next();
+      int id = rs.getInt("caseid");
+      long ean = rs.getLong("ean");
+      String comment = rs.getString("comment");
+      boolean handled = rs.getBoolean("handled");
+      int amount = rs.getInt("amount");
+      return Loss.newBuilder().setEan(ean).setCaseId(id).setComment(comment).setHandled(handled).setAmount(amount).build();
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+
+  public ArrayList<Loss> retrieveAllLoss() {
+    String SQL = "select * from sep3.productloss";
+    ArrayList<Loss> losses = new ArrayList<>();
+    try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
+      ResultSet rs = preparedStatement.executeQuery();
+      while(rs.next()){
+        int id = rs.getInt("caseid");
+        long ean = rs.getLong("ean");
+        String comment = rs.getString("comment");
+        boolean handled = rs.getBoolean("handled");
+        int amount = rs.getInt("amount");
+        Loss loss = Loss.newBuilder().setEan(ean).setCaseId(id).setComment(comment).setHandled(handled).setAmount(amount).build();
+        losses.add(loss);
+      }
+    } catch(SQLException e){
+      e.printStackTrace();
+    }
+    return losses;
   }
 }

@@ -4,7 +4,6 @@ namespace WebAPI.Controllers;
 using Application.LogicInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
-using Product = Shared.Models.Product;
 
 
 [ApiController]
@@ -18,12 +17,44 @@ public class LossController : ControllerBase
         this.warehouseLogic = warehouseLogic;
     }
 
-    /*[HttpGet]
-    public async Task<ActionResult<List<Loss>>> RetrieveLoss()
+    [HttpGet]
+    public async Task<ActionResult<List<Loss>>> RetrieveLoss(int caseId)
     {
-        var loss = await warehouseLogic.RetrieveLossAsync();
-        return Ok(eans);
-    } */
+        try
+        {
+            if (caseId == 0)
+            {
+                var loss = await warehouseLogic.RetrieveAllLossAsync();
+                return Ok(loss);
+            }
+            else
+            {
+                var loss = await warehouseLogic.RetrieveLossAsync(caseId);
+                List<Loss> losses = new List<Loss> { loss };
+                return Ok(losses);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    [HttpDelete]
+    public async Task<ActionResult<Product>> DeleteAsync(int caseId)
+    {
+        try
+        {
+            await warehouseLogic.DeleteLossAsync(caseId);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 
     [HttpPost]
     public async Task<ActionResult> RegisterLoss(Dictionary<long, int> dictionary)
@@ -39,36 +70,11 @@ public class LossController : ControllerBase
         }
     }
 
-    /*
+    
     [HttpPatch]
-    public async Task<ActionResult> UpdateAsync(StockDto dto)
+    public async Task<ActionResult> UpdateAsync(Loss loss)
     {
-        Console.WriteLine(dto.status);
-        if (dto.status.Equals("outgoing"))
-            try
-            {
-                await warehouseLogic.UpdateStockOutgoingAsync(dto.eans);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return StatusCode(500, e.Message);
-            }
-        else if (dto.status.Equals("ingoing"))
-            try
-            {
-                await warehouseLogic.UpdateStockIngoingAsync(dto.eans);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return StatusCode(500, e.Message);
-            }
-        else
-        {
-            return StatusCode(500, "string");
-        } 
-    } */
+        await warehouseLogic.UpdateLossAsync(loss);
+        return Ok();
+    } 
 }

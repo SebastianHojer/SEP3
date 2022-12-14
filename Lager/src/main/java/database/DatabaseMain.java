@@ -1,5 +1,6 @@
 package database;
 
+import lager.Loss;
 import lager.PasswordAuthenticationResponse;
 import lager.Product;
 
@@ -107,5 +108,21 @@ public class DatabaseMain
     }
     System.out.println("i have returned");
     return registered;
+  }
+
+  public Loss retrieveLoss(int caseId) {
+    return select.retrieveLoss(caseId);
+  }
+
+  public ArrayList<Loss> retrieveAllLoss() {
+    return select.retrieveAllLoss();
+  }
+
+  public boolean updateLoss(Loss loss) {
+    return update.updateLoss(loss);
+  }
+
+  public void deleteLoss(int caseId) {
+    delete.deleteLoss(caseId);
   }
 }

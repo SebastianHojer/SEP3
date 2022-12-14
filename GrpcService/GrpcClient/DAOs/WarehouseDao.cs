@@ -128,4 +128,24 @@ public class WarehouseDao : IWarehouseDao
         RegisterLossResponse response = await warehouseClient.registerLossAsync(new RegisterLossRequest(){Loss = { dictionary }});
         return response.Registered;
     }
+
+    public Task<Loss> RetrieveLossAsync(int caseId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Loss>> RetrieveAllLossAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> UpdateLossAsync(Loss loss)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteLossAsync(int caseId)
+    {
+        throw new NotImplementedException();
+    }
 }

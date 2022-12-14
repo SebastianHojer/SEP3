@@ -95,10 +95,40 @@ public class WarehouseServiceImpl extends WarehouseGrpc.WarehouseImplBase {
 
     @Override
     public void registerLoss(RegisterLossRequest request, StreamObserver<RegisterLossResponse> responseObserver){
-        System.out.println("map: " + request.getLossMap().size());
-        System.out.println("map entry set: " + request.getLossMap().entrySet().size());
         boolean registered = db.registerLoss(request.getLossMap());
         RegisterLossResponse response = RegisterLossResponse.newBuilder().setRegistered(registered).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void retrieveLoss(RetrieveLossRequest request, StreamObserver<RetrieveLossResponse> responseObserver){
+        Loss loss = db.retrieveLoss(request.getCaseId());
+        RetrieveLossResponse response = RetrieveLossResponse.newBuilder().setLoss(loss).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void retrieveAllLoss(RetrieveAllLossRequest request, StreamObserver<RetrieveAllLossResponse> responseObserver){
+        ArrayList<Loss> losses = db.retrieveAllLoss();
+        RetrieveAllLossResponse response = RetrieveAllLossResponse.newBuilder().addAllLoss(losses).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void updateLoss(UpdateLossRequest request, StreamObserver<UpdateLossResponse> responseObserver){
+        boolean updated = db.updateLoss(request.getLoss());
+        UpdateLossResponse response = UpdateLossResponse.newBuilder().setUpdated(updated).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void deleteLoss(DeleteLossRequest request, StreamObserver<DeleteLossResponse> responseObserver){
+        db.deleteLoss(request.getCaseId());
+        DeleteLossResponse response = DeleteLossResponse.newBuilder().build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

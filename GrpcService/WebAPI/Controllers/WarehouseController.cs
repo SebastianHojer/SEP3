@@ -1,7 +1,6 @@
 ﻿using Application.LogicInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs;
-using Shared.Exceptions;
 using Product = Shared.Models.Product;
 
 namespace WebAPI.Controllers;
@@ -59,8 +58,7 @@ public class WarehouseController : ControllerBase
             else
             {
                 Product product = await warehouseLogic.RetrieveProductAsync(ean);
-                List<Product> products = new List<Product>();
-                products.Add(product);
+                List<Product> products = new List<Product> { product };
                 return Ok(products);
             }
            

@@ -1,5 +1,7 @@
 package database;
 
+import lager.Loss;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,7 +40,6 @@ public class Update
 
   public boolean updateStock(long ean, int amount)
   {
-    //String SQLSubtract = "UPDATE Sep3.warehouse SET stock = stock  " + amount + " where ean = '" + ean + "'";
     String SQLAdd = "UPDATE Sep3.warehouse SET stock = stock + " + amount + " where ean = '" + ean + "'";
       try(Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(SQLAdd))
       {
@@ -77,5 +78,23 @@ public class Update
       e.printStackTrace();
     }
     return false;
+  }
+
+  public boolean updateLoss(Loss loss) {
+    String SQL = "UPDATE sep3.productloss SET comment = ?, handled = ?, amount = ? WHERE caseid = ?";
+    try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(SQL))
+    {
+      pstmt.setString(1, loss.getComment());
+      pstmt.setBoolean(2, loss.getHandled());
+      pstmt.setInt(3, loss.getAmount());
+      pstmt.setInt(4, loss.getCaseId());
+      pstmt.executeUpdate();
+    }
+    catch (SQLException ex)
+    {
+      ex.printStackTrace();
+      return false;
+    }
+    return true;
   }
 }
