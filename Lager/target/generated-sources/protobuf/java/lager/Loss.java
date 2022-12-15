@@ -17,7 +17,6 @@ public  final class Loss extends
   private Loss() {
     caseId_ = 0;
     ean_ = 0L;
-    comment_ = "";
     handled_ = false;
     amount_ = 0;
   }
@@ -57,18 +56,12 @@ public  final class Loss extends
             ean_ = input.readInt64();
             break;
           }
-          case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            comment_ = s;
-            break;
-          }
-          case 32: {
+          case 24: {
 
             handled_ = input.readBool();
             break;
           }
-          case 40: {
+          case 32: {
 
             amount_ = input.readInt32();
             break;
@@ -114,53 +107,19 @@ public  final class Loss extends
     return ean_;
   }
 
-  public static final int COMMENT_FIELD_NUMBER = 3;
-  private volatile java.lang.Object comment_;
-  /**
-   * <code>string comment = 3;</code>
-   */
-  public java.lang.String getComment() {
-    java.lang.Object ref = comment_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      comment_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string comment = 3;</code>
-   */
-  public com.google.protobuf.ByteString
-      getCommentBytes() {
-    java.lang.Object ref = comment_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      comment_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int HANDLED_FIELD_NUMBER = 4;
+  public static final int HANDLED_FIELD_NUMBER = 3;
   private boolean handled_;
   /**
-   * <code>bool handled = 4;</code>
+   * <code>bool handled = 3;</code>
    */
   public boolean getHandled() {
     return handled_;
   }
 
-  public static final int AMOUNT_FIELD_NUMBER = 5;
+  public static final int AMOUNT_FIELD_NUMBER = 4;
   private int amount_;
   /**
-   * <code>int32 amount = 5;</code>
+   * <code>int32 amount = 4;</code>
    */
   public int getAmount() {
     return amount_;
@@ -184,14 +143,11 @@ public  final class Loss extends
     if (ean_ != 0L) {
       output.writeInt64(2, ean_);
     }
-    if (!getCommentBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, comment_);
-    }
     if (handled_ != false) {
-      output.writeBool(4, handled_);
+      output.writeBool(3, handled_);
     }
     if (amount_ != 0) {
-      output.writeInt32(5, amount_);
+      output.writeInt32(4, amount_);
     }
   }
 
@@ -208,16 +164,13 @@ public  final class Loss extends
       size += com.google.protobuf.CodedOutputStream
         .computeInt64Size(2, ean_);
     }
-    if (!getCommentBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, comment_);
-    }
     if (handled_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(4, handled_);
+        .computeBoolSize(3, handled_);
     }
     if (amount_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, amount_);
+        .computeInt32Size(4, amount_);
     }
     memoizedSize = size;
     return size;
@@ -239,8 +192,6 @@ public  final class Loss extends
         == other.getCaseId());
     result = result && (getEan()
         == other.getEan());
-    result = result && getComment()
-        .equals(other.getComment());
     result = result && (getHandled()
         == other.getHandled());
     result = result && (getAmount()
@@ -260,8 +211,6 @@ public  final class Loss extends
     hash = (37 * hash) + EAN_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getEan());
-    hash = (37 * hash) + COMMENT_FIELD_NUMBER;
-    hash = (53 * hash) + getComment().hashCode();
     hash = (37 * hash) + HANDLED_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getHandled());
@@ -400,8 +349,6 @@ public  final class Loss extends
 
       ean_ = 0L;
 
-      comment_ = "";
-
       handled_ = false;
 
       amount_ = 0;
@@ -430,7 +377,6 @@ public  final class Loss extends
       lager.Loss result = new lager.Loss(this);
       result.caseId_ = caseId_;
       result.ean_ = ean_;
-      result.comment_ = comment_;
       result.handled_ = handled_;
       result.amount_ = amount_;
       onBuilt();
@@ -479,10 +425,6 @@ public  final class Loss extends
       }
       if (other.getEan() != 0L) {
         setEan(other.getEan());
-      }
-      if (!other.getComment().isEmpty()) {
-        comment_ = other.comment_;
-        onChanged();
       }
       if (other.getHandled() != false) {
         setHandled(other.getHandled());
@@ -568,84 +510,15 @@ public  final class Loss extends
       return this;
     }
 
-    private java.lang.Object comment_ = "";
-    /**
-     * <code>string comment = 3;</code>
-     */
-    public java.lang.String getComment() {
-      java.lang.Object ref = comment_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        comment_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string comment = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getCommentBytes() {
-      java.lang.Object ref = comment_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        comment_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string comment = 3;</code>
-     */
-    public Builder setComment(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      comment_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string comment = 3;</code>
-     */
-    public Builder clearComment() {
-      
-      comment_ = getDefaultInstance().getComment();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string comment = 3;</code>
-     */
-    public Builder setCommentBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      comment_ = value;
-      onChanged();
-      return this;
-    }
-
     private boolean handled_ ;
     /**
-     * <code>bool handled = 4;</code>
+     * <code>bool handled = 3;</code>
      */
     public boolean getHandled() {
       return handled_;
     }
     /**
-     * <code>bool handled = 4;</code>
+     * <code>bool handled = 3;</code>
      */
     public Builder setHandled(boolean value) {
       
@@ -654,7 +527,7 @@ public  final class Loss extends
       return this;
     }
     /**
-     * <code>bool handled = 4;</code>
+     * <code>bool handled = 3;</code>
      */
     public Builder clearHandled() {
       
@@ -665,13 +538,13 @@ public  final class Loss extends
 
     private int amount_ ;
     /**
-     * <code>int32 amount = 5;</code>
+     * <code>int32 amount = 4;</code>
      */
     public int getAmount() {
       return amount_;
     }
     /**
-     * <code>int32 amount = 5;</code>
+     * <code>int32 amount = 4;</code>
      */
     public Builder setAmount(int value) {
       
@@ -680,7 +553,7 @@ public  final class Loss extends
       return this;
     }
     /**
-     * <code>int32 amount = 5;</code>
+     * <code>int32 amount = 4;</code>
      */
     public Builder clearAmount() {
       

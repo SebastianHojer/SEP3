@@ -108,6 +108,7 @@ public class Select
   public ArrayList<Product> retrieveProducts() {
     String SQL = "select * from sep3.warehouse";
     ArrayList<Product> products = new ArrayList<>();
+
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
       ResultSet rs = preparedStatement.executeQuery();
       while(rs.next()){

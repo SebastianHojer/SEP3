@@ -128,7 +128,6 @@ public class WarehouseLogic : IWarehouseLogic
 
     public async Task<bool> UpdateLossAsync(Loss loss)
     {
-        Console.WriteLine("in logic");
         return await warehouseDao.UpdateLossAsync(loss);
     }
 

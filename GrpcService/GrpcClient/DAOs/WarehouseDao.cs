@@ -145,7 +145,6 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<bool> UpdateLossAsync(Shared.Models.Loss loss)
     {
-        Console.Write("in dao now");
         Loss grpcLoss = new Loss()
             { Amount = loss.Amount, CaseId = loss.CaseId, Ean = loss.Ean, Handled = loss.Handled };
         

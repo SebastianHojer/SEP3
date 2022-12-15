@@ -18,22 +18,12 @@ public interface LossOrBuilder extends
   long getEan();
 
   /**
-   * <code>string comment = 3;</code>
-   */
-  java.lang.String getComment();
-  /**
-   * <code>string comment = 3;</code>
-   */
-  com.google.protobuf.ByteString
-      getCommentBytes();
-
-  /**
-   * <code>bool handled = 4;</code>
+   * <code>bool handled = 3;</code>
    */
   boolean getHandled();
 
   /**
-   * <code>int32 amount = 5;</code>
+   * <code>int32 amount = 4;</code>
    */
   int getAmount();
 }

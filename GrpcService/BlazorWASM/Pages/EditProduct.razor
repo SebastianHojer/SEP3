@@ -8,6 +8,7 @@
 
 <PageTitle>Edit Product</PageTitle>
 
+@attribute [Authorize("MustBeAdmin")]
 @if (product == null)
 {
   <div class="col d-flex justify-content-center">

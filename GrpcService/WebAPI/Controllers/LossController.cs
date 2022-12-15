@@ -18,13 +18,13 @@ public class LossController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Loss>>> RetrieveLoss(int caseId)
+    public async Task<ActionResult<List<Loss>>> RetrieveLoss([FromQuery]int caseId)
     {
         try
         {
-            if (caseId == 0)
+            if (caseId == 0 | caseId==null)
             {
-                var loss = await warehouseLogic.RetrieveAllLossAsync();
+                List<Loss> loss = await warehouseLogic.RetrieveAllLossAsync();
                 return Ok(loss);
             }
             else

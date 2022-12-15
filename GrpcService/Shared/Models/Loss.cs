@@ -17,5 +17,6 @@ public class Loss
         Ean = ean;
         Amount = amount;
         Handled = handled;
+        Console.WriteLine("Caseid: " + caseId  + " amount for ean: " + ean + " is: " + amount + " handled is: " + handled);
     }
 }
