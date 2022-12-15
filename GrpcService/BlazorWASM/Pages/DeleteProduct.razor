@@ -7,6 +7,12 @@
 
 @attribute [Authorize("MustBeAdmin")]
 
+<div class="col d-flex justify-content-center">
+<input type="text" @oninput="Search" placeholder = "Search by EAN..." class="form-control"/>
+</div>
+
+<hr/>
+
 @if (products == null)
 {
   <div class="col d-flex justify-content-center">
@@ -46,11 +52,13 @@ else
 }
 @code {
   private IEnumerable<Product>? products;
+  private IEnumerable<Product>? products_temp;
 
   private int amount;
   private long ean;
   private string location;
   private string resultMsg = "";
+  private int length = 0;
 
   private string color = "";
 
@@ -110,6 +118,26 @@ else
     {
       Console.WriteLine(e);
       resultMsg = e.Message;
+    }
+  }
+  private void Search(ChangeEventArgs args)
+  {
+    var searchString = (string)args.Value;
+    if (searchString.Length < length)
+    {
+      products = products_temp;
+      if (searchString.Length > 0)
+      {
+        length = searchString.Length;
+        products = products.Where(x => x.Ean.ToString().Contains(searchString)).OrderByDescending(x => x.Ean).ToList();
+        StateHasChanged();
+      }
+    }
+    else
+    {
+      length = searchString.Length;
+      products = products.Where(x => x.Ean.ToString().Contains(searchString)).OrderByDescending(x => x.Ean).ToList();
+      StateHasChanged();
     }
   }
 }

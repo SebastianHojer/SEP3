@@ -13,12 +13,12 @@ main {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-color: #1f1f65;
 }
 
 .top-row {
     background-color: #3d3dbd;
-    border-bottom: 1px solid #3a3a3a;
+    border-bottom: 2px solid #343434;
     height: 3.5rem;
     display: flex;
     align-items: center;

@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" id="EAN" placeholder="Scan or type EAN here..." @bind="eanTemp" @oninput="@(e => { eanTemp = e.Value.ToString(); })">
             </div>
             <div class="text-center" style="margin-bottom: 1rem">
-                <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to handout list</button>
+                <button type="submit" class="btn btn-primary mb-2 text-center" @onclick="@(() => BindEan())">Add to receival list</button>
                 @if (!string.IsNullOrEmpty(resultMsg))
                 {
                     <label style="color: @color">@resultMsg</label>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-primary" @onclick="@(() => Receive())">Handout</button>
+            <button class="btn btn-primary" @onclick="@(() => Receive())">Receive</button>
         </div>
     </div>
 </div>

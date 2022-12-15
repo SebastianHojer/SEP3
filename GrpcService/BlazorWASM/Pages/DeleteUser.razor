@@ -5,8 +5,7 @@
 <PageTitle>Delete User</PageTitle>
 
 @attribute [Authorize("MustBeAdmin")]
-<h3>Delete User</h3>
-<button class="btn btn-primary text-center" @onclick="@(() => RetrieveUsers())"> Refresh </button>
+
 @if (!string.IsNullOrEmpty(resultMsg))
 {
     <div>
@@ -71,6 +70,13 @@ else
         }), null, 1000, 1000);
     }
 }
+
+<hr/>
+
+<div class="col d-flex justify-content-center">
+<button class="btn btn-primary text-center" @onclick="@(() => RetrieveUsers())"> Refresh </button>
+</div>
+
 @code {
     private List<string> usernames;
     private string password = "";

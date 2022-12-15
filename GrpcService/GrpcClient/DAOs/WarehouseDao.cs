@@ -122,6 +122,7 @@ public class WarehouseDao : IWarehouseDao
         }
         return list;
     }
+    
 
     public async Task<bool> RegisterLossAsync(Dictionary<long, int> dictionary)
     {
@@ -129,12 +130,17 @@ public class WarehouseDao : IWarehouseDao
         return response.Registered;
     }
 
-    public Task<Loss> RetrieveLossAsync(int caseId)
+    public Task<Shared.Models.Loss> RetrieveLossAsync(int caseId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Loss>> RetrieveAllLossAsync()
+    public Task<List<Shared.Models.Loss>> RetrieveAllLossAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> UpdateLossAsync(Shared.Models.Loss loss)
     {
         throw new NotImplementedException();
     }
