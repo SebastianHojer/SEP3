@@ -4,27 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class Insert
 {
-  private final String url = ConnInfo.url;
-  private final String user = ConnInfo.user;
-  private final String password = ConnInfo.password;
-
 
   public Connection connect() throws SQLException{
+    String url = ConnInfo.url;
+    String user = ConnInfo.user;
+    String password = ConnInfo.password;
     return DriverManager.getConnection(url, user, password);
   }
 
-  public boolean addUser(String username, String password, Boolean isAdmin)
+  public boolean createUser(String username, String password, Boolean isAdmin)
   {
     String SQL = "insert into sep3.\"user\" (Username, Password, Admin) values  (?, ?, ?)";
     int affectedRows;
     try (Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
       preparedStatement.setString(1, username);
       preparedStatement.setString(2, password);
-      if(isAdmin) {preparedStatement.setBoolean(3, true);} else {preparedStatement.setBoolean(3, false);}
+      preparedStatement.setBoolean(3, isAdmin);
       affectedRows = preparedStatement.executeUpdate();
       System.out.println("Affected rows: " + affectedRows);
       if(affectedRows>0){ return true;}
@@ -78,7 +76,6 @@ public class Insert
     } catch(SQLException e){
       e.printStackTrace();
     }
-    System.out.println("shit dont work");
     return false;
   }
 }

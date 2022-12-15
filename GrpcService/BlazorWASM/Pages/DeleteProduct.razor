@@ -60,7 +60,7 @@ else
 
     try
     {
-      await WarehouseService.DeleteAsync(product);
+      await WarehouseService.DeleteProductAsync(product);
     }
     catch (Exception e)
     {
@@ -74,7 +74,7 @@ else
   {
     try
     {
-      products = await WarehouseService.RetrieveAsync(null);
+      products = await WarehouseService.RetrieveProductAsync(null);
       Console.WriteLine("Retrieved Products");
     }
     catch (Exception e)
@@ -89,7 +89,7 @@ else
     resultMsg = "";
     try
     {
-      products = await WarehouseService.RetrieveAsync(null);
+      products = await WarehouseService.RetrieveProductAsync(null);
     }
     catch (Exception e)
     {
@@ -104,7 +104,7 @@ else
     try
     {
       await Delete(product);
-      products = await WarehouseService.RetrieveAsync(null);
+      products = await WarehouseService.RetrieveProductAsync(null);
     }
     catch (Exception e)
     {

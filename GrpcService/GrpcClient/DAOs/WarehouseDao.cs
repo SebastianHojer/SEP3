@@ -47,12 +47,7 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<bool> UpdateAsync(Shared.Models.Product product)
     {
-        Product productToUpdate = new Product();
-        productToUpdate.Ean = product.Ean;
-        productToUpdate.Stock = product.Stock;
-        productToUpdate.PhotoPath = product.PhotoPath;
-        productToUpdate.ProductName = product.ProductName;
-        productToUpdate.Location.AddRange(product.Location);
+        var productToUpdate = new Product(){Ean = product.Ean, Stock = product.Stock, PhotoPath = product.PhotoPath, Location = { product.Location }, ProductName = product.ProductName};
         var response = await warehouseClient.updateProductAsync(new UpdateProductRequest() { Product = productToUpdate });
         return response.Updated;
     }
@@ -63,7 +58,7 @@ public class WarehouseDao : IWarehouseDao
         var products = new List<Shared.Models.Product>();
         foreach (var t in response.Product)
         {
-            List<string> location = new List<string>();
+            var location = new List<string>();
             foreach (var s in t.Location)
             {
                 location.Add(s);
@@ -76,8 +71,8 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<bool> UpdateStockOutgoingAsync(List<long> eans)
     {
-        List<UpdateStock> toUpdate = new List<UpdateStock>();
-        List<long> eansToRemove = new List<long>();
+        var toUpdate = new List<UpdateStock>();
+        var eansToRemove = new List<long>();
         foreach (var ean in eans)
         {
             if (!eansToRemove.Contains(ean))
@@ -95,14 +90,14 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<bool> UpdateStockIngoingAsync(List<long> eans)
     {
-        List<UpdateStock> toUpdate = new List<UpdateStock>();
-        List<long> eansToRemove = new List<long>();
+        var toUpdate = new List<UpdateStock>();
+        var eansToRemove = new List<long>();
         foreach (var ean in eans)
         {
             if (!eansToRemove.Contains(ean))
             {
-                int count = eans.Count(x => x.Equals(ean));
-                UpdateStock update = new UpdateStock() { Ean = ean, Amount = count };
+                var count = eans.Count(x => x.Equals(ean));
+                var update = new UpdateStock() { Ean = ean, Amount = count };
                 toUpdate.Add(update);
                 eansToRemove.Add(ean);
             }
@@ -115,8 +110,7 @@ public class WarehouseDao : IWarehouseDao
     {
         var response = await warehouseClient.retrieveAllProductsEanAsync(new RetrieveAllProductsEanRequest());
         var list = new List<long>();
-        var repeatedField = response.Ean;
-        foreach (var e in repeatedField)
+        foreach (var e in response.Ean)
         {
             list.Add(e);
         }
@@ -125,27 +119,43 @@ public class WarehouseDao : IWarehouseDao
 
     public async Task<bool> RegisterLossAsync(Dictionary<long, int> dictionary)
     {
-        RegisterLossResponse response = await warehouseClient.registerLossAsync(new RegisterLossRequest(){Loss = { dictionary }});
+        var response = await warehouseClient.registerLossAsync(new RegisterLossRequest(){Loss = { dictionary }});
         return response.Registered;
     }
 
-    public Task<Loss> RetrieveLossAsync(int caseId)
+    public async Task<Shared.Models.Loss> RetrieveLossAsync(int caseId)
     {
-        throw new NotImplementedException();
+        var response = await warehouseClient.retrieveLossAsync(new RetrieveLossRequest(){CaseId = caseId});
+        var fromResponse = response.Loss;
+        var lossToReturn = new Shared.Models.Loss(fromResponse.CaseId, fromResponse.Ean,
+             fromResponse.Amount, fromResponse.Handled);
+        return lossToReturn;
     }
 
-    public Task<List<Loss>> RetrieveAllLossAsync()
+    public async Task<List<Shared.Models.Loss>> RetrieveAllLossAsync()
     {
-        throw new NotImplementedException();
+        var response = await warehouseClient.retrieveAllLossAsync(new RetrieveAllLossRequest());
+        var lossList = new List<Shared.Models.Loss>();
+        foreach (var loss in response.Loss)
+        {
+            lossList.Add(new Shared.Models.Loss(loss.CaseId, loss.Ean, loss.Amount, loss.Handled));
+        }
+        return lossList;
     }
 
-    public Task<bool> UpdateLossAsync(Loss loss)
+    public async Task<bool> UpdateLossAsync(Shared.Models.Loss loss)
     {
-        throw new NotImplementedException();
+        Console.Write("in dao now");
+        Loss grpcLoss = new Loss()
+            { Amount = loss.Amount, CaseId = loss.CaseId, Ean = loss.Ean, Handled = loss.Handled };
+        
+        var response = await warehouseClient.updateLossAsync(new UpdateLossRequest()
+        { Loss = grpcLoss });
+        return response.Updated;
     }
 
-    public Task DeleteLossAsync(int caseId)
+    public async Task DeleteLossAsync(int caseId)
     {
-        throw new NotImplementedException();
+        var response = await warehouseClient.deleteLossAsync(new DeleteLossRequest() { CaseId = caseId });
     }
 }

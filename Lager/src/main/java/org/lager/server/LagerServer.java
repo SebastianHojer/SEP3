@@ -1,5 +1,4 @@
 package org.lager.server;
-import database.DatabaseMain;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

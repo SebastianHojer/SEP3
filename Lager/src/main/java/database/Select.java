@@ -1,23 +1,22 @@
 package database;
-
-import dto.AuthenticationDto;
 import lager.Loss;
 import lager.PasswordAuthenticationResponse;
 import lager.Product;
-import org.checkerframework.checker.units.qual.A;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Select
 {
-  private final String url = ConnInfo.url;
-  private final String user = ConnInfo.user;
-  private final String password = ConnInfo.password;
 
   public Connection connect() throws SQLException
   {
+    String url = ConnInfo.url;
+    String user = ConnInfo.user;
+    String password = ConnInfo.password;
     return DriverManager.getConnection(url, user, password);
   }
 
@@ -169,10 +168,9 @@ public class Select
       rs.next();
       int id = rs.getInt("caseid");
       long ean = rs.getLong("ean");
-      String comment = rs.getString("comment");
       boolean handled = rs.getBoolean("handled");
       int amount = rs.getInt("amount");
-      return Loss.newBuilder().setEan(ean).setCaseId(id).setComment(comment).setHandled(handled).setAmount(amount).build();
+      return Loss.newBuilder().setEan(ean).setCaseId(id).setHandled(handled).setAmount(amount).build();
     } catch(SQLException e){
       e.printStackTrace();
     }
@@ -181,17 +179,16 @@ public class Select
 
 
   public ArrayList<Loss> retrieveAllLoss() {
-    String SQL = "select * from sep3.productloss";
+    String SQL = "select * from sep3.productloss ORDER BY caseid";
     ArrayList<Loss> losses = new ArrayList<>();
     try(Connection conn = connect(); PreparedStatement preparedStatement = conn.prepareStatement(SQL)){
       ResultSet rs = preparedStatement.executeQuery();
       while(rs.next()){
         int id = rs.getInt("caseid");
         long ean = rs.getLong("ean");
-        String comment = rs.getString("comment");
         boolean handled = rs.getBoolean("handled");
         int amount = rs.getInt("amount");
-        Loss loss = Loss.newBuilder().setEan(ean).setCaseId(id).setComment(comment).setHandled(handled).setAmount(amount).build();
+        Loss loss = Loss.newBuilder().setEan(ean).setCaseId(id).setHandled(handled).setAmount(amount).build();
         losses.add(loss);
       }
     } catch(SQLException e){

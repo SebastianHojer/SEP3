@@ -108,9 +108,8 @@ message RegisterLossResponse{
 message Loss{
   int32 caseId = 1;
   int64 ean = 2;
-  string comment = 3;
-  bool handled = 4;
-  int32 amount = 5;
+  bool handled = 3;
+  int32 amount = 4;
 }
 
 message RetrieveLossRequest{

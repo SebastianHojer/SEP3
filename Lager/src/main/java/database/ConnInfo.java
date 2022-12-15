@@ -6,11 +6,6 @@ public class ConnInfo
   static final String user = "wnrdxvjm";
   static final String password = "puaB8YLmmw7gN7khzuzrgnqmRd1VPSiF";
 
-  public String getUrl()
-  {
-    return url;
-  }
-
   public String getUser()
   {
     return user;

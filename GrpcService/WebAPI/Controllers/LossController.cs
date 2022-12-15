@@ -74,6 +74,7 @@ public class LossController : ControllerBase
     [HttpPatch]
     public async Task<ActionResult> UpdateAsync(Loss loss)
     {
+        Console.WriteLine("update in controller");
         await warehouseLogic.UpdateLossAsync(loss);
         return Ok();
     } 

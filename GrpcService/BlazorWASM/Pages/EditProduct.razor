@@ -59,12 +59,6 @@ else
   private string photoPath;
   private string location;
   private string resultMsg = "";
-/*
- @locationtemp = @ToString(product.Location);
-          <input type="text" id="Locations" name="Locations" @bind="locationtemp"><br><br>
-          <input type="submit" value="Submit">
-          @product.Location = @toList(locationtemp);
-          @location = @product.Location; */
   private string color = "";
   
   
@@ -72,8 +66,7 @@ else
   {
     try
     {
-      product = await WarehouseService.RetrieveAsync(ean);
-      Console.WriteLine("Retrieved Products");
+      product = await WarehouseService.RetrieveProductAsync(ean);
     }
     catch (Exception e)
     {
@@ -90,19 +83,6 @@ else
     return strings;
   }
   
-  private async Task BeginEditing()
-  {
-    resultMsg = "";
-    try
-    {
-      await WarehouseService.RetrieveAsync(ean);
-    }
-    catch (Exception e)
-    {
-      Console.WriteLine(e);
-      resultMsg = e.Message;
-    }
-  }
   private async Task EditProducts(long ean)
   {
     resultMsg = "";
@@ -116,8 +96,7 @@ else
         Stock = amount,
         ProductName = ProductName
       };
-      Console.WriteLine("ViewProducts: " + " EAN: " + dto.Ean + " photoPath = " + dto.PhotoPath + " Stock: " + dto.Stock + " Locations: " + dto.locations.ToString() + " name: " + dto.ProductName);
-      await WarehouseService.UpdateAsync(dto);
+      await WarehouseService.UpdateProductAsync(dto);
       navMgr.NavigateTo("/ViewProducts");
     }
     catch (Exception e)

@@ -5,11 +5,14 @@ namespace HttpClients.ClientInterfaces;
 
 public interface IWarehouseService
 {
-    Task<Product> CreateAsync(ProductCreationDto dto);
-    Task DeleteAsync(Product product);
-    Task<IEnumerable<Product>> RetrieveAsync(long? ean);
-    Task UpdateAsync(WarehouseUpdateDto dto);
+    Task<Product> CreateProductAsync(ProductCreationDto dto);
+    Task DeleteProductAsync(Product product);
+    Task<IEnumerable<Product>> RetrieveProductAsync(long? ean);
+    Task UpdateProductAsync(WarehouseUpdateDto dto);
     Task StockUpdateAsync(StockDto dto);
     Task<List<long>> RetrieveStock();
     Task RegisterLoss(Dictionary<long, int> dictionary);
+    Task<IEnumerable<Loss>> RetrieveLossAsync(int? caseId);
+    Task DeleteLossAsync(int caseId);
+    Task LossUpdateAsync(Loss loss);
 }

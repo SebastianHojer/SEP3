@@ -1,6 +1,137 @@
 @page "/ProductLoss"
-<h3>ProductLoss</h3>
+@using HttpClients.ClientInterfaces
+@using global::Shared.Models
+@inject IWarehouseService warehouseService;
+@inject NavigationManager navMgr;
 
+<PageTitle>Product Loss</PageTitle>
+
+@attribute [Authorize("MustBeAdmin")]
+<h3>Product Loss</h3>
+<button class="btn btn-primary text-center" @onclick="@(() => RetrieveLoss())"> Refresh </button>
+@if (!string.IsNullOrEmpty(resultMsg))
+{
+    <div>
+        <span>@resultMsg</span>
+    </div>
+}
+
+@if (losses == null)
+{
+    <div class="col d-flex justify-content-center">
+      <div class="loader"></div>
+      </div>
+}
+else if (!losses.Any())
+{
+    <span>No loss to be found</span>
+}
+else
+{
+    <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">CaseID</th>
+            <th scope="col">EAN</th>
+            <th scope="col">Handled</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var loss in losses)
+        {
+            <tr>
+                <td>@loss.CaseId</td>
+                <td>@loss.Ean</td>
+                @if (loss.Handled)
+                {
+                    <td>&#x2713</td>
+                }
+                else
+                {
+                    <td>&times</td>
+                }
+                <td>@loss.Amount</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(() => SetHandled(loss))"> Change status </button>
+                </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(() => DeleteAndRefresh(loss.CaseId))"> Delete </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    </div>
+}
 @code {
+    private IEnumerable<Loss> losses;
+    private List<Loss> lossesSorted;
+    private string resultMsg = "";
+    private string color = "";
     
+    private async Task DeleteLoss(int caseId)
+    {
+        resultMsg = "";
+
+        try
+        {
+            await warehouseService.DeleteLossAsync(caseId);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+            color = "red";
+        }
+    }
+    protected override async Task OnInitializedAsync() {
+        try
+        {
+           losses = await warehouseService.RetrieveLossAsync(null);
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+        }
+    }
+    private async Task RetrieveLoss()
+    {
+        resultMsg = "";
+        try
+        {
+            losses = await warehouseService.RetrieveLossAsync(null);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+            color = "red";
+        }
+    }
+
+    private async Task DeleteAndRefresh(int caseId)
+    {
+
+        try
+        {
+            await DeleteLoss(caseId);
+            losses = await warehouseService.RetrieveLossAsync(null);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = e.Message;
+        }
+    }
+
+    private void SetHandled(Loss loss)
+    {
+        loss.Handled = !loss.Handled;
+        warehouseService.LossUpdateAsync(loss);
+    }
+
 }

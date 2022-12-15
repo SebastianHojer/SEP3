@@ -61,7 +61,7 @@
 
         try
         {
-            await WarehouseService.CreateAsync(new ProductCreationDto(ean, productName, stock, photoPath, location));
+            await WarehouseService.CreateProductAsync(new ProductCreationDto(ean, productName, stock, photoPath, location));
             ean = 0;
             productName = "";
             photoPath = "";

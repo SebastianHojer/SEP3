@@ -63,7 +63,7 @@
         try
         {
             List<long> eansToHandout = new List<long>();
-            IEnumerable<Product> existing = await service.RetrieveAsync(null);
+            IEnumerable<Product> existing = await service.RetrieveProductAsync(null);
             List<long> eansExisting = new List<long>();
             List<long> eanCopy = new List<long>();
             ean.ForEach((item) => {eanCopy.Add(item);});

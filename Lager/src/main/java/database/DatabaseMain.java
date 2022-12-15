@@ -30,8 +30,8 @@ public class DatabaseMain
     } return instance;
   }
 
-  public boolean addUser(String username, String password, Boolean isAdmin){
-    return insert.addUser(username, password, isAdmin);
+  public boolean createUser(String username, String password, Boolean isAdmin){
+    return insert.createUser(username, password, isAdmin);
   }
 
   public boolean usernameExists(String username){
@@ -72,8 +72,8 @@ public class DatabaseMain
     return select.retrieveProducts();
   }
 
-  public boolean addLocation(long ean, String location){
-    return insert.addLocation(ean, location);
+  public void addLocation(long ean, String location){
+    insert.addLocation(ean, location);
   }
 
   public ArrayList<String> retrieveLocation(long ean){
@@ -99,14 +99,9 @@ public class DatabaseMain
 
   public boolean registerLoss(Map<Long, Integer> lossMap) {
     boolean registered = false;
-    System.out.println("i am about to enter the loop");
-
-    System.out.println("The entryset is so long: " + lossMap.entrySet().size());
     for (Map.Entry<Long, Integer> entry : lossMap.entrySet()) {
-      System.out.println("i am in the loop");
       registered = insert.registerLoss(entry.getKey(), entry.getValue());
     }
-    System.out.println("i have returned");
     return registered;
   }
 

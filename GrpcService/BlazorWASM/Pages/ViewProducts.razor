@@ -64,12 +64,6 @@ else
   private List<string> location;
   private string resultMsg = "";
   int length = 0;
-  /*
- @locationtemp = @ToString(product.Location);
-          <input type="text" id="Locations" name="Locations" @bind="locationtemp"><br><br>
-          <input type="submit" value="Submit">
-          @product.Location = @toList(locationtemp);
-          @location = @product.Location; */
   private string color = "";
 
 
@@ -77,7 +71,7 @@ else
   {
     try
     {
-      products = await WarehouseService.RetrieveAsync(null);
+      products = await WarehouseService.RetrieveProductAsync(null);
       products_temp = products;
       Console.WriteLine("Retrieved Products");
     }
@@ -101,7 +95,7 @@ else
     try
     {
       products = null;
-      products = await WarehouseService.RetrieveAsync(null);
+      products = await WarehouseService.RetrieveProductAsync(null);
       products_temp = products;
     }
     catch (Exception e)

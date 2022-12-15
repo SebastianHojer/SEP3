@@ -1,20 +1,16 @@
 package org.lager.server;
 
 import database.DatabaseMain;
-import dto.AuthenticationDto;
 import io.grpc.stub.StreamObserver;
 import lager.*;
-
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserServiceImpl extends UserGrpc.UserImplBase {
     private final DatabaseMain db = DatabaseMain.getInstance();
 
     @Override
     public void createUser(UserCreationRequest request, StreamObserver<UserCreationResponse> responseObserver) {
-        boolean created = db.addUser(request.getUsername(), request.getPassword(), request.getAdmin());
+        boolean created = db.createUser(request.getUsername(), request.getPassword(), request.getAdmin());
         UserCreationResponse response = UserCreationResponse.newBuilder().setCreated(created).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
