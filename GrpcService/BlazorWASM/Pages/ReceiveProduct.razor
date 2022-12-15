@@ -73,7 +73,7 @@
             }
             eansToReceive = ean.Intersect(eansExisting.Select(s => s)).ToList();
             eanCopy.ForEach((item) => {if(eansExisting.Contains(item)){ ean.Remove(item);}});
-            StockDto dto = new StockDto(eansToReceive, "outgoing");
+            StockDto dto = new StockDto(eansToReceive, "ingoing");
             await service.StockUpdateAsync(dto);
             if (ean.Count == 0)
             {
