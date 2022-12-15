@@ -29,7 +29,7 @@ public class UserLogic : IUserLogic
         return created;
     }
 
-    private static void ValidateData(UserCreationDto userToCreate)
+    public static bool ValidateData(UserCreationDto userToCreate)
     {
         string userName = userToCreate.UserName;
 
@@ -38,6 +38,7 @@ public class UserLogic : IUserLogic
 
         if (userName.Length > 32)
             throw new InvalidUsernameException("Username max-length is 32 characters!");
+        return true;
     }
 
     public async Task DeleteUserAsync(string userName)

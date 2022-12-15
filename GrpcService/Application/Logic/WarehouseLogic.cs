@@ -27,13 +27,13 @@ public class WarehouseLogic : IWarehouseLogic
         return created;
     }
 
-    private static void ValidateData(ProductCreationDto productToCreate)
+    public static bool ValidateData(ProductCreationDto productToCreate)
     {
         if (productToCreate.Ean < 0)
         {
             throw new InvalidProductException("Ean cannot be lower than 0!");
         }
-        
+
         if (productToCreate.Stock < 0)
         {
             throw new InvalidProductException("Stock cannot be lower than 0!");
@@ -48,6 +48,8 @@ public class WarehouseLogic : IWarehouseLogic
         {
             throw new InvalidProductException("Product name cannot contain more than 50 characters");
         }
+
+        return true;
     }
 
     public async Task DeleteProductAsync(long ean)
