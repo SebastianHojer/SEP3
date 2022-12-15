@@ -5,8 +5,10 @@
 <PageTitle>Delete User</PageTitle>
 
 @attribute [Authorize("MustBeAdmin")]
-<h3>Delete User</h3>
+<div class="col d-flex justify-content-center">
 <button class="btn btn-primary text-center" @onclick="@(() => RetrieveUsers())"> Refresh </button>
+</div>
+<hr/>
 @if (!string.IsNullOrEmpty(resultMsg))
 {
     <div>

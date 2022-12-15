@@ -36,7 +36,7 @@ else
           <input class="form-control" type="text" id="Stock" name="Stock" placeholder="@product.Stock" @bind="@amount" @oninput="@(e => { amount = int.Parse(e.Value.ToString()); })"><br><br>
         </ul>
       </form>
-      <button @onclick="@(() => EditProducts(product.Ean))">Edit</button>
+      <button class="btn btn-primary" @onclick="@(() => EditProducts(product.Ean))">Save changes</button>
     </div>
   </div>
 }

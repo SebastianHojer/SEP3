@@ -8,6 +8,8 @@
 
 <PageTitle>View Products</PageTitle>
 
+@attribute [Authorize]
+
 <div class="col d-flex justify-content-center">
 <input type="text" @oninput="Search" placeholder = "Search by EAN..." class="form-control"/>
 </div>
@@ -37,7 +39,9 @@ else
         <li class="list-group-item text-truncate"><strong>EAN: </strong> @product.Ean </li>
         <li class="list-group-item text-truncate"><strong>Location: </strong><br/>@String.Join(", ", product.Location)</li>
       </ul>
-      <button class="btn btn-primary" @onclick="@(() => navMgr.NavigateTo($"/EditProduct/{product.Ean}"))">Edit Product</button>
+      <AuthorizeView Policy="MustBeAdmin">
+        <button class="btn btn-primary" @onclick="@(() => navMgr.NavigateTo($"/EditProduct/{product.Ean}"))">Edit Product</button>
+      </AuthorizeView>
     </div>
   </div>
 }

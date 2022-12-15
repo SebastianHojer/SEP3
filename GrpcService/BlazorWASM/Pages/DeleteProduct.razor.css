@@ -23,3 +23,7 @@
     min-height: 18rem;
     max-height: 18rem;
 }
+
+.form-control{
+    width: 30rem;
+}
