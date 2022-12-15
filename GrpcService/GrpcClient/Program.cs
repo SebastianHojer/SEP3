@@ -1,1 +1,1 @@
-﻿Console.WriteLine("bruh");
+﻿Console.WriteLine("");
